@@ -51,6 +51,10 @@ flutter:
     - lib/view/assets/fundo.png
     - lib/view/assets/fazendeiros/
     - lib/view/assets/plantacao/
+    - lib/view/assets/produtos/
+    - lib/view/assets/seta.png
+    - lib/view/assets/celeiro.png
+
 
 
 

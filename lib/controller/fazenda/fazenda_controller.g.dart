@@ -57,6 +57,16 @@ mixin _$FazendaController on _FazendaControllerBase, Store {
   }
 
   @override
+  dynamic matarTerreno() {
+    final _$actionInfo = _$_FazendaControllerBaseActionController.startAction();
+    try {
+      return super.matarTerreno();
+    } finally {
+      _$_FazendaControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
         'terreno: ${terreno.toString()},estadoAtual: ${estadoAtual.toString()}';

@@ -1,4 +1,5 @@
 import 'package:flutter/scheduler.dart';
+import 'package:i_farm_net_new/model/celeiro_model.dart';
 import 'package:i_farm_net_new/model/cultivo_model.dart';
 
 class Fazendeiro{
@@ -6,12 +7,14 @@ class Fazendeiro{
   String nome;
   String nomeImagem;
   List<Cultivo> alimentosDisponiveisParaPlantar;
+  Celeiro celeiro;
 
   factory Fazendeiro(){
     return _instance;
   }
 
   Fazendeiro._internalConstructor();
+
 
 
   void gerarListaAlimentoCultivavelInicial(){
