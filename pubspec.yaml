@@ -21,6 +21,8 @@ dependencies:
     sdk: flutter
   mobx:
   flutter_mobx:
+  percent_indicator: "^2.1.1"
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -54,6 +56,7 @@ flutter:
     - lib/view/assets/produtos/
     - lib/view/assets/seta.png
     - lib/view/assets/celeiro.png
+    - lib/view/assets/barraPrincipal/
 
 
 

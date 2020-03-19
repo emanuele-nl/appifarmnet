@@ -1,3 +1,4 @@
+import 'package:i_farm_net_new/model/fazendeiro_model.dart';
 import 'package:i_farm_net_new/model/terreno_model.dart';
 import 'package:mobx/mobx.dart';
 part 'fazenda_controller.g.dart';
@@ -17,6 +18,9 @@ abstract class _FazendaControllerBase with Store{
 
   @observable
   String estadoAtual="vazio";
+
+  @observable
+  Fazendeiro fazendeiro = Fazendeiro();
 
   @action
   evoluirTerreno() {

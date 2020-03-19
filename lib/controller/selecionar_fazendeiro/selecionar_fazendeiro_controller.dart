@@ -14,7 +14,8 @@ abstract class _SelecionarFazendeiroControllerBase with Store{
   var fazendeiro = Fazendeiro();
 
   @observable
-  String imagemFazendeiroSelecionado;
+  String imagemFazendeiroSelecionado ="1";
+
   @action
   mudaImagemFazendeiroSelecionado(String value) {
     imagemFazendeiroSelecionado = value;
@@ -23,6 +24,7 @@ abstract class _SelecionarFazendeiroControllerBase with Store{
 
   @observable
   String nomeFazendeiro;
+
   @action
   mudaNomeFazendeiro(String value){
     nomeFazendeiro = value;

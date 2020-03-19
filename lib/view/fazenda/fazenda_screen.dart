@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:i_farm_net_new/controller/fazenda/fazenda_controller.dart';
 import 'package:i_farm_net_new/model/celeiro_model.dart';
+import 'package:i_farm_net_new/model/fazendeiro_model.dart';
 import 'package:i_farm_net_new/model/pergunta_model.dart';
+import 'package:i_farm_net_new/view/barra_navegacao_widget.dart';
 import 'package:i_farm_net_new/view/celeiro_screen.dart';
 
 
@@ -16,10 +18,6 @@ class FazendaScreen extends StatefulWidget {
 
 class _FazendaScreenState extends State<FazendaScreen> {
   final controller= FazendaController();
-  List<String> nomeProdutos = ['cenoura'];
-  List<int> quantidadeProdutos= [8];
-  String cultivoAtual;
-  List<String> colheitas = ['cenoura','tomate','morango','alface'];
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +26,8 @@ class _FazendaScreenState extends State<FazendaScreen> {
     Perguntas perguntas = Perguntas.fromJSON(jsonPerguntas);
     Pergunta pergunta = perguntas.listaPerguntas[numeroPergunta];
     return new Scaffold(
-        backgroundColor: Colors.lightGreen,
-
+        backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),
+        appBar: BarraNavegacao(),
         body:
       Center(
         child:
@@ -37,9 +35,11 @@ class _FazendaScreenState extends State<FazendaScreen> {
               children:[
                GestureDetector(
                  child: Observer(builder: (_){
+                   double altura = 120.0;
+                   String cultivoAtual = controller.fazendeiro.cultivoAtual;
                    if (cultivoAtual == null|| controller.estadoAtual == "vazio")
-                     return Image.asset("lib/view/assets/plantacao/"+controller.estadoAtual+".png");
-                   return Image.asset("lib/view/assets/plantacao/"+cultivoAtual+"/"+controller.estadoAtual+".png");}),
+                     return Image.asset("lib/view/assets/plantacao/"+controller.estadoAtual+".png",height: altura,);
+                   return Image.asset("lib/view/assets/plantacao/"+cultivoAtual+"/"+controller.estadoAtual+".png",height: altura,);}),
                    onTap:(){
 
                      if (controller.estadoAtual == "morta"){
@@ -47,19 +47,18 @@ class _FazendaScreenState extends State<FazendaScreen> {
                      }
 
                      else if (controller.estadoAtual == "vazio"){
-                     _aparecerOpcoesCultivo(nomeProdutos);
+                      aparecerOpcoesCultivo(controller.fazendeiro.nomeProdutos);
                      }
 
                      else if (controller.estadoAtual == "completo"){
                        controller.evoluirTerreno();
-                       adicionarItem(cultivoAtual);
-                       adicionarItem(cultivoAtual);
-
+                       controller.fazendeiro.adicionarItem(controller.fazendeiro.cultivoAtual);
+                       controller.fazendeiro.adicionarItem(controller.fazendeiro.cultivoAtual);
 
                      }
 
                      else if (controller.estadoAtual != "vazio") {
-                       _aprecerPergunta(pergunta);
+                       aprecerPergunta(pergunta);
                        numeroPergunta++;
                        pergunta = perguntas.listaPerguntas[numeroPergunta];
                      }
@@ -70,33 +69,42 @@ class _FazendaScreenState extends State<FazendaScreen> {
 
 
 
-                GestureDetector(
-                    child: Image.asset("lib/view/assets/celeiro.png",height: 100,),
-                    onTap:() {
-                      showCupertinoModalPopup<void>(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return celeiro(context);
-                        },
+                Row(
+                  children: <Widget>[
+                    GestureDetector(
+                        child: Image.asset("lib/view/assets/celeiro.png",height: 100,),
+                        onTap:() {
+                          showCupertinoModalPopup<void>(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return celeiro(context);
+                            },
 
-                      );
-                    }
-    ),
+                          );
+                        }
+                    ),
+                    GestureDetector(
+                      child: Image.asset("lib/view/assets/seta.png",height:100),
+                      onTap: (){
+                          controller.fazendeiro.adicionarAgua();
+                          showCupertinoModalPopup<void>(
+                          context: context,
+                          builder: (BuildContext context) {
+                          return celeiro(context);
+                          },
+                          );
+                          }
+                    )
+                  ],
+                ),
                 Container(
                   height: 30,
                 ),
-                GestureDetector(
-                    child: Image.asset("lib/view/assets/seta.png",height: 60,),
-                  onTap: (){
-                      _oferecerProdutoParaTroca();
-                  },
-                ),
-
                       ])));
   }
 
 
-  Future<void> _aprecerPergunta(Pergunta pergunta) async {
+  Future<void> aprecerPergunta(Pergunta pergunta) async {
     return showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) {
@@ -137,122 +145,14 @@ class _FazendaScreenState extends State<FazendaScreen> {
         );
       },
     );
-    }
+  }
 
 
 
-
-
-
-
-
-  Future<void> _oferecerProdutoParaTroca() async {
+  Future<void> aparecerOpcoesCultivo(List<String> cultivos) async {
     return showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) {
-        return CupertinoActionSheet(
-            message: Text("Qual desses produtos vocẽ gostaria de dar para ser trocado?"),
-            actions: gerarListaProdutosDisponiveisParaTroca()
-          //cancelButton: ,
-        );
-      },
-    );
-  }
-
-  List<Widget> gerarListaProdutosDisponiveisParaTroca(){
-    List<Widget> listaItensASerTrocado= [];
-    for (String produto in nomeProdutos){
-      listaItensASerTrocado.add(CupertinoActionSheetAction(
-        child: Text(produto),
-        onPressed: () {
-          Navigator.of(context).pop();
-          _sugerirProdutoAserTrocado(produto);
-        },
-      )
-      );
-
-    }
-    return listaItensASerTrocado;
-  }
-
-
-
-
-
-
-
-
-
-
-  Future<void> _sugerirProdutoAserTrocado(String produtoAserTrocado) async {
-    return showCupertinoModalPopup<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return CupertinoActionSheet(
-          //title: Text('Favorite Dessert'),
-          message: Text("Qual desses produtos vocẽ gostaria de adquirir?"),
-          actions: gerarListaProdutosASerTrocado(produtoAserTrocado)
-
-          //cancelButton: ,
-        );
-      },
-    );
-  }
-
-  List<Widget> gerarListaProdutosASerTrocado(String produtoAserDado){
-
-    List<Widget> listaItensASerTrocado= [];
-    for (String produto in colheitas){
-        listaItensASerTrocado.add(CupertinoActionSheetAction(
-          child: Text(produto),
-          onPressed: () {
-            trocaConcluida(produtoAserDado,produto);
-
-            Navigator.of(context).pop();
-          },
-        )
-        );
-
-    }
-    return listaItensASerTrocado;
-  }
-
-
-  Widget trocaConcluida(String produtoDado, String produtoRecebido) {
-
-    retirarItem(produtoDado);
-    if (nomeProdutos.contains(produtoRecebido))
-      adicionarItem(produtoDado);
-    else {
-      nomeProdutos.add(produtoRecebido);
-      quantidadeProdutos.add(1);
-    }
-    return AlertDialog(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12)),
-      content: Row(
-          children:[
-            Image.asset("lib/view/assets/produtos/"+produtoDado+".png", width: 50,) ,
-            Image.asset("lib/view/assets/seta.png"),
-            Image.asset("lib/view/assets/produtos/"+produtoRecebido+".png", width: 50,) ,
-
-          ]
-
-      ),
-      actions: <Widget>[
-        BotaoModal(context),
-      ],
-    );
-  }
-
-
-
-  Future<void> _aparecerOpcoesCultivo(List<String> cultivos) async {
-    return showCupertinoModalPopup<void>(
-      context: context,
-      builder: (BuildContext context) {
-
-
         return CupertinoActionSheet(
           //title: Text('Favorite Dessert'),
           message: Text("Selecione um cultivo"),
@@ -266,19 +166,16 @@ class _FazendaScreenState extends State<FazendaScreen> {
   }
 
   List<Widget>_gerarOpcoesCultivos (List<String> cultivos){
-
     List<Widget> widgetsCultivo = [];
     for (String cultivo in cultivos){
         widgetsCultivo.add(CupertinoActionSheetAction(
           child: Text(cultivo),
           onPressed:()  { controller.evoluirTerreno();
-          cultivoAtual = cultivo;
+          controller.fazendeiro.cultivoAtual = cultivo;
           Navigator.of(context).pop();
-          retirarItem(cultivoAtual);
+          controller.fazendeiro.retirarItem(controller.fazendeiro.cultivoAtual);
           },
         ));
-
-
     }
     return widgetsCultivo;
 
@@ -289,11 +186,15 @@ class _FazendaScreenState extends State<FazendaScreen> {
   void evoluiOuMorre(String respostaSelecionada,String repostaEsperada){
     if (respostaSelecionada == repostaEsperada){
       controller.evoluirTerreno();
+      controller.fazendeiro.adicionarValorItemSaude("sabedoria", 1);
+      controller.fazendeiro.adicionarValorItemSaude("vigorfísico", -5);
+      controller.fazendeiro.adicionarValorItemSaude("fome", -6);
     }
     else{
       controller.matarTerreno();
+      controller.fazendeiro.adicionarValorItemSaude("fome", -9);
+      controller.fazendeiro.adicionarValorItemSaude("vigorfísico", -3);
     }
-
   }
 
 
@@ -301,47 +202,46 @@ class _FazendaScreenState extends State<FazendaScreen> {
     List<Widget> itensLista= []  ;
     int i=0;
     for (String itens in produtos){
-      itensLista.add(ListTile(
-        leading: Image.asset("lib/view/assets/produtos/"+itens+".png", width: 50,),
-        trailing: Text(quantidades[i].toString()),
-        title: Text(itens),
-      ));
+      itensLista.add(
+          GestureDetector(
+            onTap: (){
+              Navigator.of(context).pop();
+              showCupertinoModalPopup<void>(
+              context: context,
+              builder: (BuildContext context) {
+              return comerItemCeleiro(context,itens);
+              });
+
+            },
+            child: ListTile(
+               leading: Image.asset("lib/view/assets/produtos/"+itens+".png", width: 50,),
+               trailing: Text(quantidades[i].toString()),
+               title: Text(itens),
+      ),
+          ));
       i++;
     }
+
+    itensLista.add(Text("agua x"+controller.fazendeiro.agua.toString()));
     return itensLista;
   }
 
+  Widget comerItemCeleiro(BuildContext context,String itemSelecionado){
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)),
+      content: Column(
+        children: <Widget>[
+          Image.asset("lib/view/assets/produtos/" + itemSelecionado ),
+          Text("Você gostaria de consumir "+itemSelecionado+"?")
+        ],
+      ),
+      actions: <Widget>[
+        BotaoRecusa(context),
+        BotaoConfirma(context,itemSelecionado)
+      ],
+    );
 
-//  List<Widget> gerarWidgetsItensCeleiro2(List<String> produtos, List<int> quantidades){
-//    List<Widget> itensLista= []  ;
-//    int i=0;
-//    for (String item in produtos){
-//      itensLista.add(Row(children: <Widget>[Image.asset("lib/view/assets/produtos/"+item+".png", width: 50,),Text(item + "  x"+quantidades[i].toString())],));
-//      i++;
-//    }
-//    return itensLista;
-//  }
-
-  void adicionarItem(String nomeCultivo){
-    int i=0;
-    int posicaoSelecionada;
-    for (String cultivo in nomeProdutos){
-      if (cultivo == nomeCultivo)
-        posicaoSelecionada=i;
-      i++;
-    }
-    quantidadeProdutos[posicaoSelecionada]++;
-  }
-
-  void retirarItem(String nomeCultivo){
-    int i=0;
-    int posicaoSelecionada;
-    for (String cultivo in nomeProdutos){
-      if (cultivo == nomeCultivo)
-        posicaoSelecionada=i;
-      i++;
-    }
-    quantidadeProdutos[posicaoSelecionada]--;
   }
 
   Widget celeiro(BuildContext context) {
@@ -349,7 +249,8 @@ class _FazendaScreenState extends State<FazendaScreen> {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12)),
       title:Text("Celeiro", textAlign: TextAlign.start,),
-      content: Column(children: gerarWidgetsItensCeleiro(nomeProdutos,quantidadeProdutos ),),
+      content: Column(children: gerarWidgetsItensCeleiro(controller.fazendeiro.nomeProdutos,controller.fazendeiro.quantidadeProdutos ),
+    ),
       actions: <Widget>[
         BotaoModal(context),
       ],
@@ -369,8 +270,33 @@ class _FazendaScreenState extends State<FazendaScreen> {
     );
   }
 
+  Widget BotaoRecusa(BuildContext context) {
+    return Container(
+      child: FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text("Não", style: Theme
+              .of(context)
+              .textTheme
+              .button,)),
+    );
+  }
 
-
+  Widget BotaoConfirma(BuildContext context,String alimento) {
+    return Container(
+      child: FlatButton(
+          onPressed: () {
+            controller.fazendeiro.adicionarValorItemSaude("fome", 15);
+            controller.fazendeiro.comer(alimento);
+            Navigator.of(context).pop();
+          },
+          child: Text("Sim", style: Theme
+              .of(context)
+              .textTheme
+              .button,)),
+    );
+  }
 
 
   final jsonPerguntas = {
