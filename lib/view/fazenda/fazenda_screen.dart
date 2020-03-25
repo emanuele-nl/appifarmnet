@@ -69,33 +69,36 @@ class _FazendaScreenState extends State<FazendaScreen> {
 
 
 
-                Row(
-                  children: <Widget>[
-                    GestureDetector(
-                        child: Image.asset("lib/view/assets/celeiro.png",height: 100,),
-                        onTap:() {
-                          showCupertinoModalPopup<void>(
+                Center(
+                  child: Row(
+                    children: <Widget>[
+                      GestureDetector(
+                          child: Image.asset("lib/view/assets/celeiro.png",height: 100,),
+                          onTap:() {
+                            showCupertinoModalPopup<void>(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return celeiro(context);
+                              },
+
+                            );
+                          }
+                      ),
+                      Container(width: 40,),
+                      GestureDetector(
+                        child: Image.asset("lib/view/assets/poco.png",height:100),
+                        onTap: (){
+                            controller.fazendeiro.adicionarAgua();
+                            showCupertinoModalPopup<void>(
                             context: context,
                             builder: (BuildContext context) {
-                              return celeiro(context);
+                            return celeiro(context);
                             },
-
-                          );
-                        }
-                    ),
-                    GestureDetector(
-                      child: Image.asset("lib/view/assets/seta.png",height:100),
-                      onTap: (){
-                          controller.fazendeiro.adicionarAgua();
-                          showCupertinoModalPopup<void>(
-                          context: context,
-                          builder: (BuildContext context) {
-                          return celeiro(context);
-                          },
-                          );
-                          }
-                    )
-                  ],
+                            );
+                            }
+                      )
+                    ],
+                  ),
                 ),
                 Container(
                   height: 30,
@@ -195,6 +198,8 @@ class _FazendaScreenState extends State<FazendaScreen> {
       controller.fazendeiro.adicionarValorItemSaude("fome", -9);
       controller.fazendeiro.adicionarValorItemSaude("vigorfísico", -3);
     }
+    controller.fazendeiro.agua--;
+
   }
 
 
