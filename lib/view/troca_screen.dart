@@ -8,10 +8,12 @@ class TrocaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+      ),
       backgroundColor: Colors.green,
       body: GestureDetector(
-      child: Image.asset("lib/view/assets/seta.png",height: 60,),
+      child: Image.asset("lib/view/assets/casa_troca.png",height: 60,),
       onTap: (){
         oferecerProdutoParaTroca(context);
        },)
@@ -53,7 +55,6 @@ class TrocaScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return CupertinoActionSheet(
-          //title: Text('Favorite Dessert'),
             message: Text("Qual desses produtos vocẽ gostaria de adquirir?"),
             actions: gerarListaProdutosASerTrocado(produtoAserTrocado,context)
           //cancelButton: ,
@@ -70,9 +71,14 @@ class TrocaScreen extends StatelessWidget {
       listaItensASerTrocado.add(CupertinoActionSheetAction(
         child: Text(produto),
         onPressed: () {
-          trocaConcluida(produtoAserDado,produto,context);
           Navigator.of(context).pop();
-        },
+          showCupertinoModalPopup<void>(
+              context: context,
+              builder: (BuildContext context) {
+                return   trocaConcluida(produtoAserDado,produto,context);
+
+          });
+          },
       )
       );
 
@@ -85,7 +91,7 @@ class TrocaScreen extends StatelessWidget {
 
     fazendeiro.retirarItem(produtoDado);
     if (fazendeiro.nomeProdutos.contains(produtoRecebido))
-      fazendeiro.adicionarItem(produtoDado);
+      fazendeiro.adicionarItem(produtoRecebido);
     else {
       fazendeiro.nomeProdutos.add(produtoRecebido);
       fazendeiro.quantidadeProdutos.add(1);
@@ -94,9 +100,10 @@ class TrocaScreen extends StatelessWidget {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12)),
       content: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
           children:[
             Image.asset("lib/view/assets/produtos/"+produtoDado+".png", width: 50,) ,
-            Image.asset("lib/view/assets/seta.png"),
+            Image.asset("lib/view/assets/seta.png",width: 50,),
             Image.asset("lib/view/assets/produtos/"+produtoRecebido+".png", width: 50,) ,
 
           ]

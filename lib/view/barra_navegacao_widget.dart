@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:i_farm_net_new/model/fazendeiro_model.dart';
+import 'package:i_farm_net_new/view/mercado_screen.dart';
 import 'package:i_farm_net_new/view/saude_screen.dart';
 import 'package:i_farm_net_new/view/troca_screen.dart';
 
@@ -49,7 +50,11 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
           child: Image.asset("lib/view/assets/barraPrincipal/troca.png", width: 50,),
         ),
         GestureDetector(
-          //onTap: ,
+          onTap:(){
+            Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MercadoScreen()));
+          },
           child: Image.asset("lib/view/assets/barraPrincipal/mercado.png", width: 50,),
         ),
         Container(width: 30),

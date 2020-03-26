@@ -1,6 +1,7 @@
 import 'package:flutter/scheduler.dart';
 import 'package:i_farm_net_new/model/celeiro_model.dart';
 import 'package:i_farm_net_new/model/cultivo_model.dart';
+import 'package:i_farm_net_new/model/pergunta_model.dart';
 
 class Fazendeiro{
   static  final Fazendeiro _instance= Fazendeiro._internalConstructor();
@@ -34,18 +35,23 @@ class Fazendeiro{
   void gerarListaAlimentoCultivavelInicial(){
     switch (nomeImagem){
       case "1":
+          nomeProdutos = ["alface"];
           alimentosDisponiveisParaPlantar = [Cultivo.gerarCultivoInicial("alface")];
           break;
       case "2":
+        nomeProdutos = ["morango"];
           alimentosDisponiveisParaPlantar = [Cultivo.gerarCultivoInicial("morango")];
           break;
       case "3":
+        nomeProdutos = ["tomate"];
           alimentosDisponiveisParaPlantar = [Cultivo.gerarCultivoInicial("tomate")];
           break;
       case "4":
+        nomeProdutos = ["cenoura"];
           alimentosDisponiveisParaPlantar = [Cultivo.gerarCultivoInicial("cenoura")];
           break;
       case "5":
+        nomeProdutos = ["alface"];
           alimentosDisponiveisParaPlantar = [Cultivo.gerarCultivoInicial("feijao")];
           break;
 
@@ -103,6 +109,9 @@ class Fazendeiro{
   void adicionarAgua(){
     agua++;
   }
+
+
+
 
 
 

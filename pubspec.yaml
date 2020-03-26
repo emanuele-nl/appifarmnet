@@ -54,10 +54,14 @@ flutter:
     - lib/view/assets/fazendeiros/
     - lib/view/assets/plantacao/
     - lib/view/assets/produtos/
+    - lib/view/assets/mercado/
     - lib/view/assets/celeiro.png
     - lib/view/assets/barraPrincipal/
     - lib/view/assets/poco.png
     - lib/view/assets/lago.png
+    - lib/view/assets/casa_troca.png
+    - lib/view/assets/seta.png
+
 
 
 

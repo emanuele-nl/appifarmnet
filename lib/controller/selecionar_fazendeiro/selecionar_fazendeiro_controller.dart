@@ -20,6 +20,7 @@ abstract class _SelecionarFazendeiroControllerBase with Store{
   mudaImagemFazendeiroSelecionado(String value) {
     imagemFazendeiroSelecionado = value;
     fazendeiro.nomeImagem = value;
+    //fazendeiro.gerarListaAlimentoCultivavelInicial();
   }
 
   @observable
