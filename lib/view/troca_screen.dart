@@ -7,16 +7,68 @@ class TrocaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> cultivosParaTroca = fazendeiro.colheitas;
+    //cultivosParaTroca.remove(fazendeiro.alimentosDisponiveisParaPlantar[0]);
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),
+
       ),
-      backgroundColor: Colors.green,
-      body: GestureDetector(
-      child: Image.asset("lib/view/assets/casa_troca.png",height: 60,),
-      onTap: (){
-        oferecerProdutoParaTroca(context);
-       },)
+      backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),
+      body: Stack(
+        children: [
+
+          new Container(
+            decoration: new BoxDecoration(
+              image: new DecorationImage(image: new AssetImage("lib/view/assets/troca/fundo.png"), fit: BoxFit.cover,),
+            ),
+          ),
+          new Container(
+            decoration: new BoxDecoration(
+              image: new DecorationImage(image: new AssetImage("lib/view/assets/troca/fundo_troca.png"), fit: BoxFit.fitHeight,),
+            ),
+          ),
+          Column(
+            children: <Widget>[
+              Row(
+                children: [
+                  GestureDetector(
+                    child: Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
+                    onTap: (){
+                      _sugerirProdutoAserTrocado("alface",context);
+                      },),
+                  GestureDetector(
+                    child: Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
+                    onTap: (){
+                      _sugerirProdutoAserTrocado("tomate",context);
+                    },)
+                ],
+              ),
+              Container(height: 60,),
+              Row(
+                children: [
+                  GestureDetector(
+                    child: Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
+                    onTap: (){
+                      _sugerirProdutoAserTrocado("morango",context);
+                    },),
+                  GestureDetector(
+                    child: Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
+                    onTap: (){
+                      _sugerirProdutoAserTrocado("cenoura",context);
+                    },)
+                ],
+
+              ),
+            ],
+          ),
+
+        ],
+
+
+      )
+
     );
   }
 

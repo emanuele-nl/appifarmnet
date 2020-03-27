@@ -27,48 +27,57 @@ class _FazendaScreenState extends State<FazendaScreen> {
         backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),
         appBar: BarraNavegacao(),
         body:
-      Center(
-        child:
-            Row(
-              children: <Widget>[
-                Container(width: 20),
-                Column(
-                  children: <Widget>[
-                    terreno(),
-                  ],
-                ),
-                Container(width: 60,),
-                Column(
-                  children:[
-                          GestureDetector(
-                              child: Image.asset("lib/view/assets/celeiro.png",height: 100,),
-                              onTap:() {
-                                showCupertinoModalPopup<void>(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return celeiro(context);
-                                  },
+          Stack(
+           children: [
+             new Container(
+               decoration: new BoxDecoration(
+                 image: new DecorationImage(image: new AssetImage("lib/view/assets/lago.png"), fit: BoxFit.fitWidth,),
+               ),
+             ),
 
-                                );
-                              }
-                          ),
-                          Container(height: 70,),
-                          GestureDetector(
-                            child: Image.asset("lib/view/assets/poco.png",height:100),
-                            onTap: (){
-                                controller.fazendeiro.adicionarAgua();
-                                showCupertinoModalPopup<void>(
-                                context: context,
-                                builder: (BuildContext context) {
-                                return celeiro(context);
-                                },
-                                );
-                                }
-                          )
+             Center(
+                child:
+                  Row(
+                    children: <Widget>[
+                      Container(width: 20),
+                      Column(
+                        children: <Widget>[
+                          terreno(),
                         ],
                       ),
-              ]
-            )));
+                      Container(width: 60,),
+                      Column(
+                        children:[
+                                GestureDetector(
+                                    child: Image.asset("lib/view/assets/celeiro.png",height: 100,),
+                                    onTap:() {
+                                      showCupertinoModalPopup<void>(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return celeiro(context);
+                                        },
+
+                                  );
+                                }
+                            ),
+                            Container(height: 70,),
+                            GestureDetector(
+                              child: Image.asset("lib/view/assets/poco.png",height:100),
+                              onTap: (){
+                                  controller.fazendeiro.adicionarAgua();
+                                  showCupertinoModalPopup<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                  return celeiro(context);
+                                  },
+                                  );
+                              }
+                            )
+                          ],
+                        ),
+                ]
+              ))],
+      ));
   }
 
 

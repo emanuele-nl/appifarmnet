@@ -50,6 +50,8 @@ flutter:
 
   assets:
     - lib/view/assets/botao-continuar.png
+    - lib/view/assets/botao-tutorial.png
+    - lib/view/assets/telainicial.png
     - lib/view/assets/fundo.png
     - lib/view/assets/fazendeiros/
     - lib/view/assets/plantacao/
@@ -59,7 +61,7 @@ flutter:
     - lib/view/assets/barraPrincipal/
     - lib/view/assets/poco.png
     - lib/view/assets/lago.png
-    - lib/view/assets/casa_troca.png
+    - lib/view/assets/troca/
     - lib/view/assets/seta.png
 
 

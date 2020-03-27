@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
           children: <Widget>[
             new Container(
               decoration: new BoxDecoration(
-                image: new DecorationImage(image: new AssetImage("lib/view/assets/fundo.png"), fit: BoxFit.cover,),
+                image: new DecorationImage(image: new AssetImage("lib/view/assets/telainicial.png"), fit: BoxFit.cover,),
               ),
             ),
             new Column(
@@ -28,6 +28,18 @@ class HomeScreen extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => SelecionarFazendeiroScreen()));
                     },
                     child: Image.asset("lib/view/assets/botao-continuar.png",semanticLabel: "Continuar",)
+                  )
+                  ,
+                ),
+                Flexible(
+                  flex: 4,
+                  child:GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SelecionarFazendeiroScreen()));
+                      },
+                      child: Image.asset("lib/view/assets/botao-tutorial.png",semanticLabel: "Tutorial",)
                   )
                   ,
                 ),
