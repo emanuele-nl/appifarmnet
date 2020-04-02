@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:i_farm_net_new/controller/fazenda/fazenda_controller.dart';
 import 'package:i_farm_net_new/model/celeiro_model.dart';
 import 'package:i_farm_net_new/model/fazendeiro_model.dart';
+import 'package:i_farm_net_new/model/missoes_model.dart';
 import 'package:i_farm_net_new/model/pergunta_model.dart';
 import 'package:i_farm_net_new/view/barra_navegacao_widget.dart';
 import 'package:i_farm_net_new/view/celeiro_screen.dart';
@@ -43,6 +44,8 @@ class _FazendaScreenState extends State<FazendaScreen> {
                       Column(
                         children: <Widget>[
                           terreno(),
+                          Container(height: 70,),
+                          vaca(),
                         ],
                       ),
                       Container(width: 60,),
@@ -62,13 +65,13 @@ class _FazendaScreenState extends State<FazendaScreen> {
                             ),
                             Container(height: 70,),
                             GestureDetector(
-                              child: Image.asset("lib/view/assets/poco.png",height:100),
+                              child: Image.asset("lib/view/assets/poco.png",height:60),
                               onTap: (){
                                   controller.fazendeiro.adicionarAgua();
                                   showCupertinoModalPopup<void>(
                                   context: context,
                                   builder: (BuildContext context) {
-                                  return celeiro(context);
+                                    return aguaAdicionada(context);
                                   },
                                   );
                               }
@@ -79,6 +82,20 @@ class _FazendaScreenState extends State<FazendaScreen> {
               ))],
       ));
   }
+
+
+  Widget aguaAdicionada(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)),
+      title:Text("Água adicionada", textAlign: TextAlign.center,),
+      content: Image.asset("lib/view/assets/produtos/agua.png",height: 100,),
+      actions: <Widget>[
+        BotaoModal(context),
+      ],
+    );
+  }
+
 
 
   Future<void> aparecerPergunta(Pergunta pergunta) async {
@@ -100,13 +117,17 @@ class _FazendaScreenState extends State<FazendaScreen> {
 
     for (String alternativa in pergunta.alternativas){
       alternativas.add(
-        RaisedButton(
-          child: Text(alternativa),
-          onPressed: (){
-              evoluiOuMorre(alternativa, pergunta.respostaCorreta);
+        ButtonTheme(
+          minWidth: 400,
+          buttonColor: Colors.grey,
+          child: RaisedButton(
+            child: Text(alternativa),
+            onPressed: (){
               Navigator.of(context).pop();
+              evoluiOuMorre(alternativa, pergunta.respostaCorreta);
 
-          },
+            },
+          ),
         )
       );
 
@@ -145,6 +166,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
             }
 
             else if (controller.estadoAtual == "completo"){
+              controller.fazendeiro.checarMissao(Missoes.colherAlimento);
               controller.evoluirTerreno();
               controller.fazendeiro.adicionarItem(controller.fazendeiro.cultivoAtual);
               controller.fazendeiro.adicionarItem(controller.fazendeiro.cultivoAtual);
@@ -162,8 +184,71 @@ class _FazendaScreenState extends State<FazendaScreen> {
       )],
     );
 
+  }
+
+  Widget vaca(){
+    return GestureDetector(
+      onTap: (){
+        showCupertinoModalPopup<void>(
+          context: context,
+          builder: (BuildContext context) {
+            return modalVaca(context);
+          },
+
+        );
+
+      },
+      child: Stack(
+        children: [
+          Image.asset("lib/view/assets/animal/cerca_animal.png",height: 60,),
+          GestureDetector(
+            child: Image.asset("lib/view/assets/animal/vaca.png",height: 40,),
+          )
+
+
+
+        ],
+
+      ),
+    );
 
   }
+
+  Widget modalVaca(BuildContext context){
+    Fazendeiro fazendeiro = Fazendeiro();
+    return AlertDialog(
+      title: Text("vaca"),
+      content: Column(
+        children:[
+          RaisedButton(
+            child: Text("Coletar Leite"),
+            onPressed: (){
+              Navigator.of(context).pop();
+              fazendeiro.coletarLeite();
+            }
+         ),
+          RaisedButton(
+            child:Text("Produzir Adubo"),
+            onPressed: (){
+              Navigator.of(context).pop();
+              fazendeiro.produzirAdubo();
+            },
+          ),
+
+        ],
+      ),
+      actions: <Widget>[
+        BotaoModal(context)
+      ],
+    );
+
+  }
+
+
+
+
+
+
 
   Future<void> aparecerOpcoesCultivo(List<String> cultivos) async {
     return showCupertinoModalPopup<void>(
@@ -183,6 +268,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
   List<Widget>_gerarOpcoesCultivos (List<String> cultivos){
     List<Widget> widgetsCultivo = [];
     for (String cultivo in cultivos){
+      if (controller.fazendeiro.colheitas.contains(cultivo)){
         widgetsCultivo.add(CupertinoActionSheetAction(
           child: Text(cultivo),
           onPressed:()  { controller.evoluirTerreno();
@@ -190,7 +276,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
           Navigator.of(context).pop();
           controller.fazendeiro.retirarItem(controller.fazendeiro.cultivoAtual);
           },
-        ));
+        ));}
     }
     return widgetsCultivo;
 
@@ -198,7 +284,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
   }
 
 
-  void evoluiOuMorre(String respostaSelecionada,String repostaEsperada){
+  Widget evoluiOuMorre(String respostaSelecionada,String repostaEsperada){
     if (respostaSelecionada == repostaEsperada){
       controller.evoluirTerreno();
       controller.fazendeiro.adicionarValorItemSaude("sabedoria", 1);
@@ -211,6 +297,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
       controller.fazendeiro.adicionarValorItemSaude("vigorfísico", -3);
     }
     controller.fazendeiro.agua--;
+
 
   }
 
@@ -239,7 +326,14 @@ class _FazendaScreenState extends State<FazendaScreen> {
       i++;
     }
 
-    itensLista.add(Text("agua x"+controller.fazendeiro.agua.toString()));
+
+    itensLista.add(ListTile(
+      leading: Image.asset("lib/view/assets/produtos/agua.png", height: 40,),
+      trailing: Text(controller.fazendeiro.agua.toString()),
+      title: Text("Água"),
+    ));
+
+
     return itensLista;
   }
 
@@ -306,6 +400,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
           onPressed: () {
             controller.fazendeiro.adicionarValorItemSaude("fome", 15);
             controller.fazendeiro.comer(alimento);
+            controller.fazendeiro.checarMissao(Missoes.comerAlimento);
             Navigator.of(context).pop();
           },
           child: Text("Sim", style: Theme

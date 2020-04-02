@@ -16,6 +16,9 @@ abstract class _SelecionarFazendeiroControllerBase with Store{
   @observable
   String imagemFazendeiroSelecionado ="1";
 
+  @observable
+  bool nomePreenchido= false;
+
   @action
   mudaImagemFazendeiroSelecionado(String value) {
     imagemFazendeiroSelecionado = value;
@@ -30,6 +33,10 @@ abstract class _SelecionarFazendeiroControllerBase with Store{
   mudaNomeFazendeiro(String value){
     nomeFazendeiro = value;
     fazendeiro.nome= value;
+    if (nomeFazendeiro.length>0)
+      nomePreenchido=true;
+    else
+      nomePreenchido=false;
   }
 
   @observable

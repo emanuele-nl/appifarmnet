@@ -59,7 +59,14 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
         ),
         Container(width: 30),
         GestureDetector(
-          //onTap: ,
+          onTap: () {
+            showCupertinoModalPopup<void>(
+              context: context,
+              builder: (BuildContext context) {
+                return missao(context);
+              },);
+
+          },
           child: Image.asset("lib/view/assets/barraPrincipal/tresPontos.png", width: 50,),
         )
       ],
@@ -134,6 +141,35 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
       actions: <Widget>[BotaoModal(context)],
     );
   }
+
+
+  Widget missao(BuildContext context){
+    Fazendeiro fazendeiro =Fazendeiro();
+    return AlertDialog(
+      title:Text("Missão Atual", textAlign: TextAlign.center,),
+      content: Column(
+        children: <Widget>[
+          fazendeiro.missaoConcluida?Text("Missao concluída",style: TextStyle(color: Colors.green),):Text("Missão em andamento",style: TextStyle(color: Colors.yellowAccent),),
+          Text(fazendeiro.missaAtual),
+          fazendeiro.missaoConcluida? RaisedButton(
+            child: Text("Requerer nova Missão"),
+            onPressed: () {
+              Navigator.of(context).pop();
+              fazendeiro.numeroMissao++;
+              fazendeiro.missaAtual = fazendeiro.missoes[fazendeiro.numeroMissao];
+              fazendeiro.missaoConcluida =false;
+              missao(context);
+            }
+
+
+          ):RaisedButton(
+            child: Text("Fechar"),
+            onPressed: (){
+              Navigator.of(context).pop();
+            },
+          )]));
+
+}
 
 
     Widget BotaoModal(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'package:flutter/scheduler.dart';
 import 'package:i_farm_net_new/model/celeiro_model.dart';
 import 'package:i_farm_net_new/model/cultivo_model.dart';
+import 'package:i_farm_net_new/model/missoes_model.dart';
 import 'package:i_farm_net_new/model/pergunta_model.dart';
 
 class Fazendeiro{
@@ -13,6 +14,8 @@ class Fazendeiro{
   int vigorFisico = 100;
   int sabedoria = 0;
   int agua = 8;
+  int adubo=8;
+  int leite = 2;
 
 
   List<String> nomeProdutos = ['cenoura'];
@@ -21,7 +24,10 @@ class Fazendeiro{
   List<String> colheitas = ['cenoura','tomate','morango','alface'];
   List<String> itensMercado = ['Biscoito','chocolate','racao','refrigerante','Suco de Laranja'];
 
-
+  String missaAtual= Missoes.realizarUmaTroca;
+  bool missaoConcluida =false;
+  List<String> missoes = [Missoes.realizarUmaTroca,Missoes.comprarItemMercado,Missoes.coletarAgua,Missoes.colherAlimento,Missoes.comerAlimento,Missoes.coletarLeite,Missoes.coletarLeite];
+  int numeroMissao = 0;
 
 
   factory Fazendeiro(){
@@ -30,7 +36,22 @@ class Fazendeiro{
 
   Fazendeiro._internalConstructor();
 
+  void checarMissao (String acaoRealizada){
+    if (acaoRealizada == missaAtual)
+      missaoConcluida = true;
 
+  }
+
+  void produzirAdubo(){
+    adubo++;
+    checarMissao(Missoes.gerarAdubo);
+  }
+
+  void coletarLeite(){
+    leite++;
+    checarMissao(Missoes.coletarLeite);
+
+  }
 
   void gerarListaAlimentoCultivavelInicial(){
     switch (nomeImagem){
@@ -107,6 +128,7 @@ class Fazendeiro{
   }
 
   void adicionarAgua(){
+    checarMissao(Missoes.coletarAgua);
     agua++;
   }
 

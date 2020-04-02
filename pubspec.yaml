@@ -22,6 +22,10 @@ dependencies:
   mobx:
   flutter_mobx:
   percent_indicator: "^2.1.1"
+  bubble: ^1.1.9+1
+  auto_size_text: ^2.1.0
+
+
 
 
 
@@ -57,8 +61,10 @@ flutter:
     - lib/view/assets/plantacao/
     - lib/view/assets/produtos/
     - lib/view/assets/mercado/
-    - lib/view/assets/celeiro.png
+    - lib/view/assets/animal/
     - lib/view/assets/barraPrincipal/
+    - lib/view/assets/pergunta/
+    - lib/view/assets/celeiro.png
     - lib/view/assets/poco.png
     - lib/view/assets/lago.png
     - lib/view/assets/troca/

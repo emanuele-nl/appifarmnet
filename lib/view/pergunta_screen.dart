@@ -41,9 +41,13 @@ class PerguntaScreen extends StatelessWidget {
                   child: Container(
                     child: Column(
                       children: List.generate(pergunta.alternativas.length,(index){
-                        return RaisedButton(
-                              onPressed: controller.verificarResposta(pergunta.respostaCorreta),
-                              child: Center(child: Text(pergunta.alternativas[index]))
+                        return ButtonTheme(
+                            minWidth: 100,
+                            height: 2,
+                            child: RaisedButton(
+                                onPressed: controller.verificarResposta(pergunta.respostaCorreta),
+                                child: Center(child: Text(pergunta.alternativas[index],))
+                          ),
                         );
                       },
                     ),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:i_farm_net_new/model/fazendeiro_model.dart';
+import 'package:i_farm_net_new/model/missoes_model.dart';
 
 class MercadoScreen extends StatelessWidget {
   Fazendeiro fazendeiro = Fazendeiro();
@@ -119,6 +120,8 @@ class MercadoScreen extends StatelessWidget {
       fazendeiro.nomeProdutos.add(produtoRecebido);
       fazendeiro.quantidadeProdutos.add(1);
     }
+    fazendeiro.checarMissao(Missoes.comprarItemMercado);
+
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12)),

@@ -1,6 +1,9 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bubble/bubble.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:i_farm_net_new/model/fazendeiro_model.dart';
+import 'package:i_farm_net_new/model/missoes_model.dart';
 
 class TrocaScreen extends StatelessWidget {
   Fazendeiro fazendeiro = Fazendeiro();
@@ -8,7 +11,6 @@ class TrocaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> cultivosParaTroca = fazendeiro.colheitas;
-    //cultivosParaTroca.remove(fazendeiro.alimentosDisponiveisParaPlantar[0]);
 
     return Scaffold(
       appBar: AppBar(
@@ -36,27 +38,29 @@ class TrocaScreen extends StatelessWidget {
                   GestureDetector(
                     child: Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
                     onTap: (){
-                      _sugerirProdutoAserTrocado("alface",context);
+                      oferecerProdutoParaTroca("alface",context);
                       },),
+                  Container(width: 60,),
                   GestureDetector(
                     child: Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
                     onTap: (){
-                      _sugerirProdutoAserTrocado("tomate",context);
+                      oferecerProdutoParaTroca("tomate",context);
                     },)
                 ],
               ),
-              Container(height: 60,),
+              Container(height: 60),
               Row(
                 children: [
                   GestureDetector(
                     child: Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
                     onTap: (){
-                      _sugerirProdutoAserTrocado("morango",context);
+                      oferecerProdutoParaTroca("morango",context);
                     },),
+                  Container(width: 60,),
                   GestureDetector(
                     child: Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
                     onTap: (){
-                      _sugerirProdutoAserTrocado("cenoura",context);
+                      oferecerProdutoParaTroca("cenoura",context);
                     },)
                 ],
 
@@ -73,70 +77,149 @@ class TrocaScreen extends StatelessWidget {
   }
 
 
-  Future<void> oferecerProdutoParaTroca(BuildContext context) async {
+  Future<void> oferecerProdutoParaTroca(String produtoOfertado,BuildContext context) async {
+    double pixelRatio = MediaQuery.of(context).devicePixelRatio;
+    double px = 1 / pixelRatio;
+
+    BubbleStyle styleSomebody = BubbleStyle(
+      nip: BubbleNip.leftTop,
+      color: Colors.white,
+      //elevation: 1 * px,
+      //margin: BubbleEdges.only(top: 8.0, right: 10.0),
+      //alignment: Alignment.topLeft,
+    );
+
+    String textoBalaoDeFala = "Você gostaria de trocar algo comigo por um " + produtoOfertado;
+
+    double tamanhoImagem =40;
     return showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) {
-        return CupertinoActionSheet(
-            message: Text("Qual desses produtos vocẽ gostaria de dar para ser trocado?"),
-            actions: gerarListaProdutosDisponiveisParaTroca(context)
-          //cancelButton: ,
+        return AlertDialog(
+          backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+          content: Container(
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    ClipOval(
+                        child: Image.asset("lib/view/assets/fazendeiros/"+fazendeiro.nomeImagem+".png",
+                          width: tamanhoImagem,
+                        )
+                    ),
+
+                    Bubble(
+                      style: styleSomebody,
+                      nip: BubbleNip.leftBottom,
+                      child:Text("Olá,"+fazendeiro.nome+"!"),
+                    )
+                  ],
+
+                ),
+
+
+                Container(
+                  child: Row(
+                    children: [
+                      Container(width: tamanhoImagem,),
+                      Bubble(
+                        style: styleSomebody,
+                        nip: BubbleNip.leftBottom,
+                        child: AutoSizeText("quer " + produtoOfertado+"?", maxLines: 3,),
+                      )
+                    ],
+                  ),
+                ),
+
+
+                Column(
+                  children:[
+                    ButtonTheme(
+                      minWidth: 5,
+                      buttonColor: Colors.lightGreen,
+                      child: RaisedButton(
+                        child: Text("Não, valeu!"),
+                        onPressed: (){
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ),
+                    ButtonTheme(
+                      minWidth: 5,
+                      buttonColor: Colors.lightGreen,
+                      child: RaisedButton(
+                        child: Text("Sim, por favor!"),
+                        onPressed: (){
+                          Navigator.of(context).pop();
+                          pedirProdutoEmTroca(produtoOfertado,context);
+                        },
+                      ),
+                    ),
+                  ],
+                )
+
+              ],
+            ),
+
+          )
+
         );
+
       },
     );
+
   }
 
-  List<Widget> gerarListaProdutosDisponiveisParaTroca(BuildContext context){
-    List<Widget> listaItensASerTrocado= [];
-    for (String produto in fazendeiro.nomeProdutos){
-      listaItensASerTrocado.add(CupertinoActionSheetAction(
-        child: Text(produto),
-        onPressed: () {
-          Navigator.of(context).pop();
-          _sugerirProdutoAserTrocado(produto,context);
-        },
-      )
-      );
 
-    }
-    return listaItensASerTrocado;
-  }
 
-  Future<void> _sugerirProdutoAserTrocado(String produtoAserTrocado,BuildContext context) async {
+  Future<void> pedirProdutoEmTroca(String produtoOfertado,BuildContext context) async {
+
     return showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) {
-        return CupertinoActionSheet(
-            message: Text("Qual desses produtos vocẽ gostaria de adquirir?"),
-            actions: gerarListaProdutosASerTrocado(produtoAserTrocado,context)
-          //cancelButton: ,
+        return AlertDialog(
+          title: Text("Qual desses produtos vocẽ gostaria de dar para ser trocado em troca do "+ produtoOfertado + "?",
+            style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+          backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+          content: Column(children: gerarListaProdutosDisponiveisParaTroca(context, produtoOfertado)),
         );
+
       },
     );
+
   }
 
-
-  List<Widget> gerarListaProdutosASerTrocado(String produtoAserDado,BuildContext context){
-
+  List<Widget> gerarListaProdutosDisponiveisParaTroca(BuildContext context,String produtoOfertado){
     List<Widget> listaItensASerTrocado= [];
-    for (String produto in fazendeiro.colheitas){
-      listaItensASerTrocado.add(CupertinoActionSheetAction(
-        child: Text(produto),
-        onPressed: () {
-          Navigator.of(context).pop();
-          showCupertinoModalPopup<void>(
-              context: context,
-              builder: (BuildContext context) {
-                return   trocaConcluida(produtoAserDado,produto,context);
-
-          });
-          },
-      )
-      );
+    for (String produtoASerDado in fazendeiro.nomeProdutos){
+      if(fazendeiro.colheitas.contains(produtoASerDado)) {
+        listaItensASerTrocado.add(
+            ButtonTheme(
+              minWidth: 400,
+              buttonColor: Colors.grey,
+              child: RaisedButton(
+                child: Row(
+                  children: <Widget>[
+                    Text(produtoASerDado),
+                  ],
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  showCupertinoModalPopup<void>(
+                    context: context, builder: (BuildContext context) {
+                      return   trocaConcluida(produtoASerDado, produtoOfertado, context);
+                     });
+                  },
+              ),
+            )
+        );
+      }
 
     }
+
     return listaItensASerTrocado;
   }
+
 
 
   Widget trocaConcluida(String produtoDado, String produtoRecebido,BuildContext context) {
@@ -148,9 +231,11 @@ class TrocaScreen extends StatelessWidget {
       fazendeiro.nomeProdutos.add(produtoRecebido);
       fazendeiro.quantidadeProdutos.add(1);
     }
+    fazendeiro.checarMissao(Missoes.realizarUmaTroca);
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12)),
+      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
       content: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
           children:[

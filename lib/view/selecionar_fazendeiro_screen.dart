@@ -61,7 +61,7 @@ class _SelecionarFazendeiroScreenState extends State<SelecionarFazendeiroScreen>
                                 borderRadius: BorderRadius.all(const Radius.circular(12.0)),
                               ),
                               contentPadding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.035),
-                              errorText: "favor inserir um nome ",
+                              //errorText: "favor inserir um nome ",
                               ),
                               );
                             }
@@ -72,10 +72,13 @@ class _SelecionarFazendeiroScreenState extends State<SelecionarFazendeiroScreen>
                         builder: (_) {
                             return GestureDetector(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => FazendaScreen()));
-                              },
+                                if (controller.nomePreenchido)
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => FazendaScreen()));
+
+
+                                },
                               child: Image.asset("lib/view/assets/botao-continuar.png",semanticLabel: "Continuar",)
                         );
                         }
