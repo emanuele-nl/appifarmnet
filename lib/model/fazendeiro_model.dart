@@ -12,7 +12,7 @@ class Fazendeiro{
   Celeiro celeiro;
   int fome = 100;
   int vigorFisico = 100;
-  int sabedoria = 0;
+  int experiencia = 0;
   int agua = 8;
   int adubo=8;
   int leite = 2;
@@ -26,6 +26,7 @@ class Fazendeiro{
 
   String missaAtual= Missoes.realizarUmaTroca;
   bool missaoConcluida =false;
+  bool avisoNovaMissao = true;
   List<String> missoes = [Missoes.realizarUmaTroca,Missoes.comprarItemMercado,Missoes.coletarAgua,Missoes.colherAlimento,Missoes.comerAlimento,Missoes.coletarLeite,Missoes.coletarLeite];
   int numeroMissao = 0;
 
@@ -37,14 +38,22 @@ class Fazendeiro{
   Fazendeiro._internalConstructor();
 
   void checarMissao (String acaoRealizada){
-    if (acaoRealizada == missaAtual)
+    if (acaoRealizada == missaAtual) {
       missaoConcluida = true;
+      avisoNovaMissao = true;
+    }
 
   }
 
   void produzirAdubo(){
     adubo++;
     checarMissao(Missoes.gerarAdubo);
+  }
+
+  void utilizarAdubo (){
+    adubo--;
+    if (adubo<0)
+      adubo=0;
   }
 
   void coletarLeite(){
@@ -114,16 +123,22 @@ class Fazendeiro{
       fome=fome + valorAserAdicionado;
       if (fome > 100)
         fome = 100;
+      if (fome<=0)
+        fome=0;
     }
     else if (item == "vigorFisico") {
         vigorFisico = vigorFisico + valorAserAdicionado;
         if (vigorFisico > 100)
           vigorFisico = 100;
+        if (fome<=0)
+          vigorFisico=0;
       }
-    else if (item == "sabedoria") {
-      sabedoria = sabedoria + valorAserAdicionado;
-      if (sabedoria> 100)
-        sabedoria = 100;
+    else if (item == "experiencia") {
+      experiencia = experiencia + valorAserAdicionado;
+      if (experiencia> 100)
+        experiencia = 100;
+      if (experiencia<=0)
+        experiencia = 0; 
     }
   }
 

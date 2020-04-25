@@ -24,6 +24,10 @@ dependencies:
   percent_indicator: "^2.1.1"
   bubble: ^1.1.9+1
   auto_size_text: ^2.1.0
+  flushbar:
+    git:
+      url: https://github.com/AndreHaueisen/flushbar.git
+      ref: 13c55a8
 
 
 
@@ -62,6 +66,9 @@ flutter:
     - lib/view/assets/produtos/
     - lib/view/assets/mercado/
     - lib/view/assets/animal/
+    - lib/view/assets/atividadeFisica/
+    - lib/view/assets/atividadeFisica/natacao/
+    - lib/view/assets/atividadeFisica/bicicleta/
     - lib/view/assets/barraPrincipal/
     - lib/view/assets/pergunta/
     - lib/view/assets/celeiro.png

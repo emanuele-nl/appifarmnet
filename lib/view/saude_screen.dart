@@ -7,15 +7,15 @@ class SaudeScreen extends StatelessWidget{
   Widget build(BuildContext context) {
     Fazendeiro fazendeiro = Fazendeiro();
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),
       ),
       body: Center(
         child: Column(
           children: <Widget>[
             Image.asset("lib/view/assets/fazendeiros/"+fazendeiro.nomeImagem+".png", width: 100,),
-            Text(fazendeiro.nome == null? "nulo": fazendeiro.nome),
+            Text(fazendeiro.nome == null? "nulo": fazendeiro.nome,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
             Padding(
               padding: EdgeInsets.all(15.0),
               child: new LinearPercentIndicator(
@@ -49,8 +49,8 @@ class SaudeScreen extends StatelessWidget{
                 animation: true,
                 lineHeight: 20.0,
                 animationDuration: 2000,
-                percent: fazendeiro.sabedoria/100,
-                center: Text("Sabedoria"),
+                percent: fazendeiro.experiencia/100,
+                center: Text("Experiência"),
                 linearStrokeCap: LinearStrokeCap.roundAll,
                 progressColor: Colors.orangeAccent,
               ),

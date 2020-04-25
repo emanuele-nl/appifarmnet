@@ -61,7 +61,7 @@ class _SelecionarFazendeiroScreenState extends State<SelecionarFazendeiroScreen>
                                 borderRadius: BorderRadius.all(const Radius.circular(12.0)),
                               ),
                               contentPadding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.035),
-                              //errorText: "favor inserir um nome ",
+                              errorText: controller.nomePreenchido? null : "Favor inserir um nome ",
                               ),
                               );
                             }

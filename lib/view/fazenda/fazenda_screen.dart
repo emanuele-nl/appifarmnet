@@ -25,20 +25,22 @@ class _FazendaScreenState extends State<FazendaScreen> {
     //List<String> nomeProdutos= ["cenoura"];
 
     return new Scaffold(
-        backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),
+        backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),ls
+
         appBar: BarraNavegacao(),
         body:
-          Stack(
-           children: [
-             new Container(
-               decoration: new BoxDecoration(
-                 image: new DecorationImage(image: new AssetImage("lib/view/assets/lago.png"), fit: BoxFit.fitWidth,),
-               ),
-             ),
+        Stack(
+          children: [
+            Expanded(
+              child: Align(
+                alignment: FractionalOffset.bottomCenter,
+                child:  Image.asset("lib/view/assets/lago.png", excludeFromSemantics: true,),
+              ),
 
-             Center(
+            ),
+            Center(
                 child:
-                  Row(
+                Row(
                     children: <Widget>[
                       Container(width: 20),
                       Column(
@@ -51,36 +53,36 @@ class _FazendaScreenState extends State<FazendaScreen> {
                       Container(width: 60,),
                       Column(
                         children:[
-                                GestureDetector(
-                                    child: Image.asset("lib/view/assets/celeiro.png",height: 100,),
-                                    onTap:() {
-                                      showCupertinoModalPopup<void>(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return celeiro(context);
-                                        },
+                          GestureDetector(
+                              child: Image.asset("lib/view/assets/celeiro.png",height: 100,),
+                              onTap:() {
+                                showCupertinoModalPopup<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return celeiro(context);
+                                  },
 
-                                  );
-                                }
-                            ),
-                            Container(height: 70,),
-                            GestureDetector(
+                                );
+                              }
+                          ),
+                          Container(height: 70,),
+                          GestureDetector(
                               child: Image.asset("lib/view/assets/poco.png",height:60),
                               onTap: (){
-                                  controller.fazendeiro.adicionarAgua();
-                                  showCupertinoModalPopup<void>(
+                                controller.fazendeiro.adicionarAgua();
+                                showCupertinoModalPopup<void>(
                                   context: context,
                                   builder: (BuildContext context) {
                                     return aguaAdicionada(context);
                                   },
-                                  );
+                                );
                               }
-                            )
-                          ],
-                        ),
-                ]
-              ))],
-      ));
+                          )
+                        ],
+                      ),
+                    ]
+                ))],
+        ));
   }
 
 
@@ -117,18 +119,18 @@ class _FazendaScreenState extends State<FazendaScreen> {
 
     for (String alternativa in pergunta.alternativas){
       alternativas.add(
-        ButtonTheme(
-          minWidth: 400,
-          buttonColor: Colors.grey,
-          child: RaisedButton(
-            child: Text(alternativa),
-            onPressed: (){
-              Navigator.of(context).pop();
-              evoluiOuMorre(alternativa, pergunta.respostaCorreta);
+          ButtonTheme(
+            minWidth: 400,
+            buttonColor: Colors.grey,
+            child: RaisedButton(
+              child: Text(alternativa),
+              onPressed: (){
+                Navigator.of(context).pop();
+                evoluiOuMorre(alternativa, pergunta.respostaCorreta);
 
-            },
-          ),
-        )
+              },
+            ),
+          )
       );
 
     }
@@ -149,39 +151,39 @@ class _FazendaScreenState extends State<FazendaScreen> {
       children: [
         Image.asset("lib/view/assets/plantacao/cercaplantacoes.png", height: 125.0),
         GestureDetector(
-          child: Observer(builder: (_){
-            double altura = 120.0;
-            String cultivoAtual = controller.fazendeiro.cultivoAtual;
-            if (cultivoAtual == null|| controller.estadoAtual == "vazio")
-              return Image.asset("lib/view/assets/plantacao/"+controller.estadoAtual+".png",height: altura,);
-            return Image.asset("lib/view/assets/plantacao/"+cultivoAtual+"/"+controller.estadoAtual+".png",height: altura,);}),
-          onTap:(){
+            child: Observer(builder: (_){
+              double altura = 120.0;
+              String cultivoAtual = controller.fazendeiro.cultivoAtual;
+              if (cultivoAtual == null|| controller.estadoAtual == "vazio")
+                return Image.asset("lib/view/assets/plantacao/"+controller.estadoAtual+".png",height: altura,);
+              return Image.asset("lib/view/assets/plantacao/"+cultivoAtual+"/"+controller.estadoAtual+".png",height: altura,);}),
+            onTap:(){
 
-            if (controller.estadoAtual == "morta"){
-              controller.evoluirTerreno();
+              if (controller.estadoAtual == "morta"){
+                controller.evoluirTerreno();
+              }
+
+              else if (controller.estadoAtual == "vazio"){
+                aparecerOpcoesCultivo(controller.fazendeiro.nomeProdutos);
+              }
+
+              else if (controller.estadoAtual == "completo"){
+                controller.fazendeiro.checarMissao(Missoes.colherAlimento);
+                controller.evoluirTerreno();
+                controller.fazendeiro.adicionarItem(controller.fazendeiro.cultivoAtual);
+                controller.fazendeiro.adicionarItem(controller.fazendeiro.cultivoAtual);
+
+              }
+
+              else if (controller.estadoAtual != "vazio") {
+                aparecerPergunta(pergunta);
+                numeroPergunta++;
+                pergunta = perguntas.listaPerguntas[numeroPergunta];
+              }
+
             }
 
-            else if (controller.estadoAtual == "vazio"){
-              aparecerOpcoesCultivo(controller.fazendeiro.nomeProdutos);
-            }
-
-            else if (controller.estadoAtual == "completo"){
-              controller.fazendeiro.checarMissao(Missoes.colherAlimento);
-              controller.evoluirTerreno();
-              controller.fazendeiro.adicionarItem(controller.fazendeiro.cultivoAtual);
-              controller.fazendeiro.adicionarItem(controller.fazendeiro.cultivoAtual);
-
-            }
-
-            else if (controller.estadoAtual != "vazio") {
-              aparecerPergunta(pergunta);
-              numeroPergunta++;
-              pergunta = perguntas.listaPerguntas[numeroPergunta];
-            }
-
-          }
-
-      )],
+        )],
     );
 
   }
@@ -221,12 +223,12 @@ class _FazendaScreenState extends State<FazendaScreen> {
       content: Column(
         children:[
           RaisedButton(
-            child: Text("Coletar Leite"),
-            onPressed: (){
-              Navigator.of(context).pop();
-              fazendeiro.coletarLeite();
-            }
-         ),
+              child: Text("Coletar Leite"),
+              onPressed: (){
+                Navigator.of(context).pop();
+                fazendeiro.coletarLeite();
+              }
+          ),
           RaisedButton(
             child:Text("Produzir Adubo"),
             onPressed: (){
@@ -311,17 +313,17 @@ class _FazendaScreenState extends State<FazendaScreen> {
             onTap: (){
               Navigator.of(context).pop();
               showCupertinoModalPopup<void>(
-              context: context,
-              builder: (BuildContext context) {
-              return comerItemCeleiro(context,itens);
-              });
+                  context: context,
+                  builder: (BuildContext context) {
+                    return comerItemCeleiro(context,itens);
+                  });
 
             },
             child: ListTile(
-               leading: Image.asset("lib/view/assets/produtos/"+itens+".png", width: 50,),
-               trailing: Text(quantidades[i].toString()),
-               title: Text(itens),
-      ),
+              leading: Image.asset("lib/view/assets/produtos/"+itens+".png", width: 50,),
+              trailing: Text(quantidades[i].toString()),
+              title: Text(itens),
+            ),
           ));
       i++;
     }
@@ -361,7 +363,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
           borderRadius: BorderRadius.circular(12)),
       title:Text("Celeiro", textAlign: TextAlign.start,),
       content: Column(children: gerarWidgetsItensCeleiro(controller.fazendeiro.nomeProdutos,controller.fazendeiro.quantidadeProdutos ),
-    ),
+      ),
       actions: <Widget>[
         BotaoModal(context),
       ],

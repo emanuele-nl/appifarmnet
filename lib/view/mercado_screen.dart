@@ -82,7 +82,7 @@ class MercadoScreen extends StatelessWidget {
             showCupertinoModalPopup<void>(
                 context: context,
                 builder: (BuildContext context) {
-                  return Questionamento("cenoura", itens, context);
+                  return Questionamento(fazendeiro.nomeProdutos[0], itens, context);
 
                 });
 
