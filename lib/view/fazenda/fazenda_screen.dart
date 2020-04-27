@@ -25,8 +25,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
     //List<String> nomeProdutos= ["cenoura"];
 
     return new Scaffold(
-        backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),ls
-
+        backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),
         appBar: BarraNavegacao(),
         body:
         Stack(
@@ -38,6 +37,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
               ),
 
             ),
+
             Center(
                 child:
                 Row(
@@ -90,6 +90,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12)),
+      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
       title:Text("Água adicionada", textAlign: TextAlign.center,),
       content: Image.asset("lib/view/assets/produtos/agua.png",height: 100,),
       actions: <Widget>[
@@ -164,7 +165,15 @@ class _FazendaScreenState extends State<FazendaScreen> {
               }
 
               else if (controller.estadoAtual == "vazio"){
-                aparecerOpcoesCultivo(controller.fazendeiro.nomeProdutos);
+                showCupertinoModalPopup<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return  aparecerOpcoesCultivo(controller.fazendeiro.nomeProdutos,context);
+
+                  },
+
+                );
+
               }
 
               else if (controller.estadoAtual == "completo"){
@@ -219,14 +228,21 @@ class _FazendaScreenState extends State<FazendaScreen> {
   Widget modalVaca(BuildContext context){
     Fazendeiro fazendeiro = Fazendeiro();
     return AlertDialog(
-      title: Text("vaca"),
+      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
       content: Column(
         children:[
+          Image.asset("lib/view/assets/animal/vaca.png",height: 60,),
           RaisedButton(
               child: Text("Coletar Leite"),
               onPressed: (){
                 Navigator.of(context).pop();
                 fazendeiro.coletarLeite();
+                showCupertinoModalPopup<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return leiteAdicionado(context);
+                  },
+                );
               }
           ),
           RaisedButton(
@@ -234,6 +250,12 @@ class _FazendaScreenState extends State<FazendaScreen> {
             onPressed: (){
               Navigator.of(context).pop();
               fazendeiro.produzirAdubo();
+              showCupertinoModalPopup<void>(
+                context: context,
+                builder: (BuildContext context) {
+                  return aduboAdicionado(context);
+                },
+              );
             },
           ),
 
@@ -246,43 +268,114 @@ class _FazendaScreenState extends State<FazendaScreen> {
 
   }
 
-
-
-
-
-
-
-  Future<void> aparecerOpcoesCultivo(List<String> cultivos) async {
-    return showCupertinoModalPopup<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return CupertinoActionSheet(
-          message: Text("Selecione um cultivo"),
-          actions: _gerarOpcoesCultivos(cultivos),
-
-          //cancelButton: ,
-        );
-      },
+  Widget aduboAdicionado(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)),
+      title:Text("Adubo Adicionado", textAlign: TextAlign.center,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+      content: Image.asset("lib/view/assets/produtos/adubo.png",height: 100,),
+      actions: <Widget>[
+        BotaoModal(context),
+      ],
     );
+  }
+
+  Widget leiteAdicionado(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)),
+      title:Text("Leite Adicionado", textAlign: TextAlign.center,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+      content: Image.asset("lib/view/assets/produtos/leite.png",height: 100,),
+      actions: <Widget>[
+        BotaoModal(context),
+      ],
+    );
+  }
+
+
+
+
+
+//
+//  Future<void> aparecerOpcoesCultivo(List<String> cultivos) async {
+//    return showCupertinoModalPopup<void>(
+//      context: context,
+//      builder: (BuildContext context) {
+//        return CupertinoActionSheet(
+//          message: Text("Selecione um cultivo"),
+//          actions: _gerarOpcoesCultivos(cultivos),
+//
+//          //cancelButton: ,
+//        );
+//      },
+//    );
+//
+//  }
+//
+//  List<Widget>_gerarOpcoesCultivos (List<String> cultivos){
+//    List<Widget> widgetsCultivo = [];
+//    for (String cultivo in cultivos){
+//      if (controller.fazendeiro.colheitas.contains(cultivo)){
+//        widgetsCultivo.add(CupertinoActionSheetAction(
+//          child: Text(cultivo),
+//          onPressed:()  { controller.evoluirTerreno();
+//          controller.fazendeiro.cultivoAtual = cultivo;
+//          Navigator.of(context).pop();
+//          controller.fazendeiro.retirarItem(controller.fazendeiro.cultivoAtual);
+//          },
+//        ));}
+//    }
+//    return widgetsCultivo;
+//  }
+
+
+
+
+
+
+  Widget aparecerOpcoesCultivo(List<String> cultivos,BuildContext context) {
+    Fazendeiro fazendeiro = Fazendeiro();
+    List<Widget> botoesCultivos = _gerarOpcoesCultivos(cultivos);
+
+    return AlertDialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12)),
+        title:Text("Selecione um Cultivo", textAlign: TextAlign.center,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+        backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+        content: Container(
+          height: 200,
+          child: Column(
+              children: botoesCultivos
+          ),
+        ));
 
   }
 
-  List<Widget>_gerarOpcoesCultivos (List<String> cultivos){
+
+  List<Widget> _gerarOpcoesCultivos(List<String> cultivos) {
     List<Widget> widgetsCultivo = [];
-    for (String cultivo in cultivos){
-      if (controller.fazendeiro.colheitas.contains(cultivo)){
-        widgetsCultivo.add(CupertinoActionSheetAction(
-          child: Text(cultivo),
-          onPressed:()  { controller.evoluirTerreno();
-          controller.fazendeiro.cultivoAtual = cultivo;
-          Navigator.of(context).pop();
-          controller.fazendeiro.retirarItem(controller.fazendeiro.cultivoAtual);
-          },
-        ));}
+    for (String cultivo in cultivos) {
+      if (controller.fazendeiro.colheitas.contains(cultivo)) {
+        widgetsCultivo.add(RaisedButton(
+          child: Row(
+            children: <Widget>[
+              Image.asset("lib/view/assets/produtos/" + cultivo + ".png",height: 10,),
+              Text(cultivo),
+            ],
+          ),
+
+          onPressed: () {
+            controller.evoluirTerreno();
+            controller.fazendeiro.cultivoAtual = cultivo;
+            Navigator.of(context).pop();
+            controller.fazendeiro.retirarItem(controller.fazendeiro.cultivoAtual);
+            controller.fazendeiro.utilizarAdubo();
+          },));
+      }
     }
     return widgetsCultivo;
-
-
   }
 
 
@@ -343,6 +436,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12)),
+      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5), //aqui!!!!!
       content: Column(
         children: <Widget>[
           Image.asset("lib/view/assets/produtos/" + itemSelecionado ),
@@ -361,6 +455,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12)),
+      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),//aqui
       title:Text("Celeiro", textAlign: TextAlign.start,),
       content: Column(children: gerarWidgetsItensCeleiro(controller.fazendeiro.nomeProdutos,controller.fazendeiro.quantidadeProdutos ),
       ),
