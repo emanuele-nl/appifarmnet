@@ -80,7 +80,6 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
   Widget atividadeFisica(BuildContext context) {
     Fazendeiro fazendeiro = Fazendeiro();
 
-
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12)),
@@ -123,7 +122,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                 showCupertinoModalPopup<void>(
                 context: context,
                 builder: (BuildContext context) {
-                return confirmarAtividadeFisica(context);
+                return confirmarCaminhada(context);
                 },
                 );
                 }
@@ -143,7 +142,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                   showCupertinoModalPopup<void>(
                     context: context,
                     builder: (BuildContext context) {
-                      return confirmarAtividadeFisica(context);
+                      return confirmarCorrida(context);
                     },
                   );
                 }
@@ -206,6 +205,47 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
       ],
     );
   }
+
+  Widget confirmarCorrida(BuildContext context) {
+    Fazendeiro fazendeiro =Fazendeiro();
+    return AlertDialog(
+      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+      content: Container(
+        height: 220,
+        child: Column(
+          children: <Widget>[
+            Image.asset("lib/view/assets/atividadeFisica/corrida/corrida"+fazendeiro.nomeImagem+".png", height: 200,),
+            Text("Você correu!!",textAlign: TextAlign.center,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        BotaoModal(context),
+      ],
+    );
+  }
+
+
+  Widget confirmarCaminhada(BuildContext context) {
+    Fazendeiro fazendeiro =Fazendeiro();
+    return AlertDialog(
+      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+      content: Container(
+        height: 220,
+        child: Column(
+          children: <Widget>[
+            Image.asset("lib/view/assets/atividadeFisica/caminhada/caminhada"+fazendeiro.nomeImagem+".png", height: 200,),
+            Text("Você caminhou!!",textAlign: TextAlign.center,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        BotaoModal(context),
+      ],
+    );
+  }
+
+
 
   Widget confirmarPedalar(BuildContext context) {
     Fazendeiro fazendeiro =Fazendeiro();

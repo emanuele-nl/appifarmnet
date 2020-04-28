@@ -9,6 +9,8 @@ import 'package:i_farm_net_new/model/pergunta_model.dart';
 import 'package:i_farm_net_new/view/barra_navegacao_widget.dart';
 import 'package:i_farm_net_new/view/noticias_widgets.dart';
 import 'package:mobx/mobx.dart';
+import 'dart:math';
+
 
 
 class FazendaScreen extends StatefulWidget {
@@ -20,10 +22,6 @@ class FazendaScreen extends StatefulWidget {
 
 class _FazendaScreenState extends State<FazendaScreen> {
   final controller= FazendaController();
-
-
-
-
 
 
 

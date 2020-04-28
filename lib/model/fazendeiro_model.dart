@@ -30,6 +30,8 @@ class Fazendeiro{
   List<String> missoes = [Missoes.realizarUmaTroca,Missoes.comprarItemMercado,Missoes.coletarAgua,Missoes.colherAlimento,Missoes.comerAlimento,Missoes.coletarLeite,Missoes.coletarLeite];
   int numeroMissao = 0;
 
+  String teste ="ainda nao fez missao????";
+
 
   factory Fazendeiro(){
     return _instance;
@@ -41,6 +43,8 @@ class Fazendeiro{
     if (acaoRealizada == missaAtual) {
       missaoConcluida = true;
       avisoNovaMissao = true;
+      teste = "missao concluida";
+
     }
   }
 

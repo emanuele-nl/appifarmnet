@@ -69,6 +69,8 @@ flutter:
     - lib/view/assets/atividadeFisica/
     - lib/view/assets/atividadeFisica/natacao/
     - lib/view/assets/atividadeFisica/bicicleta/
+    - lib/view/assets/atividadeFisica/corrida/
+    - lib/view/assets/atividadeFisica/caminhada/
     - lib/view/assets/barraPrincipal/
     - lib/view/assets/pergunta/
     - lib/view/assets/celeiro.png
