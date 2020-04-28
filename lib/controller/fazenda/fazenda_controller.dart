@@ -20,6 +20,12 @@ abstract class _FazendaControllerBase with Store{
   String estadoAtual="vazio";
 
   @observable
+  String mensagensNoticiasMissoes = "Faça missões e ganhe experiência! | ";
+
+  @observable
+  String mensagemExtra = "Você está em um ambiente de econômia solidária |";
+
+  @observable
   Fazendeiro fazendeiro = Fazendeiro();
 
   @action
@@ -40,5 +46,18 @@ abstract class _FazendaControllerBase with Store{
     estadoAtual = terreno.estadoAtual;
 
   }
+
+  @computed
+  String get noticias => "$mensagensNoticiasMissoes $mensagemExtra";
+
+  @action
+  gerarMensagensMissoes(){
+    if (fazendeiro.avisoNovaMissao){
+      mensagensNoticiasMissoes = "Missao concluída! pegue uma nova missão | ";
+    }
+    else
+      mensagensNoticiasMissoes = "Realize sua missão e ganhe experiência | ";
+  }
+
 
 }

@@ -9,6 +9,29 @@ part of 'fazenda_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$FazendaController on _FazendaControllerBase, Store {
+  Computed<String> _$noticiasComputed;
+
+  @override
+  String get noticias =>
+      (_$noticiasComputed ??= Computed<String>(() => super.noticias)).value;
+
+  final _$NomeCultivoAtom = Atom(name: '_FazendaControllerBase.NomeCultivo');
+
+  @override
+  String get NomeCultivo {
+    _$NomeCultivoAtom.context.enforceReadPolicy(_$NomeCultivoAtom);
+    _$NomeCultivoAtom.reportObserved();
+    return super.NomeCultivo;
+  }
+
+  @override
+  set NomeCultivo(String value) {
+    _$NomeCultivoAtom.context.conditionallyRunInAction(() {
+      super.NomeCultivo = value;
+      _$NomeCultivoAtom.reportChanged();
+    }, _$NomeCultivoAtom, name: '${_$NomeCultivoAtom.name}_set');
+  }
+
   final _$terrenoAtom = Atom(name: '_FazendaControllerBase.terreno');
 
   @override
@@ -43,6 +66,61 @@ mixin _$FazendaController on _FazendaControllerBase, Store {
     }, _$estadoAtualAtom, name: '${_$estadoAtualAtom.name}_set');
   }
 
+  final _$mensagensNoticiasMissoesAtom =
+      Atom(name: '_FazendaControllerBase.mensagensNoticiasMissoes');
+
+  @override
+  String get mensagensNoticiasMissoes {
+    _$mensagensNoticiasMissoesAtom.context
+        .enforceReadPolicy(_$mensagensNoticiasMissoesAtom);
+    _$mensagensNoticiasMissoesAtom.reportObserved();
+    return super.mensagensNoticiasMissoes;
+  }
+
+  @override
+  set mensagensNoticiasMissoes(String value) {
+    _$mensagensNoticiasMissoesAtom.context.conditionallyRunInAction(() {
+      super.mensagensNoticiasMissoes = value;
+      _$mensagensNoticiasMissoesAtom.reportChanged();
+    }, _$mensagensNoticiasMissoesAtom,
+        name: '${_$mensagensNoticiasMissoesAtom.name}_set');
+  }
+
+  final _$mensagemExtraAtom =
+      Atom(name: '_FazendaControllerBase.mensagemExtra');
+
+  @override
+  String get mensagemExtra {
+    _$mensagemExtraAtom.context.enforceReadPolicy(_$mensagemExtraAtom);
+    _$mensagemExtraAtom.reportObserved();
+    return super.mensagemExtra;
+  }
+
+  @override
+  set mensagemExtra(String value) {
+    _$mensagemExtraAtom.context.conditionallyRunInAction(() {
+      super.mensagemExtra = value;
+      _$mensagemExtraAtom.reportChanged();
+    }, _$mensagemExtraAtom, name: '${_$mensagemExtraAtom.name}_set');
+  }
+
+  final _$fazendeiroAtom = Atom(name: '_FazendaControllerBase.fazendeiro');
+
+  @override
+  Fazendeiro get fazendeiro {
+    _$fazendeiroAtom.context.enforceReadPolicy(_$fazendeiroAtom);
+    _$fazendeiroAtom.reportObserved();
+    return super.fazendeiro;
+  }
+
+  @override
+  set fazendeiro(Fazendeiro value) {
+    _$fazendeiroAtom.context.conditionallyRunInAction(() {
+      super.fazendeiro = value;
+      _$fazendeiroAtom.reportChanged();
+    }, _$fazendeiroAtom, name: '${_$fazendeiroAtom.name}_set');
+  }
+
   final _$_FazendaControllerBaseActionController =
       ActionController(name: '_FazendaControllerBase');
 
@@ -67,9 +145,19 @@ mixin _$FazendaController on _FazendaControllerBase, Store {
   }
 
   @override
+  dynamic gerarMensagensMissoes() {
+    final _$actionInfo = _$_FazendaControllerBaseActionController.startAction();
+    try {
+      return super.gerarMensagensMissoes();
+    } finally {
+      _$_FazendaControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
-        'terreno: ${terreno.toString()},estadoAtual: ${estadoAtual.toString()}';
+        'NomeCultivo: ${NomeCultivo.toString()},terreno: ${terreno.toString()},estadoAtual: ${estadoAtual.toString()},mensagensNoticiasMissoes: ${mensagensNoticiasMissoes.toString()},mensagemExtra: ${mensagemExtra.toString()},fazendeiro: ${fazendeiro.toString()},noticias: ${noticias.toString()}';
     return '{$string}';
   }
 }

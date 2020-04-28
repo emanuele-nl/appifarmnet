@@ -14,6 +14,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    Fazendeiro fazendeiro = Fazendeiro();
     return AppBar(
       automaticallyImplyLeading: false,
       titleSpacing: 100.0,
@@ -60,6 +61,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
         Container(width: 30),
         GestureDetector(
           onTap: () {
+            fazendeiro.avisoNovaMissao=false;
             showCupertinoModalPopup<void>(
               context: context,
               builder: (BuildContext context) {
@@ -75,66 +77,6 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
   }
 
 
-//  Widget atividadeFisica(BuildContext context) {
-//    Fazendeiro fazendeiro = Fazendeiro();
-//    return AlertDialog(
-//      title:Text("Atividade Física", textAlign: TextAlign.start,),
-//      content: Column(
-//        children: <Widget>[
-//          Container(
-//            height: 70,
-//            child: GestureDetector(
-//              onTap: (){
-//                Navigator.of(context).pop();
-//                fazendeiro.adicionarValorItemSaude("vigorFisico", 8);
-//                showCupertinoModalPopup<void>(
-//                  context: context,
-//                  builder: (BuildContext context) {
-//                    return confirmarAtividadeFisica(context);
-//                  },);
-//              },
-//              child: Text("Nadar"),
-//            ),
-//          ),
-//          Container(
-//            height: 70,
-//            child: GestureDetector(
-//              onTap: (){
-//                Navigator.of(context).pop();
-//                fazendeiro.adicionarValorItemSaude("vigorFisico", 8);
-//                showCupertinoModalPopup<void>(
-//                  context: context,
-//                  builder: (BuildContext context) {
-//                    return confirmarAtividadeFisica(context);
-//                  },);
-//              },
-//              child: Text("Correr"),
-//            ),
-//          ),
-//          Container(
-//            height: 70,
-//            child: GestureDetector(
-//              onTap: (){
-//                Navigator.of(context).pop();
-//                fazendeiro.adicionarValorItemSaude("vigorFisico", 8);
-//                showCupertinoModalPopup<void>(
-//                  context: context,
-//                  builder: (BuildContext context) {
-//                    return confirmarAtividadeFisica(context);
-//                  },);
-//              },
-//              child: Text("Caminhar"),
-//            ),
-//          ),
-//        ],
-//
-//      ),
-//      actions: <Widget>[
-//        BotaoModal(context),
-//      ],
-//    );
-//  }
-
   Widget atividadeFisica(BuildContext context) {
     Fazendeiro fazendeiro = Fazendeiro();
 
@@ -148,6 +90,25 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
         height: 200,
         child: Column(
           children: <Widget>[
+            RaisedButton(
+                child: Row(
+                  children: <Widget>[
+                    Image.asset("lib/view/assets/atividadeFisica/bicicleta.png",height: 20,),
+                    Text("Pedalar",)
+                  ],
+                ),
+                onPressed: (){
+                  Navigator.of(context).pop();
+                  fazendeiro.adicionarValorItemSaude("vigorFisico", 8);
+                  showCupertinoModalPopup<void>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return confirmarPedalar(context);
+                    },
+                  );
+                }
+
+            ),
             RaisedButton(
               child: Row(
                 children: <Widget>[
@@ -237,6 +198,25 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
           children: <Widget>[
             Image.asset("lib/view/assets/atividadeFisica/natacao/natacao"+fazendeiro.nomeImagem+".png", height: 200,),
             Text("Você nadou!",textAlign: TextAlign.center,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        BotaoModal(context),
+      ],
+    );
+  }
+
+  Widget confirmarPedalar(BuildContext context) {
+    Fazendeiro fazendeiro =Fazendeiro();
+    return AlertDialog(
+      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+      content: Container(
+        height: 220,
+        child: Column(
+          children: <Widget>[
+            Image.asset("lib/view/assets/atividadeFisica/bicicleta/bicicleta"+fazendeiro.nomeImagem+".png", height: 200,),
+            Text("Você pedalou!",textAlign: TextAlign.center,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
           ],
         ),
       ),

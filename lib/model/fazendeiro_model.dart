@@ -26,7 +26,7 @@ class Fazendeiro{
 
   String missaAtual= Missoes.realizarUmaTroca;
   bool missaoConcluida =false;
-  bool avisoNovaMissao = true;
+  bool avisoNovaMissao = false;
   List<String> missoes = [Missoes.realizarUmaTroca,Missoes.comprarItemMercado,Missoes.coletarAgua,Missoes.colherAlimento,Missoes.comerAlimento,Missoes.coletarLeite,Missoes.coletarLeite];
   int numeroMissao = 0;
 
@@ -42,7 +42,6 @@ class Fazendeiro{
       missaoConcluida = true;
       avisoNovaMissao = true;
     }
-
   }
 
   void produzirAdubo(){

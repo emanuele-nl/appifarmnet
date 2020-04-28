@@ -30,6 +30,24 @@ mixin _$SelecionarFazendeiroController
         name: '${_$imagemFazendeiroSelecionadoAtom.name}_set');
   }
 
+  final _$nomePreenchidoAtom =
+      Atom(name: '_SelecionarFazendeiroControllerBase.nomePreenchido');
+
+  @override
+  bool get nomePreenchido {
+    _$nomePreenchidoAtom.context.enforceReadPolicy(_$nomePreenchidoAtom);
+    _$nomePreenchidoAtom.reportObserved();
+    return super.nomePreenchido;
+  }
+
+  @override
+  set nomePreenchido(bool value) {
+    _$nomePreenchidoAtom.context.conditionallyRunInAction(() {
+      super.nomePreenchido = value;
+      _$nomePreenchidoAtom.reportChanged();
+    }, _$nomePreenchidoAtom, name: '${_$nomePreenchidoAtom.name}_set');
+  }
+
   final _$nomeFazendeiroAtom =
       Atom(name: '_SelecionarFazendeiroControllerBase.nomeFazendeiro');
 
@@ -132,7 +150,7 @@ mixin _$SelecionarFazendeiroController
   @override
   String toString() {
     final string =
-        'imagemFazendeiroSelecionado: ${imagemFazendeiroSelecionado.toString()},nomeFazendeiro: ${nomeFazendeiro.toString()},numeroFazendeiro: ${numeroFazendeiro.toString()}';
+        'imagemFazendeiroSelecionado: ${imagemFazendeiroSelecionado.toString()},nomePreenchido: ${nomePreenchido.toString()},nomeFazendeiro: ${nomeFazendeiro.toString()},numeroFazendeiro: ${numeroFazendeiro.toString()}';
     return '{$string}';
   }
 }
