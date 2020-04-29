@@ -2,6 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bubble/bubble.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:i_farm_net_new/controller/fazenda/fazenda_controller.dart';
 import 'package:i_farm_net_new/model/fazendeiro_model.dart';
 import 'package:i_farm_net_new/model/missoes_model.dart';
 
@@ -224,14 +226,16 @@ class TrocaScreen extends StatelessWidget {
 
   Widget trocaConcluida(String produtoDado, String produtoRecebido,BuildContext context) {
 
-    fazendeiro.retirarItem(produtoDado);
+    final controller= GetIt.I.get<FazendaController>();
+
+    controller.retirarItem(produtoDado);
     if (fazendeiro.nomeProdutos.contains(produtoRecebido))
-      fazendeiro.adicionarItem(produtoRecebido);
+      controller.adicionarItem(produtoRecebido);
     else {
       fazendeiro.nomeProdutos.add(produtoRecebido);
       fazendeiro.quantidadeProdutos.add(1);
     }
-    fazendeiro.checarMissao(Missoes.realizarUmaTroca);
+    controller.checarMissao(Missoes.realizarUmaTroca);
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12)),

@@ -1,4 +1,5 @@
 import 'package:i_farm_net_new/model/fazendeiro_model.dart';
+import 'package:i_farm_net_new/model/missoes_model.dart';
 import 'package:i_farm_net_new/model/terreno_model.dart';
 import 'package:mobx/mobx.dart';
 part 'fazenda_controller.g.dart';
@@ -25,8 +26,12 @@ abstract class _FazendaControllerBase with Store{
   @observable
   String mensagemExtra = "Você está em um ambiente de econômia solidária |";
 
+
   @observable
   Fazendeiro fazendeiro = Fazendeiro();
+
+  @action
+  setMensagemMissao(String value) => mensagensNoticiasMissoes = value;
 
   @action
   evoluirTerreno() {
@@ -50,14 +55,108 @@ abstract class _FazendaControllerBase with Store{
   @computed
   String get noticias => "$mensagensNoticiasMissoes $mensagemExtra";
 
+
+
   @action
   gerarMensagensMissoes(){
     if (fazendeiro.avisoNovaMissao){
-      mensagensNoticiasMissoes = "Missao concluída! pegue uma nova missão | ";
+      setMensagemMissao("Missao concluída! pegue uma nova missão | ");
     }
     else
-      mensagensNoticiasMissoes = "Realize sua missão e ganhe experiência | ";
+      setMensagemMissao("Realize sua missão e ganhe experiência | ");
+
   }
+
+  @action
+  void checarMissao (String acaoRealizada){
+    if (acaoRealizada == fazendeiro.missaAtual) {
+      setMensagemMissao("Missao concluída! Pegue uma nova missão! |");
+      fazendeiro.missaoConcluida = true;
+      fazendeiro.avisoNovaMissao = true;
+
+    }
+  }
+
+  @action
+  void produzirAdubo(){
+    fazendeiro.adubo++;
+    checarMissao(Missoes.gerarAdubo);
+  }
+
+  @action
+  void utilizarAdubo (){
+    fazendeiro.adubo--;
+    if (fazendeiro.adubo<0)
+      fazendeiro.adubo=0;
+  }
+
+  @action
+  void coletarLeite(){
+    fazendeiro.leite++;
+    checarMissao(Missoes.coletarLeite);
+
+  }
+
+  @action
+  void comer(String nome){
+    retirarItem(nome);
+  }
+
+  @action
+  void adicionarItem(String nomeCultivo){
+    int i=0;
+    int posicaoSelecionada;
+    for (String cultivo in fazendeiro.nomeProdutos){
+      if (cultivo == nomeCultivo)
+        posicaoSelecionada=i;
+      i++;
+    }
+    fazendeiro.quantidadeProdutos[posicaoSelecionada]++;
+  }
+
+  @action
+  void retirarItem(String nomeCultivo){
+    int i=0;
+    int posicaoSelecionada;
+    for (String cultivo in fazendeiro.nomeProdutos){
+      if (cultivo == nomeCultivo)
+        posicaoSelecionada=i;
+      i++;
+    }
+    fazendeiro.quantidadeProdutos[posicaoSelecionada]--;
+  }
+
+  @action
+  void adicionarValorItemSaude(String item, int valorAserAdicionado){
+    if (item == "fome"){
+      fazendeiro.fome=fazendeiro.fome + valorAserAdicionado;
+      if (fazendeiro.fome > 100)
+        fazendeiro.fome = 100;
+      if (fazendeiro.fome<=0)
+        fazendeiro.fome=0;
+    }
+    else if (item == "vigorFisico") {
+      fazendeiro.vigorFisico = fazendeiro.vigorFisico + valorAserAdicionado;
+      if (fazendeiro.vigorFisico > 100)
+        fazendeiro.vigorFisico = 100;
+      if (fazendeiro.fome<=0)
+        fazendeiro.vigorFisico=0;
+    }
+    else if (item == "experiencia") {
+      fazendeiro.experiencia = fazendeiro.experiencia + valorAserAdicionado;
+      if (fazendeiro.experiencia> 100)
+        fazendeiro.experiencia = 100;
+      if (fazendeiro.experiencia<=0)
+        fazendeiro.experiencia = 0;
+    }
+  }
+  @action
+  void adicionarAgua(){
+    checarMissao(Missoes.coletarAgua);
+    fazendeiro.agua++;
+  }
+
+
 
 
 }

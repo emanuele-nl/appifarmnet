@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:i_farm_net_new/controller/fazenda/fazenda_controller.dart';
 import 'package:i_farm_net_new/model/fazendeiro_model.dart';
 import 'package:i_farm_net_new/model/missoes_model.dart';
 
@@ -112,15 +114,16 @@ class MercadoScreen extends StatelessWidget {
 
 
   Widget trocaConcluida(String produtoDado, String produtoRecebido,BuildContext context) {
+    final controller= GetIt.I.get<FazendaController>();
 
-    fazendeiro.retirarItem(produtoDado);
+    controller.retirarItem(produtoDado);
     if (fazendeiro.nomeProdutos.contains(produtoRecebido))
-      fazendeiro.adicionarItem(produtoRecebido);
+      controller.adicionarItem(produtoRecebido);
     else {
       fazendeiro.nomeProdutos.add(produtoRecebido);
       fazendeiro.quantidadeProdutos.add(1);
     }
-    fazendeiro.checarMissao(Missoes.comprarItemMercado);
+    controller.checarMissao(Missoes.comprarItemMercado);
 
     return AlertDialog(
       shape: RoundedRectangleBorder(

@@ -1,7 +1,9 @@
-import 'package:flushbar/flushbar.dart';
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:i_farm_net_new/controller/fazenda/fazenda_controller.dart';
 import 'package:i_farm_net_new/model/fazendeiro_model.dart';
 import 'package:i_farm_net_new/model/missoes_model.dart';
@@ -13,6 +15,7 @@ import 'dart:math';
 
 
 
+
 class FazendaScreen extends StatefulWidget {
 
   @override
@@ -21,12 +24,12 @@ class FazendaScreen extends StatefulWidget {
 }
 
 class _FazendaScreenState extends State<FazendaScreen> {
-  final controller= FazendaController();
-
 
 
   @override
   Widget build(BuildContext context) {
+    final controller= GetIt.I.get<FazendaController>();
+
 
     return new Scaffold(
         backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),
@@ -49,9 +52,8 @@ class _FazendaScreenState extends State<FazendaScreen> {
                     Container(height: 40,
                       color:Color.fromRGBO(125, 125, 125, 0.5),
                       child: Observer(builder: (_) {
-                        controller.gerarMensagensMissoes();
                         return ScrollingText(
-                          text: controller.noticias,
+                          text: controller.mensagensNoticiasMissoes,
                           textStyle: TextStyle(
                               fontSize: 16, color: Colors.lightGreen),);
                       })
@@ -85,7 +87,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
                               GestureDetector(
                                   child: Image.asset("lib/view/assets/poco.png",height:60),
                                   onTap: (){
-                                    controller.fazendeiro.adicionarAgua();
+                                    controller.adicionarAgua();
                                     showCupertinoModalPopup<void>(
                                       context: context,
                                       builder: (BuildContext context) {
@@ -168,6 +170,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
     int numeroPergunta = 0;
     Perguntas perguntas = Perguntas.fromJSON(jsonPerguntas);
     Pergunta pergunta = perguntas.listaPerguntas[numeroPergunta];
+    final controller= GetIt.I.get<FazendaController>();
 
 
     return Stack(
@@ -196,10 +199,10 @@ class _FazendaScreenState extends State<FazendaScreen> {
               }
 
               else if (controller.estadoAtual == "completo"){
-                controller.fazendeiro.checarMissao(Missoes.colherAlimento);
+                controller.checarMissao(Missoes.colherAlimento);
                 controller.evoluirTerreno();
-                controller.fazendeiro.adicionarItem(controller.fazendeiro.cultivoAtual);
-                controller.fazendeiro.adicionarItem(controller.fazendeiro.cultivoAtual);
+                controller.adicionarItem(controller.fazendeiro.cultivoAtual);
+                controller.adicionarItem(controller.fazendeiro.cultivoAtual);
 
               }
 
@@ -245,7 +248,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
   }
 
   Widget modalVaca(BuildContext context){
-    Fazendeiro fazendeiro = Fazendeiro();
+    final controller= GetIt.I.get<FazendaController>();
     return AlertDialog(
       backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
       content: Column(
@@ -255,7 +258,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
               child: Text("Coletar Leite",),
               onPressed: (){
                 Navigator.of(context).pop();
-                fazendeiro.coletarLeite();
+                controller.coletarLeite();
                 showCupertinoModalPopup<void>(
                   context: context,
                   builder: (BuildContext context) {
@@ -268,7 +271,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
             child:Text("Produzir Adubo"),
             onPressed: (){
               Navigator.of(context).pop();
-              fazendeiro.produzirAdubo();
+              controller.produzirAdubo();
               showCupertinoModalPopup<void>(
                 context: context,
                 builder: (BuildContext context) {
@@ -341,6 +344,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
 
 
   List<Widget> _gerarOpcoesCultivos(List<String> cultivos) {
+    final controller= GetIt.I.get<FazendaController>();
     List<Widget> widgetsCultivo = [];
     for (String cultivo in cultivos) {
       if (controller.fazendeiro.colheitas.contains(cultivo)) {
@@ -356,8 +360,8 @@ class _FazendaScreenState extends State<FazendaScreen> {
             controller.evoluirTerreno();
             controller.fazendeiro.cultivoAtual = cultivo;
             Navigator.of(context).pop();
-            controller.fazendeiro.retirarItem(controller.fazendeiro.cultivoAtual);
-            controller.fazendeiro.utilizarAdubo();
+            controller.retirarItem(controller.fazendeiro.cultivoAtual);
+            controller.utilizarAdubo();
           },));
       }
     }
@@ -366,11 +370,12 @@ class _FazendaScreenState extends State<FazendaScreen> {
 
 
   Widget evoluiOuMorre(String respostaSelecionada,String repostaEsperada){
+    final controller= GetIt.I.get<FazendaController>();
     if (respostaSelecionada == repostaEsperada){
       controller.evoluirTerreno();
-      controller.fazendeiro.adicionarValorItemSaude("sabedoria", 1);
-      controller.fazendeiro.adicionarValorItemSaude("vigorfísico", -5);
-      controller.fazendeiro.adicionarValorItemSaude("fome", -6);
+      controller.adicionarValorItemSaude("sabedoria", 1);
+      controller.adicionarValorItemSaude("vigorfísico", -5);
+      controller.adicionarValorItemSaude("fome", -6);
       controller.fazendeiro.agua--;
       showCupertinoModalPopup<void>(
         context: context,
@@ -382,8 +387,8 @@ class _FazendaScreenState extends State<FazendaScreen> {
     }
     else{
       controller.matarTerreno();
-      controller.fazendeiro.adicionarValorItemSaude("fome", -9);
-      controller.fazendeiro.adicionarValorItemSaude("vigorfísico", -3);
+      controller.adicionarValorItemSaude("fome", -9);
+      controller.adicionarValorItemSaude("vigorfísico", -3);
       controller.fazendeiro.agua--;
       showCupertinoModalPopup<void>(
         context: context,
@@ -430,6 +435,8 @@ class _FazendaScreenState extends State<FazendaScreen> {
 
 
   List<Widget> gerarWidgetsItensCeleiro(List<String> produtos, List<int> quantidades){
+    final controller= GetIt.I.get<FazendaController>();
+
     List<Widget> itensLista= []  ;
     int i=0;
     for (String itens in produtos){
@@ -498,12 +505,15 @@ class _FazendaScreenState extends State<FazendaScreen> {
   }
 
   Widget celeiro(BuildContext context) {
+    final controller= GetIt.I.get<FazendaController>();
+
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12)),
       backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),//aqui
       title:Text("Celeiro", textAlign: TextAlign.start,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
-      content: Column(children: gerarWidgetsItensCeleiro(controller.fazendeiro.nomeProdutos,controller.fazendeiro.quantidadeProdutos ),
+      content: Column(
+        children: gerarWidgetsItensCeleiro(controller.fazendeiro.nomeProdutos, controller.fazendeiro.quantidadeProdutos ),
       ),
       actions: <Widget>[
         BotaoModal(context),
@@ -537,12 +547,14 @@ class _FazendaScreenState extends State<FazendaScreen> {
   }
 
   Widget BotaoConfirma(BuildContext context,String alimento) {
+    final controller= GetIt.I.get<FazendaController>();
+
     return Container(
       child: FlatButton(
           onPressed: () {
-            controller.fazendeiro.adicionarValorItemSaude("fome", 15);
-            controller.fazendeiro.comer(alimento);
-            controller.fazendeiro.checarMissao(Missoes.comerAlimento);
+            controller.adicionarValorItemSaude("fome", 15);
+            controller.comer(alimento);
+            controller.checarMissao(Missoes.comerAlimento);
             Navigator.of(context).pop();
           },
           child: Text("Sim", style: Theme

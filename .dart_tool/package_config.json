@@ -158,12 +158,6 @@
       "languageVersion": "2.1"
     },
     {
-      "name": "flushbar",
-      "rootUri": "file:///home/jwieland/.pub-cache/git/flushbar-13c55a888c1693f1c8269ea30d55c614a1bfee16/",
-      "packageUri": "lib/",
-      "languageVersion": "2.0"
-    },
-    {
       "name": "flutter",
       "rootUri": "file:///home/jwieland/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -180,6 +174,12 @@
       "rootUri": "file:///home/jwieland/flutter/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "2.2"
+    },
+    {
+      "name": "get_it",
+      "rootUri": "file:///home/jwieland/.pub-cache/hosted/pub.dartlang.org/get_it-4.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
     },
     {
       "name": "glob",
@@ -494,7 +494,7 @@
       "languageVersion": "2.1"
     }
   ],
-  "generated": "2020-04-28T18:16:46.429287Z",
+  "generated": "2020-04-29T19:39:58.307718Z",
   "generator": "pub",
   "generatorVersion": "2.8.0-dev.20.10"
 }

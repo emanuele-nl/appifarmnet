@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get_it/get_it.dart';
+import 'package:i_farm_net_new/controller/fazenda/fazenda_controller.dart';
 import 'package:i_farm_net_new/model/fazendeiro_model.dart';
 import 'package:i_farm_net_new/view/mercado_screen.dart';
 import 'package:i_farm_net_new/view/saude_screen.dart';
@@ -14,7 +16,8 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    Fazendeiro fazendeiro = Fazendeiro();
+    final controller= GetIt.I.get<FazendaController>();
+
     return AppBar(
       automaticallyImplyLeading: false,
       titleSpacing: 100.0,
@@ -61,7 +64,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
         Container(width: 30),
         GestureDetector(
           onTap: () {
-            fazendeiro.avisoNovaMissao=false;
+            controller.fazendeiro.avisoNovaMissao=false;
             showCupertinoModalPopup<void>(
               context: context,
               builder: (BuildContext context) {
@@ -78,6 +81,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
 
 
   Widget atividadeFisica(BuildContext context) {
+    final controller= GetIt.I.get<FazendaController>();
     Fazendeiro fazendeiro = Fazendeiro();
 
     return AlertDialog(
@@ -98,7 +102,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 onPressed: (){
                   Navigator.of(context).pop();
-                  fazendeiro.adicionarValorItemSaude("vigorFisico", 8);
+                  controller.adicionarValorItemSaude("vigorFisico", 8);
                   showCupertinoModalPopup<void>(
                     context: context,
                     builder: (BuildContext context) {
@@ -118,7 +122,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
               ),
               onPressed: (){
                 Navigator.of(context).pop();
-                fazendeiro.adicionarValorItemSaude("vigorFisico", 8);
+                controller.adicionarValorItemSaude("vigorFisico", 8);
                 showCupertinoModalPopup<void>(
                 context: context,
                 builder: (BuildContext context) {
@@ -138,7 +142,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 onPressed: (){
                   Navigator.of(context).pop();
-                  fazendeiro.adicionarValorItemSaude("vigorFisico", 8);
+                  controller.adicionarValorItemSaude("vigorFisico", 8);
                   showCupertinoModalPopup<void>(
                     context: context,
                     builder: (BuildContext context) {
@@ -157,7 +161,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 onPressed: (){
                   Navigator.of(context).pop();
-                  fazendeiro.adicionarValorItemSaude("vigorFisico", 8);
+                  controller.adicionarValorItemSaude("vigorFisico", 8);
                   showCupertinoModalPopup<void>(
                     context: context,
                     builder: (BuildContext context) {
@@ -245,8 +249,6 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-
-
   Widget confirmarPedalar(BuildContext context) {
     Fazendeiro fazendeiro =Fazendeiro();
     return AlertDialog(
@@ -301,11 +303,14 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
 //}
 
   Widget missao(BuildContext context) {
+    final controller= GetIt.I.get<FazendaController>();
+
     Fazendeiro fazendeiro = Fazendeiro();
     fazendeiro.missaoConcluida?fazendeiro.numeroMissao++:null;
     fazendeiro.missaAtual = fazendeiro.missoes[fazendeiro.numeroMissao];
-    fazendeiro.missaoConcluida? fazendeiro.adicionarValorItemSaude("experiencia", 10):null;
+    fazendeiro.missaoConcluida? controller.adicionarValorItemSaude("experiencia", 10):null;
     fazendeiro.missaoConcluida =false;
+    controller.setMensagemMissao("Realize sua missão e ganhe experiência |" );
 
     return AlertDialog(
       shape: RoundedRectangleBorder(

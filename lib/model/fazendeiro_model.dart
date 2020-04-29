@@ -30,7 +30,6 @@ class Fazendeiro{
   List<String> missoes = [Missoes.realizarUmaTroca,Missoes.comprarItemMercado,Missoes.coletarAgua,Missoes.colherAlimento,Missoes.comerAlimento,Missoes.coletarLeite,Missoes.coletarLeite];
   int numeroMissao = 0;
 
-  String teste ="ainda nao fez missao????";
 
 
   factory Fazendeiro(){
@@ -39,31 +38,7 @@ class Fazendeiro{
 
   Fazendeiro._internalConstructor();
 
-  void checarMissao (String acaoRealizada){
-    if (acaoRealizada == missaAtual) {
-      missaoConcluida = true;
-      avisoNovaMissao = true;
-      teste = "missao concluida";
 
-    }
-  }
-
-  void produzirAdubo(){
-    adubo++;
-    checarMissao(Missoes.gerarAdubo);
-  }
-
-  void utilizarAdubo (){
-    adubo--;
-    if (adubo<0)
-      adubo=0;
-  }
-
-  void coletarLeite(){
-    leite++;
-    checarMissao(Missoes.coletarLeite);
-
-  }
 
   void gerarListaAlimentoCultivavelInicial(){
     switch (nomeImagem){
@@ -94,62 +69,6 @@ class Fazendeiro{
     }
 
   }
-
-  void comer(String nome){
-    retirarItem(nome);
-  }
-
-  void adicionarItem(String nomeCultivo){
-    int i=0;
-    int posicaoSelecionada;
-    for (String cultivo in nomeProdutos){
-      if (cultivo == nomeCultivo)
-        posicaoSelecionada=i;
-      i++;
-    }
-    quantidadeProdutos[posicaoSelecionada]++;
-  }
-
-  void retirarItem(String nomeCultivo){
-    int i=0;
-    int posicaoSelecionada;
-    for (String cultivo in nomeProdutos){
-      if (cultivo == nomeCultivo)
-        posicaoSelecionada=i;
-      i++;
-    }
-    quantidadeProdutos[posicaoSelecionada]--;
-  }
-
-  void adicionarValorItemSaude(String item, int valorAserAdicionado){
-    if (item == "fome"){
-      fome=fome + valorAserAdicionado;
-      if (fome > 100)
-        fome = 100;
-      if (fome<=0)
-        fome=0;
-    }
-    else if (item == "vigorFisico") {
-        vigorFisico = vigorFisico + valorAserAdicionado;
-        if (vigorFisico > 100)
-          vigorFisico = 100;
-        if (fome<=0)
-          vigorFisico=0;
-      }
-    else if (item == "experiencia") {
-      experiencia = experiencia + valorAserAdicionado;
-      if (experiencia> 100)
-        experiencia = 100;
-      if (experiencia<=0)
-        experiencia = 0; 
-    }
-  }
-
-  void adicionarAgua(){
-    checarMissao(Missoes.coletarAgua);
-    agua++;
-  }
-
 
 
 
