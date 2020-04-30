@@ -72,11 +72,13 @@ class _SelecionarFazendeiroScreenState extends State<SelecionarFazendeiroScreen>
                         builder: (_) {
                             return GestureDetector(
                               onTap: () {
-                                if (controller.nomePreenchido)
+                                if (controller.nomePreenchido) {
+                                  controller.fazendeiro.gerarListaOrdemPerguntas();
                                   Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => FazendaScreen()));
-
+                                      MaterialPageRoute(builder: (context) =>
+                                          FazendaScreen()));
+                                }
 
                                 },
                               child: Image.asset("lib/view/assets/botao-continuar.png",semanticLabel: "Continuar",)

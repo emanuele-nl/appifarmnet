@@ -73,8 +73,8 @@ abstract class _FazendaControllerBase with Store{
       setMensagemMissao("Missao concluída! Pegue uma nova missão! |");
       fazendeiro.missaoConcluida = true;
       fazendeiro.avisoNovaMissao = true;
-
     }
+    gerarMensagensMissoes();
   }
 
   @action
@@ -85,9 +85,8 @@ abstract class _FazendaControllerBase with Store{
 
   @action
   void utilizarAdubo (){
-    fazendeiro.adubo--;
-    if (fazendeiro.adubo<0)
-      fazendeiro.adubo=0;
+    if (fazendeiro.adubo>0)
+      fazendeiro.adubo--;
   }
 
   @action
@@ -154,6 +153,14 @@ abstract class _FazendaControllerBase with Store{
   void adicionarAgua(){
     checarMissao(Missoes.coletarAgua);
     fazendeiro.agua++;
+  }
+
+
+  @action
+  void utilizarAgua(){
+    //checarMissao(Missoes.);
+    if(fazendeiro.agua>0)
+      fazendeiro.agua--;
   }
 
 

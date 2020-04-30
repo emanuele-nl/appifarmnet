@@ -13,6 +13,8 @@ import 'package:i_farm_net_new/view/noticias_widgets.dart';
 import 'package:mobx/mobx.dart';
 import 'dart:math';
 
+import 'package:percent_indicator/linear_percent_indicator.dart';
+
 
 
 
@@ -49,15 +51,21 @@ class _FazendaScreenState extends State<FazendaScreen> {
                 child:
                 Column(
                   children: <Widget>[
-                    Container(height: 40,
-                      color:Color.fromRGBO(125, 125, 125, 0.5),
+                    GestureDetector(
+                      onTap: controller.gerarMensagensMissoes,
                       child: Observer(builder: (_) {
-                        return ScrollingText(
-                          text: controller.mensagensNoticiasMissoes,
-                          textStyle: TextStyle(
-                              fontSize: 16, color: Colors.lightGreen),);
-                      })
+                        return Container(height: 40,
+                            color:Color.fromRGBO(125, 125, 125, 0.5),
+                            child: ScrollingText(
+                                text: controller.mensagensNoticiasMissoes,
+                                textStyle: TextStyle(
+                                    fontSize: 16, color: Colors.lightGreen),)
+                            );}
+                        ),
                     ),
+
+
+
                     Row(
                         children: <Widget>[
                           Container(width: 20),
@@ -166,11 +174,11 @@ class _FazendaScreenState extends State<FazendaScreen> {
   }
 
   Widget terreno(){
+    final controller= GetIt.I.get<FazendaController>();
 
     int numeroPergunta = 0;
     Perguntas perguntas = Perguntas.fromJSON(jsonPerguntas);
-    Pergunta pergunta = perguntas.listaPerguntas[numeroPergunta];
-    final controller= GetIt.I.get<FazendaController>();
+    Pergunta pergunta = perguntas.listaPerguntas[controller.fazendeiro.ordemPerguntas[numeroPergunta]];
 
 
     return Stack(
@@ -184,8 +192,29 @@ class _FazendaScreenState extends State<FazendaScreen> {
                 return Image.asset("lib/view/assets/plantacao/"+controller.estadoAtual+".png",height: altura,);
               return Image.asset("lib/view/assets/plantacao/"+cultivoAtual+"/"+controller.estadoAtual+".png",height: altura,);}),
             onTap:(){
-              if (controller.estadoAtual == "morta"){
-                controller.evoluirTerreno();
+
+
+              if (controller.fazendeiro.agua <= 0){
+                showCupertinoModalPopup<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return avisoSemAgua(context);
+                  },
+                );
+              }
+
+              else if (controller.estadoAtual == "morta"){
+                if(controller.fazendeiro.adubo <= 0)
+                  showCupertinoModalPopup<void>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return avisoSemAdubo(context);
+                    },
+                  );
+                else{
+                  controller.utilizarAdubo();
+                  controller.evoluirTerreno();
+                }
               }
 
               else if (controller.estadoAtual == "vazio"){
@@ -210,6 +239,11 @@ class _FazendaScreenState extends State<FazendaScreen> {
                 aparecerPergunta(pergunta);
                 numeroPergunta++;
                 pergunta = perguntas.listaPerguntas[numeroPergunta];
+                if (numeroPergunta==120){
+                  numeroPergunta=0;
+                  controller.fazendeiro.gerarListaOrdemPerguntas();
+                }
+
               }
 
             }
@@ -218,6 +252,38 @@ class _FazendaScreenState extends State<FazendaScreen> {
     );
 
   }
+
+
+  Widget avisoSemAdubo(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)),
+      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+      title:Text("Acabou o adubo! Clique na vaca para recolher o adubo", textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+      content: Image.asset("lib/view/assets/animal/vaca.png",height: 100,),
+      actions: <Widget>[
+        BotaoModal(context),
+      ],
+    );
+  }
+
+
+
+
+
+  Widget avisoSemAgua(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)),
+      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+      title:Text("Acabou a água para irrigar! Clique no poço para pegar mais", textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+      content: Image.asset("lib/view/assets/poco.png",height: 100,),
+      actions: <Widget>[
+        BotaoModal(context),
+      ],
+    );
+  }
+
 
   Widget vaca(){
     return GestureDetector(
@@ -249,39 +315,94 @@ class _FazendaScreenState extends State<FazendaScreen> {
 
   Widget modalVaca(BuildContext context){
     final controller= GetIt.I.get<FazendaController>();
+
+    if (controller.fazendeiro.fomeVaca<=0)
+      return AlertDialog(
+        backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+        content: Container(
+          height: 200,
+          child: Column(
+            children:[
+              Text("A vaca está com fome! alimente-a para produzir mais leite ou mais adubo!", textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+              //aaaaaaaaaaaaa
+              Image.asset("lib/view/assets/animal/vaca.png",height: 60,),
+
+              RaisedButton(
+                child:Text("Alimentar Vaca"),
+                onPressed: (){
+                  Navigator.of(context).pop();
+                  controller.produzirAdubo();
+                  showCupertinoModalPopup<void>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      List<String> cultivos = controller.fazendeiro.nomeProdutos;
+                      return alimentarVaca(cultivos,context);
+                    },
+                  );
+                },
+              ),
+
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          BotaoModal(context)
+        ],
+      );
+
+
+
     return AlertDialog(
       backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
-      content: Column(
-        children:[
-          Image.asset("lib/view/assets/animal/vaca.png",height: 60,),
-          RaisedButton(
-              child: Text("Coletar Leite",),
+      content: Container(
+        height: 250,
+        child: Column(
+          children:[
+            Image.asset("lib/view/assets/animal/vaca.png",height: 60,),
+            Padding(
+              padding: EdgeInsets.all(15.0),
+              child: new LinearPercentIndicator(
+                width: 150,
+                animation: true,
+                lineHeight: 20.0,
+                animationDuration: 20,
+                percent: controller.fazendeiro.fomeVaca/5,
+                center: Text(""),
+                linearStrokeCap: LinearStrokeCap.roundAll,
+                progressColor: Colors.greenAccent,
+              ),
+            ),
+            RaisedButton(
+                child: Text("Coletar Leite",),
+                onPressed: (){
+                  controller.fazendeiro.fomeVaca--;
+                  Navigator.of(context).pop();
+                  controller.coletarLeite();
+                  showCupertinoModalPopup<void>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return leiteAdicionado(context);
+                    },
+                  );
+                }
+            ),
+            RaisedButton(
+              child:Text("Produzir Adubo"),
               onPressed: (){
+                controller.fazendeiro.fomeVaca--;
                 Navigator.of(context).pop();
-                controller.coletarLeite();
+                controller.produzirAdubo();
                 showCupertinoModalPopup<void>(
                   context: context,
                   builder: (BuildContext context) {
-                    return leiteAdicionado(context);
+                    return aduboAdicionado(context);
                   },
                 );
-              }
-          ),
-          RaisedButton(
-            child:Text("Produzir Adubo"),
-            onPressed: (){
-              Navigator.of(context).pop();
-              controller.produzirAdubo();
-              showCupertinoModalPopup<void>(
-                context: context,
-                builder: (BuildContext context) {
-                  return aduboAdicionado(context);
-                },
-              );
-            },
-          ),
+              },
+            ),
 
-        ],
+          ],
+        ),
       ),
       actions: <Widget>[
         BotaoModal(context)
@@ -289,6 +410,60 @@ class _FazendaScreenState extends State<FazendaScreen> {
     );
 
   }
+
+  Widget alimentarVaca(List<String> cultivos,BuildContext context) {
+    Fazendeiro fazendeiro = Fazendeiro();
+    List<Widget> botoesCultivos = _gerarOpcoesAlimentarVaca(cultivos);
+
+    return AlertDialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12)),
+        title:Text("Selecione um Cultivo", textAlign: TextAlign.center,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+        backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+        content: Container(
+          height: 200,
+          child: Column(
+              children: botoesCultivos
+          ),
+        ));
+
+  }
+
+
+  List<Widget> _gerarOpcoesAlimentarVaca(List<String> cultivos) {
+    final controller= GetIt.I.get<FazendaController>();
+    List<Widget> widgetsCultivo = [];
+    for (String cultivo in cultivos) {
+      if (controller.fazendeiro.colheitas.contains(cultivo)) {
+        widgetsCultivo.add(RaisedButton(
+          child: Row(
+            children: <Widget>[
+              Image.asset("lib/view/assets/produtos/" + cultivo + ".png",height: 10,),
+              Text(cultivo),
+            ],
+          ),
+
+          onPressed: () {
+            controller.fazendeiro.fomeVaca=5;
+            controller.retirarItem(cultivo);
+            Navigator.of(context).pop();
+            showCupertinoModalPopup<void>(
+              context: context,
+              builder: (BuildContext context) {
+                return modalVaca(context);
+              },
+            );
+
+          },));
+      }
+    }
+    return widgetsCultivo;
+  }
+
+
+
+
+
 
   Widget aduboAdicionado(BuildContext context) {
     return AlertDialog(
@@ -315,8 +490,6 @@ class _FazendaScreenState extends State<FazendaScreen> {
       ],
     );
   }
-
-
 
 
 
@@ -361,7 +534,6 @@ class _FazendaScreenState extends State<FazendaScreen> {
             controller.fazendeiro.cultivoAtual = cultivo;
             Navigator.of(context).pop();
             controller.retirarItem(controller.fazendeiro.cultivoAtual);
-            controller.utilizarAdubo();
           },));
       }
     }
@@ -376,7 +548,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
       controller.adicionarValorItemSaude("sabedoria", 1);
       controller.adicionarValorItemSaude("vigorfísico", -5);
       controller.adicionarValorItemSaude("fome", -6);
-      controller.fazendeiro.agua--;
+      controller.utilizarAgua();
       showCupertinoModalPopup<void>(
         context: context,
         builder: (BuildContext context) {
@@ -389,7 +561,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
       controller.matarTerreno();
       controller.adicionarValorItemSaude("fome", -9);
       controller.adicionarValorItemSaude("vigorfísico", -3);
-      controller.fazendeiro.agua--;
+      controller.utilizarAgua();
       showCupertinoModalPopup<void>(
         context: context,
         builder: (BuildContext context) {

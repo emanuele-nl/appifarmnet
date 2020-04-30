@@ -121,6 +121,16 @@ mixin _$FazendaController on _FazendaControllerBase, Store {
       ActionController(name: '_FazendaControllerBase');
 
   @override
+  dynamic setMensagemMissao(String value) {
+    final _$actionInfo = _$_FazendaControllerBaseActionController.startAction();
+    try {
+      return super.setMensagemMissao(value);
+    } finally {
+      _$_FazendaControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic evoluirTerreno() {
     final _$actionInfo = _$_FazendaControllerBaseActionController.startAction();
     try {
@@ -235,6 +245,16 @@ mixin _$FazendaController on _FazendaControllerBase, Store {
     final _$actionInfo = _$_FazendaControllerBaseActionController.startAction();
     try {
       return super.adicionarAgua();
+    } finally {
+      _$_FazendaControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void utilizarAgua() {
+    final _$actionInfo = _$_FazendaControllerBaseActionController.startAction();
+    try {
+      return super.utilizarAgua();
     } finally {
       _$_FazendaControllerBaseActionController.endAction(_$actionInfo);
     }

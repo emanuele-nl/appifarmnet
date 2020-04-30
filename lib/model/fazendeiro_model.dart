@@ -1,8 +1,8 @@
-import 'package:flutter/scheduler.dart';
 import 'package:i_farm_net_new/model/celeiro_model.dart';
 import 'package:i_farm_net_new/model/cultivo_model.dart';
 import 'package:i_farm_net_new/model/missoes_model.dart';
-import 'package:i_farm_net_new/model/pergunta_model.dart';
+import 'dart:math';
+
 
 class Fazendeiro{
   static  final Fazendeiro _instance= Fazendeiro._internalConstructor();
@@ -13,9 +13,10 @@ class Fazendeiro{
   int fome = 100;
   int vigorFisico = 100;
   int experiencia = 0;
-  int agua = 8;
-  int adubo=8;
-  int leite = 2;
+  int agua = 0;
+  int adubo= 0;
+  int leite = 0;
+  int fomeVaca =5;
 
 
   List<String> nomeProdutos = ['cenoura'];
@@ -29,6 +30,8 @@ class Fazendeiro{
   bool avisoNovaMissao = false;
   List<String> missoes = [Missoes.realizarUmaTroca,Missoes.comprarItemMercado,Missoes.coletarAgua,Missoes.colherAlimento,Missoes.comerAlimento,Missoes.coletarLeite,Missoes.coletarLeite];
   int numeroMissao = 0;
+
+  List<int>ordemPerguntas =[];
 
 
 
@@ -67,6 +70,13 @@ class Fazendeiro{
         print("implementar uma exception aqui");
 
     }
+
+  }
+
+  void gerarListaOrdemPerguntas(){
+    var rng = new Random();
+    ordemPerguntas = new List.generate(140, (_) =>
+        rng.nextInt(75));
 
   }
 

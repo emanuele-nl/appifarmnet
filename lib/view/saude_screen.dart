@@ -22,7 +22,7 @@ class SaudeScreen extends StatelessWidget{
                 width: MediaQuery.of(context).size.width - 50,
                 animation: true,
                 lineHeight: 20.0,
-                animationDuration: 2000,
+                animationDuration: 20,
                 percent: fazendeiro.fome/100,
                 center: Text("Nutrição"),
                 linearStrokeCap: LinearStrokeCap.roundAll,
