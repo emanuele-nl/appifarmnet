@@ -1,4 +1,4 @@
-#Thu Apr 30 00:44:35 BRT 2020
+#Tue May 05 01:28:12 BRT 2020
 base.0=/home/jwieland/Projetos/appifarmnet/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

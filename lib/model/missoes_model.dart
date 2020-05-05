@@ -6,5 +6,13 @@ class Missoes {
   static final comerAlimento = "Comer um Alimento";
   static final colherAlimento = "Colher um alimento na plantação";
   static final gerarAdubo = "Produza Adubo";
+
+  //missoes a serem implementadas
+  static final correr= "Corra";
+  static final nadar ="nade";
+  static final pedalar ="Pedale";
+  static final colherTresPlantas ="";
+  static final colherAlgo = "colha algo";
+
 }
 

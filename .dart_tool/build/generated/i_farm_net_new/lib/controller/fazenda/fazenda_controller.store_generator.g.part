@@ -161,7 +161,7 @@ mixin _$FazendaController on _FazendaControllerBase, Store {
   }
 
   @override
-  void checarMissao(String acaoRealizada) {
+  bool checarMissao(String acaoRealizada) {
     final _$actionInfo = _$_FazendaControllerBaseActionController.startAction();
     try {
       return super.checarMissao(acaoRealizada);
@@ -255,6 +255,16 @@ mixin _$FazendaController on _FazendaControllerBase, Store {
     final _$actionInfo = _$_FazendaControllerBaseActionController.startAction();
     try {
       return super.utilizarAgua();
+    } finally {
+      _$_FazendaControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void utilizarLeite() {
+    final _$actionInfo = _$_FazendaControllerBaseActionController.startAction();
+    try {
+      return super.utilizarLeite();
     } finally {
       _$_FazendaControllerBaseActionController.endAction(_$actionInfo);
     }

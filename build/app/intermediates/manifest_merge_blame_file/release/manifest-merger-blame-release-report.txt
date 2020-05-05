@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.ifarmnet.i_farm_net_new"
+3    package="ifarmnet.ifarmnet"
 4    android:versionCode="1"
 5    android:versionName="1.0.0" >
 6
@@ -21,14 +21,14 @@
 18        android:name="io.flutter.app.FlutterApplication"
 18-->/home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:9:9-57
 19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-19-->[androidx.core:core:1.0.0] /home/jwieland/.gradle/caches/transforms-2/files-2.1/0a271e99b6771ad4a84318244d532fb7/core-1.0.0/AndroidManifest.xml:22:18-86
+19-->[androidx.core:core:1.1.0] /home/jwieland/.gradle/caches/transforms-2/files-2.1/a528b13ac93e64cafa3d0480e2c93207/core-1.1.0/AndroidManifest.xml:24:18-86
 20        android:icon="@mipmap/ic_launcher"
 20-->/home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:11:9-43
-21        android:label="i_farm_net_new" >
-21-->/home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:10:9-39
+21        android:label="ifarmnet" >
+21-->/home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:10:9-33
 22        <activity
 22-->/home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:12:9-40:20
-23            android:name="com.ifarmnet.i_farm_net_new.MainActivity"
+23            android:name="ifarmnet.ifarmnet.MainActivity"
 23-->/home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:13:13-41
 24            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
 24-->/home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:16:13-163

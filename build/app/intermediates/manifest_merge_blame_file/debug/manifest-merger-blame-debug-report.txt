@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.ifarmnet.i_farm_net_new"
+3    package="ifarmnet.ifarmnet"
 4    android:versionCode="1"
 5    android:versionName="1.0.0" >
 6
@@ -30,11 +30,11 @@
 25        android:debuggable="true"
 26        android:icon="@mipmap/ic_launcher"
 26-->/home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:11:9-43
-27        android:label="i_farm_net_new" >
-27-->/home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:10:9-39
+27        android:label="ifarmnet" >
+27-->/home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:10:9-33
 28        <activity
 28-->/home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:12:9-40:20
-29            android:name="com.ifarmnet.i_farm_net_new.MainActivity"
+29            android:name="ifarmnet.ifarmnet.MainActivity"
 29-->/home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:13:13-41
 30            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
 30-->/home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:16:13-163

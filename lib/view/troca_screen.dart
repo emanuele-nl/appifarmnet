@@ -9,10 +9,14 @@ import 'package:i_farm_net_new/model/missoes_model.dart';
 
 class TrocaScreen extends StatelessWidget {
   Fazendeiro fazendeiro = Fazendeiro();
+  List<String> personagensTroca = ["1","2","3","4","5"];
+
 
   @override
   Widget build(BuildContext context) {
     List<String> cultivosParaTroca = fazendeiro.colheitas;
+    personagensTroca.remove(fazendeiro.nomeImagem);
+
 
     return Scaffold(
       appBar: AppBar(
@@ -40,13 +44,13 @@ class TrocaScreen extends StatelessWidget {
                   GestureDetector(
                     child: Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
                     onTap: (){
-                      oferecerProdutoParaTroca("alface",context);
+                      oferecerProdutoParaTroca("alface",personagensTroca[0],context);
                       },),
                   Container(width: 60,),
                   GestureDetector(
                     child: Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
                     onTap: (){
-                      oferecerProdutoParaTroca("tomate",context);
+                      oferecerProdutoParaTroca("tomate",personagensTroca[1],context);
                     },)
                 ],
               ),
@@ -56,13 +60,13 @@ class TrocaScreen extends StatelessWidget {
                   GestureDetector(
                     child: Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
                     onTap: (){
-                      oferecerProdutoParaTroca("morango",context);
+                      oferecerProdutoParaTroca("morango",personagensTroca[2],context);
                     },),
                   Container(width: 60,),
                   GestureDetector(
                     child: Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
                     onTap: (){
-                      oferecerProdutoParaTroca("cenoura",context);
+                      oferecerProdutoParaTroca("cenoura",personagensTroca[3],context);
                     },)
                 ],
 
@@ -79,7 +83,7 @@ class TrocaScreen extends StatelessWidget {
   }
 
 
-  Future<void> oferecerProdutoParaTroca(String produtoOfertado,BuildContext context) async {
+  Future<void> oferecerProdutoParaTroca(String produtoOfertado, String nomeImagem, BuildContext context) async {
     double pixelRatio = MediaQuery.of(context).devicePixelRatio;
     double px = 1 / pixelRatio;
 
@@ -100,12 +104,13 @@ class TrocaScreen extends StatelessWidget {
         return AlertDialog(
           backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
           content: Container(
+            height: 200,
             child: Column(
               children: [
                 Row(
                   children: [
                     ClipOval(
-                        child: Image.asset("lib/view/assets/fazendeiros/"+fazendeiro.nomeImagem+".png",
+                        child: Image.asset("lib/view/assets/fazendeiros/"+nomeImagem+".png",
                           width: tamanhoImagem,
                         )
                     ),
@@ -202,6 +207,7 @@ class TrocaScreen extends StatelessWidget {
               child: RaisedButton(
                 child: Row(
                   children: <Widget>[
+                    Image.asset("lib/view/assets/produtos/" + produtoASerDado + ".png",height: 10,),
                     Text(produtoASerDado),
                   ],
                 ),
@@ -235,7 +241,6 @@ class TrocaScreen extends StatelessWidget {
       fazendeiro.nomeProdutos.add(produtoRecebido);
       fazendeiro.quantidadeProdutos.add(1);
     }
-    controller.checarMissao(Missoes.realizarUmaTroca);
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12)),
@@ -251,23 +256,59 @@ class TrocaScreen extends StatelessWidget {
 
       ),
       actions: <Widget>[
-        BotaoModal(context),
+        BotaoModalTroca(context),
       ],
     );
   }
 
-  Widget BotaoModal(BuildContext context) {
+  Widget BotaoModalTroca(BuildContext context) {
+    final controller= GetIt.I.get<FazendaController>();
+
+
     return Container(
       child: FlatButton(
           onPressed: () {
             Navigator.of(context).pop();
+            if (controller.checarMissao(Missoes.realizarUmaTroca)){
+              showCupertinoModalPopup<void>(
+                  context: context, builder: (BuildContext context) {
+                return   missaoConcluida(context);
+              });
+            }
+            else{
+              Navigator.of(context).pop();
+            }
           },
-          child: Text("ok", style: Theme
-              .of(context)
-              .textTheme
-              .button,)),
+          child: Text("ok", style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white))
+    ));
+  }
+
+
+  Widget missaoConcluida(BuildContext context){
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)),
+      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+      title:Text("Missão Concluída! Pegue sua nova missão!", textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+      content: Image.asset("lib/view/assets/barraPrincipal/missao.png",height: 100,),
+      actions: <Widget>[
+        botaoModal(context),
+      ],
     );
   }
+
+  Widget botaoModal(BuildContext context) {
+    return Container(
+      child: FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pop();
+          },
+          child: Text("ok", style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white))),
+    );
+  }
+
+
 
 
 }

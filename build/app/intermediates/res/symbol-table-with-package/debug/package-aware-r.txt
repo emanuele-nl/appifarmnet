@@ -1,4 +1,4 @@
-com.ifarmnet.i_farm_net_new
+ifarmnet.ifarmnet
 attr alpha
 attr font
 attr fontProviderAuthority

@@ -27,10 +27,11 @@ class HomeScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(builder: (context) => SelecionarFazendeiroScreen()));
                     },
-                    child: Image.asset("lib/view/assets/botao-continuar.png",semanticLabel: "Continuar",)
+                    child: Image.asset("lib/view/assets/botao-continuar.png",semanticLabel: "Continuar", width: 200,)
                   )
                   ,
                 ),
+                Container(height:10),
                 Flexible(
                   flex: 4,
                   child:GestureDetector(
@@ -39,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                             context,
                             MaterialPageRoute(builder: (context) => SelecionarFazendeiroScreen()));
                       },
-                      child: Image.asset("lib/view/assets/botao-tutorial.png",semanticLabel: "Tutorial",)
+                      child: Image.asset("lib/view/assets/botao-tutorial.png",semanticLabel: "Tutorial",width: 200,)
                   )
                   ,
                 ),

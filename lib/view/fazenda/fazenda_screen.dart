@@ -10,7 +10,6 @@ import 'package:i_farm_net_new/model/missoes_model.dart';
 import 'package:i_farm_net_new/model/pergunta_model.dart';
 import 'package:i_farm_net_new/view/barra_navegacao_widget.dart';
 import 'package:i_farm_net_new/view/noticias_widgets.dart';
-import 'package:mobx/mobx.dart';
 import 'dart:math';
 
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -33,86 +32,87 @@ class _FazendaScreenState extends State<FazendaScreen> {
     final controller= GetIt.I.get<FazendaController>();
 
 
-    return new Scaffold(
-        backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),
-        appBar: BarraNavegacao(),
-        body:
-        Stack(
-          children: [
-            Expanded(
-              child: Align(
-                alignment: FractionalOffset.bottomCenter,
-                child:  Image.asset("lib/view/assets/lago.png", excludeFromSemantics: true,),
-              ),
+    return WillPopScope(
+      child: new Scaffold(
+          backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),
+          appBar: BarraNavegacao(),
+          body:
+          Stack(
+            children: [
+             Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child:  Image.asset("lib/view/assets/lago.png", excludeFromSemantics: true,),
+                ),
 
-            ),
+              Center(
+                  child:
 
-            Center(
-                child:
-                Column(
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: controller.gerarMensagensMissoes,
-                      child: Observer(builder: (_) {
-                        return Container(height: 40,
-                            color:Color.fromRGBO(125, 125, 125, 0.5),
-                            child: ScrollingText(
-                                text: controller.mensagensNoticiasMissoes,
-                                textStyle: TextStyle(
-                                    fontSize: 16, color: Colors.lightGreen),)
-                            );}
-                        ),
-                    ),
+                  Column(
+                    children: <Widget>[
+                      Container(height: 40,),
+
+//                      GestureDetector(
+//                        onTap: controller.gerarMensagensMissoes,
+//                        child: Observer(builder: (_) {
+//                          return Container(height: 40,
+//                              color:Color.fromRGBO(125, 125, 125, 0.5),
+//                              child: ScrollingText(
+//                                  text: controller.mensagensNoticiasMissoes,
+//                                  textStyle: TextStyle(
+//                                      fontSize: 16, color: Colors.lightGreen),)
+//                              );}
+//                          ),
+//                      ),
 
 
+                      Row(
+                          children: <Widget>[
+                            Container(width: 20),
+                            Column(
+                              children: <Widget>[
+                                terreno(),
+                                Container(height: 70,),
+                                vaca(),
+                              ],
+                            ),
+                            Container(width: 60,),
+                            Column(
+                              children:[
+                                GestureDetector(
+                                    child: Image.asset("lib/view/assets/celeiro.png",height: 100,),
+                                    onTap:() {
+                                      showCupertinoModalPopup<void>(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return celeiro(context);
+                                        },
 
-                    Row(
-                        children: <Widget>[
-                          Container(width: 20),
-                          Column(
-                            children: <Widget>[
-                              terreno(),
-                              Container(height: 70,),
-                              vaca(),
-                            ],
-                          ),
-                          Container(width: 60,),
-                          Column(
-                            children:[
-                              GestureDetector(
-                                  child: Image.asset("lib/view/assets/celeiro.png",height: 100,),
-                                  onTap:() {
-                                    showCupertinoModalPopup<void>(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return celeiro(context);
-                                      },
+                                      );
+                                    }
+                                ),
+                                Container(height: 70,),
+                                GestureDetector(
+                                    child: Image.asset("lib/view/assets/poco.png",height:60),
+                                    onTap: (){
+                                      controller.adicionarAgua();
+                                      showCupertinoModalPopup<void>(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return aguaAdicionada(context);
+                                        },
+                                      );
+                                    }
+                                )
+                              ],
+                            ),
+                          ]
+                      ),
+                    ],
+                  )),
+            ],
+          ),
 
-                                    );
-                                  }
-                              ),
-                              Container(height: 70,),
-                              GestureDetector(
-                                  child: Image.asset("lib/view/assets/poco.png",height:60),
-                                  onTap: (){
-                                    controller.adicionarAgua();
-                                    showCupertinoModalPopup<void>(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return aguaAdicionada(context);
-                                      },
-                                    );
-                                  }
-                              )
-                            ],
-                          ),
-                        ]
-                    ),
-                  ],
-                )),
-          ],
-        ),
-
+      ),
     );
   }
 
@@ -126,7 +126,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
       title:Text("Água adicionada", textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
       content: Image.asset("lib/view/assets/produtos/agua.png",height: 100,),
       actions: <Widget>[
-        BotaoModal(context),
+        botaoModalVerificaMissao(context,Missoes.coletarAgua),
       ],
     );
   }
@@ -228,11 +228,17 @@ class _FazendaScreenState extends State<FazendaScreen> {
               }
 
               else if (controller.estadoAtual == "completo"){
-                controller.checarMissao(Missoes.colherAlimento);
                 controller.evoluirTerreno();
                 controller.adicionarItem(controller.fazendeiro.cultivoAtual);
                 controller.adicionarItem(controller.fazendeiro.cultivoAtual);
-
+                if(controller.checarMissao(Missoes.colherAlimento)){
+                  showCupertinoModalPopup<void>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return missaoConcluida(context);
+                    },
+                  );
+                }
               }
 
               else if (controller.estadoAtual != "vazio") {
@@ -262,7 +268,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
       title:Text("Acabou o adubo! Clique na vaca para recolher o adubo", textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
       content: Image.asset("lib/view/assets/animal/vaca.png",height: 100,),
       actions: <Widget>[
-        BotaoModal(context),
+        botaoModal(context),
       ],
     );
   }
@@ -279,7 +285,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
       title:Text("Acabou a água para irrigar! Clique no poço para pegar mais", textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
       content: Image.asset("lib/view/assets/poco.png",height: 100,),
       actions: <Widget>[
-        BotaoModal(context),
+        botaoModal(context),
       ],
     );
   }
@@ -346,7 +352,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
           ),
         ),
         actions: <Widget>[
-          BotaoModal(context)
+          botaoModal(context)
         ],
       );
 
@@ -405,7 +411,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
         ),
       ),
       actions: <Widget>[
-        BotaoModal(context)
+        botaoModal(context)
       ],
     );
 
@@ -473,7 +479,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
       backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
       content: Image.asset("lib/view/assets/produtos/adubo.png",height: 100,),
       actions: <Widget>[
-        BotaoModal(context),
+        botaoModalVerificaMissao(context,Missoes.gerarAdubo),
       ],
     );
   }
@@ -486,7 +492,8 @@ class _FazendaScreenState extends State<FazendaScreen> {
       backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
       content: Image.asset("lib/view/assets/produtos/leite.png",height: 100,),
       actions: <Widget>[
-        BotaoModal(context),
+        botaoModalVerificaMissao(context,Missoes.coletarLeite),
+        
       ],
     );
   }
@@ -553,7 +560,6 @@ class _FazendaScreenState extends State<FazendaScreen> {
         context: context,
         builder: (BuildContext context) {
           return respostaCorreta(context);
-
         },
       );
     }
@@ -582,7 +588,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
       backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
       content: Image.asset("lib/view/assets/pergunta/certo.png",height: 100,),
       actions: <Widget>[
-        BotaoModal(context),
+        botaoModal(context),
       ],
     );
   }
@@ -595,7 +601,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
       backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
       content: Image.asset("lib/view/assets/pergunta/errado.png",height: 100,),
       actions: <Widget>[
-        BotaoModal(context),
+        botaoModal(context),
       ],
     );
   }
@@ -662,15 +668,18 @@ class _FazendaScreenState extends State<FazendaScreen> {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12)),
       backgroundColor: Color.fromRGBO(125, 125, 125, 0.5), //aqui!!!!!
-      content: Column(
-        children: <Widget>[
-          Image.asset("lib/view/assets/produtos/" + itemSelecionado ),
-          Text("Você gostaria de consumir "+itemSelecionado+"?",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),)
-        ],
+      content: Container(
+        height:150,
+        child: Column(
+          children: <Widget>[
+            Text("Você gostaria de consumir "+itemSelecionado+"?",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+            Image.asset("lib/view/assets/produtos/" + itemSelecionado+ ".png", height: 100,),
+          ],
+        ),
       ),
       actions: <Widget>[
-        BotaoRecusa(context),
-        BotaoConfirma(context,itemSelecionado)
+        botaoRecusa(context),
+        botaoConfirma(context,itemSelecionado)
       ],
     );
 
@@ -688,37 +697,33 @@ class _FazendaScreenState extends State<FazendaScreen> {
         children: gerarWidgetsItensCeleiro(controller.fazendeiro.nomeProdutos, controller.fazendeiro.quantidadeProdutos ),
       ),
       actions: <Widget>[
-        BotaoModal(context),
+        botaoModal(context),
       ],
     );
   }
 
-  Widget BotaoModal(BuildContext context) {
+  Widget botaoModal(BuildContext context) {
     return Container(
       child: FlatButton(
           onPressed: () {
             Navigator.of(context).pop();
             //mudar isso aqui
-            //controller.fazendeiro.avisoNovaMissao=false;
           },
-          child: Text("ok", style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white))),
+          child: Text("OK", style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white))),
     );
   }
 
-  Widget BotaoRecusa(BuildContext context) {
+  Widget botaoRecusa(BuildContext context) {
     return Container(
       child: FlatButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text("Não", style: Theme
-              .of(context)
-              .textTheme
-              .button,)),
-    );
+          child: Text("Não", style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
+    ));
   }
 
-  Widget BotaoConfirma(BuildContext context,String alimento) {
+  Widget botaoConfirma(BuildContext context,String alimento) {
     final controller= GetIt.I.get<FazendaController>();
 
     return Container(
@@ -726,15 +731,73 @@ class _FazendaScreenState extends State<FazendaScreen> {
           onPressed: () {
             controller.adicionarValorItemSaude("fome", 15);
             controller.comer(alimento);
-            controller.checarMissao(Missoes.comerAlimento);
+            if(controller.checarMissao(Missoes.comerAlimento)){
+              showCupertinoModalPopup<void>(
+                context: context,
+                builder: (BuildContext context) {
+                  return missaoConcluida(context);
+                },
+              );
+            }
+
             Navigator.of(context).pop();
           },
-          child: Text("Sim", style: Theme
-              .of(context)
-              .textTheme
-              .button,)),
+          child:Text("Sim", style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
+    ));
+  }
+
+
+  Widget missaoConcluida(BuildContext context){
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)),
+      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+      title:Text("Missão Concluída! Pegue sua nova missão!", textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+      content: Image.asset("lib/view/assets/barraPrincipal/missao.png",height: 100,),
+      actions: <Widget>[
+        botaoModalMissao(context),
+      ],
     );
   }
+
+
+  Widget botaoModalMissao(BuildContext context) {
+    final controller= GetIt.I.get<FazendaController>();
+
+    return Container(
+      child: FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            controller.fazendeiro.avisoNovaMissao=false;
+
+          },
+          child: Text("OK", style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white))),
+    );
+  }
+
+
+  Widget botaoModalVerificaMissao(BuildContext context, String missao) {
+    final controller= GetIt.I.get<FazendaController>();
+
+    return Container(
+      child: FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            if (controller.checarMissao(missao)){
+              showCupertinoModalPopup<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return missaoConcluida(context);
+                  });
+            }
+
+          },
+          child: Text("ok", style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
+      )
+    );
+  }
+
+
 
 
   final jsonPerguntas ={

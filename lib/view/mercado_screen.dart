@@ -75,16 +75,20 @@ class MercadoScreen extends StatelessWidget {
   List<Widget> gerarImagensMercadorias(BuildContext context){
     List<Widget> listaFinal = [];
 
+
     for (String itens in itensMercado){
       listaFinal.add(
         GestureDetector(
           child: Image.asset("lib/view/assets/produtos/"+itens+".png"),
           onTap:(){
-
+            final controller= GetIt.I.get<FazendaController>();
             showCupertinoModalPopup<void>(
                 context: context,
                 builder: (BuildContext context) {
-                  return Questionamento(fazendeiro.nomeProdutos[0], itens, context);
+                  if (controller.fazendeiro.leite <=0)
+                    return modalSemLeite(context);
+                  else
+                    return Questionamento("leite", itens, context);
 
                 });
 
@@ -113,17 +117,37 @@ class MercadoScreen extends StatelessWidget {
   }
 
 
+  Widget modalSemLeite(BuildContext context) {
+
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)),
+      content: Container(
+        height: 150,
+        child: Column(
+          children: <Widget>[
+            Text("Você não possui leite no seu celeiro. Produza leite para que você possa trocar itens do mercado"),
+            Image.asset("lib/view/assets/animal/vaca.png",height: 60,),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        BotaoModal(context)
+      ],
+    );
+  }
+
+
   Widget trocaConcluida(String produtoDado, String produtoRecebido,BuildContext context) {
     final controller= GetIt.I.get<FazendaController>();
-
-    controller.retirarItem(produtoDado);
+    controller.utilizarLeite();
+    //controller.retirarItem(produtoDado);
     if (fazendeiro.nomeProdutos.contains(produtoRecebido))
       controller.adicionarItem(produtoRecebido);
     else {
       fazendeiro.nomeProdutos.add(produtoRecebido);
       fazendeiro.quantidadeProdutos.add(1);
     }
-    controller.checarMissao(Missoes.comprarItemMercado);
 
     return AlertDialog(
       shape: RoundedRectangleBorder(
@@ -139,7 +163,7 @@ class MercadoScreen extends StatelessWidget {
 
       ),
       actions: <Widget>[
-        BotaoModal(context),
+        BotaoModalConcluido(context),
       ],
     );
   }
@@ -156,6 +180,35 @@ class MercadoScreen extends StatelessWidget {
               .button,)),
     );
   }
+
+
+  Widget BotaoModalConcluido(BuildContext context) {
+    final controller= GetIt.I.get<FazendaController>();
+
+    return Container(
+      child: FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            if ( controller.checarMissao(Missoes.comprarItemMercado)){
+              showCupertinoModalPopup<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return missaoConcluida(context);
+                  });
+            }
+
+            else{
+              Navigator.of(context).pop();
+            }
+
+          },
+          child: Text("ok", style: Theme
+              .of(context)
+              .textTheme
+              .button,)),
+    );
+  }
+
 
   Widget BotaoModalNao(BuildContext context) {
     return Container(
@@ -191,6 +244,33 @@ class MercadoScreen extends StatelessWidget {
               .textTheme
               .button,)),
     );
+  }
+
+  Widget missaoConcluida(BuildContext context){
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)),
+      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+      title:Text("Missão Concluída! Pegue sua nova missão!", textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+      content: Image.asset("lib/view/assets/barraPrincipal/missao.png",height: 100,),
+      actions: <Widget>[
+        botaoModal(context),
+      ],
+    );
+  }
+
+  Widget botaoModal(BuildContext context) {
+    return Container(
+      child: FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pop();
+          },
+          child: Text("Sim", style: Theme
+          .of(context)
+          .textTheme
+          .button,)
+    ));
   }
 
 

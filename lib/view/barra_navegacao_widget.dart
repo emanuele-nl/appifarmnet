@@ -72,7 +72,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
               },);
 
           },
-          child: Image.asset("lib/view/assets/barraPrincipal/tresPontos.png", width: 50,),
+          child: Image.asset("lib/view/assets/barraPrincipal/missao.png", width: 40,),
         )
       ],
 

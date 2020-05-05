@@ -68,19 +68,23 @@ abstract class _FazendaControllerBase with Store{
   }
 
   @action
-  void checarMissao (String acaoRealizada){
-    if (acaoRealizada == fazendeiro.missaAtual) {
+  bool checarMissao (String acaoRealizada){
+
+
+    if ((acaoRealizada == fazendeiro.missaAtual) &  (!fazendeiro.missaoConcluida)){
       setMensagemMissao("Missao concluída! Pegue uma nova missão! |");
       fazendeiro.missaoConcluida = true;
       fazendeiro.avisoNovaMissao = true;
+      return true;
     }
+    return false;
     gerarMensagensMissoes();
   }
 
   @action
   void produzirAdubo(){
     fazendeiro.adubo++;
-    checarMissao(Missoes.gerarAdubo);
+    //checarMissao(Missoes.gerarAdubo);
   }
 
   @action
@@ -92,7 +96,7 @@ abstract class _FazendaControllerBase with Store{
   @action
   void coletarLeite(){
     fazendeiro.leite++;
-    checarMissao(Missoes.coletarLeite);
+    //checarMissao(Missoes.coletarLeite);
 
   }
 
@@ -151,7 +155,7 @@ abstract class _FazendaControllerBase with Store{
   }
   @action
   void adicionarAgua(){
-    checarMissao(Missoes.coletarAgua);
+    //checarMissao(Missoes.coletarAgua);
     fazendeiro.agua++;
   }
 
@@ -161,6 +165,13 @@ abstract class _FazendaControllerBase with Store{
     //checarMissao(Missoes.);
     if(fazendeiro.agua>0)
       fazendeiro.agua--;
+  }
+
+  @action
+  void utilizarLeite(){
+    if(fazendeiro.leite>0)
+      fazendeiro.leite--;
+
   }
 
 

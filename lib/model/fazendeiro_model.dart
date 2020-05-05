@@ -28,7 +28,7 @@ class Fazendeiro{
   String missaAtual= Missoes.realizarUmaTroca;
   bool missaoConcluida =false;
   bool avisoNovaMissao = false;
-  List<String> missoes = [Missoes.realizarUmaTroca,Missoes.comprarItemMercado,Missoes.coletarAgua,Missoes.colherAlimento,Missoes.comerAlimento,Missoes.coletarLeite,Missoes.coletarLeite];
+  List<String> missoes = [Missoes.coletarAgua,Missoes.colherAlimento,Missoes.realizarUmaTroca,Missoes.comprarItemMercado,Missoes.comerAlimento,Missoes.coletarLeite,Missoes.coletarLeite,"Não há novas missões"];
   int numeroMissao = 0;
 
   List<int>ordemPerguntas =[];
