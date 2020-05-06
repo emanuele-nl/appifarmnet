@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:i_farm_net_new/controller/selecionar_fazendeiro/selecionar_fazendeiro_controller.dart';
+import 'package:i_farm_net_new/view/carteirinha_screen.dart';
 import 'package:i_farm_net_new/view/fazenda/fazenda_screen.dart';
 
 
@@ -93,8 +94,7 @@ class _SelecionarFazendeiroScreenState extends State<SelecionarFazendeiroScreen>
                                             .gerarListaOrdemPerguntas();
                                         Navigator.push(
                                             context,
-                                            MaterialPageRoute(builder: (context) =>
-                                                FazendaScreen()));
+                                            MaterialPageRoute(builder: (context) => CarteirinhaScreen()));
                                       }
                                       else {
                                         showCupertinoModalPopup<void>(

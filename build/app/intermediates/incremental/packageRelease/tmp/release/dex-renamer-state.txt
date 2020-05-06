@@ -1,4 +1,4 @@
-#Tue May 05 02:03:05 BRT 2020
+#Tue May 05 02:11:59 BRT 2020
 base.0=/home/jwieland/Projetos/appifarmnet/build/app/intermediates/transforms/r8/release/0/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

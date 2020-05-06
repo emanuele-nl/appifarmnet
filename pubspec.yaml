@@ -75,6 +75,7 @@ flutter:
     - lib/view/assets/lago.png
     - lib/view/assets/troca/
     - lib/view/assets/seta.png
+    - lib/view/assets/cadsol.png
     - lib/view/assets/pergunta/
 
 

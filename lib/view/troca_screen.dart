@@ -42,13 +42,38 @@ class TrocaScreen extends StatelessWidget {
               Row(
                 children: [
                   GestureDetector(
-                    child: Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
+                    child: Stack(
+                      children: <Widget>[
+                        Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
+                        Row(
+                          children: <Widget>[
+                            Container(width:20),
+                            Image.asset("lib/view/assets/fazendeiros/"+personagensTroca[0]+".png",height: 50,
+
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                     onTap: (){
                       oferecerProdutoParaTroca("alface",personagensTroca[0],context);
                       },),
                   Container(width: 60,),
                   GestureDetector(
-                    child: Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
+                    child: Stack(
+                      children: <Widget>[
+                        Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
+                        Row(
+                          children: <Widget>[
+                            Container(width:20),
+                            Image.asset("lib/view/assets/fazendeiros/"+personagensTroca[1]+".png",height: 50,
+
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+
                     onTap: (){
                       oferecerProdutoParaTroca("tomate",personagensTroca[1],context);
                     },)
@@ -58,13 +83,40 @@ class TrocaScreen extends StatelessWidget {
               Row(
                 children: [
                   GestureDetector(
-                    child: Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
+                    child: Stack(
+                      children: <Widget>[
+                        Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
+                        Row(
+                          children: <Widget>[
+                            Container(width:20),
+                            Image.asset("lib/view/assets/fazendeiros/"+personagensTroca[2]+".png",height: 50,
+
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+
                     onTap: (){
                       oferecerProdutoParaTroca("morango",personagensTroca[2],context);
                     },),
                   Container(width: 60,),
                   GestureDetector(
-                    child: Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
+                    //child: Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
+                    child: Stack(
+                      children: <Widget>[
+                        Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
+                        Row(
+                          children: <Widget>[
+                            Container(width:20),
+                            Image.asset("lib/view/assets/fazendeiros/"+personagensTroca[3]+".png",height: 50,
+
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+
                     onTap: (){
                       oferecerProdutoParaTroca("cenoura",personagensTroca[3],context);
                     },)

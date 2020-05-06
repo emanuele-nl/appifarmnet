@@ -9,7 +9,6 @@ import 'package:i_farm_net_new/model/fazendeiro_model.dart';
 import 'package:i_farm_net_new/model/missoes_model.dart';
 import 'package:i_farm_net_new/model/pergunta_model.dart';
 import 'package:i_farm_net_new/view/barra_navegacao_widget.dart';
-import 'package:i_farm_net_new/view/noticias_widgets.dart';
 import 'dart:math';
 
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -183,10 +182,10 @@ class _FazendaScreenState extends State<FazendaScreen> {
 
     return Stack(
       children: [
-        Image.asset("lib/view/assets/plantacao/cercaplantacoes.png", height: 125.0),
+        Image.asset("lib/view/assets/plantacao/cercaplantacoes.png", width: 90.0),
         GestureDetector(
             child: Observer(builder: (_){
-              double altura = 120.0;
+              double altura = 110.0;
               String cultivoAtual = controller.fazendeiro.cultivoAtual;
               if (cultivoAtual == null|| controller.estadoAtual == "vazio")
                 return Image.asset("lib/view/assets/plantacao/"+controller.estadoAtual+".png",height: altura,);
@@ -306,8 +305,18 @@ class _FazendaScreenState extends State<FazendaScreen> {
       child: Stack(
         children: [
           Image.asset("lib/view/assets/animal/cerca_animal.png",height: 60,),
-          GestureDetector(
-            child: Image.asset("lib/view/assets/animal/vaca.png",height: 40,),
+          Column(
+            children: <Widget>[
+              Container(height: 10,),
+              Row(
+                children: <Widget>[
+                  Image.asset("lib/view/assets/animal/comedourobebedouro.png",height: 20,),
+                  GestureDetector(
+                    child: Image.asset("lib/view/assets/animal/vaca.png",height: 40,),
+                  ),
+                ],
+              ),
+            ],
           )
 
 
