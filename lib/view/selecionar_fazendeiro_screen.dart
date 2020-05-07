@@ -43,10 +43,13 @@ class _SelecionarFazendeiroScreenState extends State<SelecionarFazendeiroScreen>
                                 ),
                                 Observer(
                                     builder: (_) {
-                                      return Image.asset(
-                                        "lib/view/assets/fazendeiros/" +
-                                            controller.numeroFazendeiro.toString() +
-                                            ".png", width: 180,);
+                                      return Hero(
+                                        tag: 'fazendeiro',
+                                        child: Image.asset(
+                                          "lib/view/assets/fazendeiros/" +
+                                              controller.numeroFazendeiro.toString() +
+                                              ".png", width: 180,),
+                                      );
                                     }
                                 ),
                                 GestureDetector(

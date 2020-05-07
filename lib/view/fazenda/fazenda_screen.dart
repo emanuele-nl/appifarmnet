@@ -50,18 +50,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
                     children: <Widget>[
                       Container(height: 40,),
 
-//                      GestureDetector(
-//                        onTap: controller.gerarMensagensMissoes,
-//                        child: Observer(builder: (_) {
-//                          return Container(height: 40,
-//                              color:Color.fromRGBO(125, 125, 125, 0.5),
-//                              child: ScrollingText(
-//                                  text: controller.mensagensNoticiasMissoes,
-//                                  textStyle: TextStyle(
-//                                      fontSize: 16, color: Colors.lightGreen),)
-//                              );}
-//                          ),
-//                      ),
+
 
 
                       Row(
@@ -338,7 +327,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
           height: 200,
           child: Column(
             children:[
-              Text("A vaca está com fome! alimente-a para produzir mais leite ou mais adubo!", textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+              Text("A vaca está com fome! alimente-a com ração para produzir mais leite ou mais adubo!", textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
               //aaaaaaaaaaaaa
               Image.asset("lib/view/assets/animal/vaca.png",height: 60,),
 
@@ -428,39 +417,54 @@ class _FazendaScreenState extends State<FazendaScreen> {
 
   Widget alimentarVaca(List<String> cultivos,BuildContext context) {
     Fazendeiro fazendeiro = Fazendeiro();
-    List<Widget> botoesCultivos = _gerarOpcoesAlimentarVaca(cultivos);
+    Widget botoesCultivos = _gerarOpcoesAlimentarVaca();
 
-    return AlertDialog(
+    if(fazendeiro.racao<=0){
+      return AlertDialog(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12)),
-        title:Text("Selecione um Cultivo", textAlign: TextAlign.center,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
         backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
-        content: Container(
-          height: 200,
-          child: Column(
-              children: botoesCultivos
-          ),
-        ));
+        title:Text("Acabou a ração! troque um cultivo por ração para alimentar a vaca", textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+        content: Image.asset("lib/view/assets/produtos/racao.png",height: 100,),
+        actions: <Widget>[
+          botaoModal(context),
+        ],
+      );
+    }
+
+    else {
+      return AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12)),
+          title: Text("Dê a ração para a vaca", textAlign: TextAlign.center,
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.white),),
+          backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+          content: Container(
+            height: 200,
+            child: Column(
+                children: [botoesCultivos]
+            ),
+          ));
+    }
 
   }
 
 
-  List<Widget> _gerarOpcoesAlimentarVaca(List<String> cultivos) {
+  Widget _gerarOpcoesAlimentarVaca() {
     final controller= GetIt.I.get<FazendaController>();
     List<Widget> widgetsCultivo = [];
-    for (String cultivo in cultivos) {
-      if (controller.fazendeiro.colheitas.contains(cultivo)) {
-        widgetsCultivo.add(RaisedButton(
+     return RaisedButton(
           child: Row(
             children: <Widget>[
-              Image.asset("lib/view/assets/produtos/" + cultivo + ".png",height: 10,),
-              Text(cultivo),
+              Image.asset("lib/view/assets/produtos/racao.png",height: 10,),
+              Text("ração"),
             ],
           ),
 
           onPressed: () {
             controller.fazendeiro.fomeVaca=5;
-            controller.retirarItem(cultivo);
+            controller.fazendeiro.racao--;
             Navigator.of(context).pop();
             showCupertinoModalPopup<void>(
               context: context,
@@ -469,11 +473,9 @@ class _FazendaScreenState extends State<FazendaScreen> {
               },
             );
 
-          },));
+          });
       }
-    }
-    return widgetsCultivo;
-  }
+
 
 
 
@@ -666,7 +668,11 @@ class _FazendaScreenState extends State<FazendaScreen> {
       trailing: Text(controller.fazendeiro.adubo.toString(), style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
       title: Text("Adubo",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
     ));
-
+    itensLista.add(ListTile(
+      leading: Image.asset("lib/view/assets/produtos/racao.png", height: 40,),
+      trailing: Text(controller.fazendeiro.racao.toString(), style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
+      title: Text("Ração",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+    ));
 
 
     return itensLista;
@@ -853,7 +859,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
         "assuntoPergunta": "Biologia"
       },
       {
-        "questao": "Qual ser vivo contribuem escavando canais no solo?",
+        "questao": "Qual ser vivo contribue na escavação canais no solo?",
         "alternativas": [
           "Quero-quero",
           "Borboleta",

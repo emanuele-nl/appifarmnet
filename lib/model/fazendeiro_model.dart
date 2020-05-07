@@ -17,6 +17,7 @@ class Fazendeiro{
   int adubo= 0;
   int leite = 0;
   int fomeVaca =5;
+  int racao = 0;
 
 
   List<String> nomeProdutos = ['cenoura'];

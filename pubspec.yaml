@@ -25,6 +25,8 @@ dependencies:
   bubble: ^1.1.9+1
   auto_size_text: ^2.1.0
   get_it:
+  youtube_player_flutter: ^6.1.1
+
 
 
 
@@ -56,6 +58,7 @@ flutter:
   assets:
     - lib/view/assets/botao-continuar.png
     - lib/view/assets/botao-tutorial.png
+    - lib/view/assets/botao-iniciar.png
     - lib/view/assets/telainicial.png
     - lib/view/assets/fundo.png
     - lib/view/assets/fazendeiros/

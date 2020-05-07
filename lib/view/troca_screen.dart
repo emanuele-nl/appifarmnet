@@ -10,20 +10,21 @@ import 'package:i_farm_net_new/model/missoes_model.dart';
 class TrocaScreen extends StatelessWidget {
   Fazendeiro fazendeiro = Fazendeiro();
   List<String> personagensTroca = ["1","2","3","4","5"];
+  List<String> itensTroca = ["tomate","alface","ração","cenoura","morango"];
 
 
   @override
   Widget build(BuildContext context) {
     List<String> cultivosParaTroca = fazendeiro.colheitas;
     personagensTroca.remove(fazendeiro.nomeImagem);
+    itensTroca.remove(fazendeiro.nomeProdutos[0]);
 
 
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
+          backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),
+        ),
         backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),
-
-      ),
-      backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),
       body: Stack(
         children: [
 
@@ -56,7 +57,7 @@ class TrocaScreen extends StatelessWidget {
                       ],
                     ),
                     onTap: (){
-                      oferecerProdutoParaTroca("alface",personagensTroca[0],context);
+                      oferecerProdutoParaTroca(itensTroca[0],personagensTroca[0],context);
                       },),
                   Container(width: 60,),
                   GestureDetector(
@@ -75,7 +76,7 @@ class TrocaScreen extends StatelessWidget {
                     ),
 
                     onTap: (){
-                      oferecerProdutoParaTroca("tomate",personagensTroca[1],context);
+                      oferecerProdutoParaTroca(itensTroca[1],personagensTroca[1],context);
                     },)
                 ],
               ),
@@ -98,7 +99,7 @@ class TrocaScreen extends StatelessWidget {
                     ),
 
                     onTap: (){
-                      oferecerProdutoParaTroca("morango",personagensTroca[2],context);
+                      oferecerProdutoParaTroca(itensTroca[2],personagensTroca[2],context);
                     },),
                   Container(width: 60,),
                   GestureDetector(
@@ -118,7 +119,7 @@ class TrocaScreen extends StatelessWidget {
                     ),
 
                     onTap: (){
-                      oferecerProdutoParaTroca("cenoura",personagensTroca[3],context);
+                      oferecerProdutoParaTroca(itensTroca[3],personagensTroca[3],context);
                     },)
                 ],
 
@@ -287,7 +288,13 @@ class TrocaScreen extends StatelessWidget {
     final controller= GetIt.I.get<FazendaController>();
 
     controller.retirarItem(produtoDado);
-    if (fazendeiro.nomeProdutos.contains(produtoRecebido))
+
+
+    if(produtoRecebido == "ração"){
+      produtoRecebido = "racao";
+      fazendeiro.racao++;
+    }
+    else if (fazendeiro.nomeProdutos.contains(produtoRecebido))
       controller.adicionarItem(produtoRecebido);
     else {
       fazendeiro.nomeProdutos.add(produtoRecebido);

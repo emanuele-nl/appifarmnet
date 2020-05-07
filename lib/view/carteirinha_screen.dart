@@ -55,7 +55,10 @@ class CarteirinhaScreen extends StatelessWidget {
                               children: <Widget>[
                                 Column(
                                   children: <Widget>[
-                                    Image.asset("lib/view/assets/cadsol.png",height: 60,),
+                                    Hero(
+                                      tag:'fazendeiro',
+                                        child: Image.asset("lib/view/assets/cadsol.png",height: 60,)
+                                    ),
                                     Container(height: 30,),
                                   ],
                                 ),
