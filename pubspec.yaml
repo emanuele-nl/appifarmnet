@@ -26,6 +26,8 @@ dependencies:
   auto_size_text: ^2.1.0
   get_it:
   youtube_player_flutter: ^6.1.1
+  basic_utils: ^1.2.0
+  audioplayers: ^0.13.2
 
 
 

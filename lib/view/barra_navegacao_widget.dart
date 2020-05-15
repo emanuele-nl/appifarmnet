@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:i_farm_net_new/controller/fazenda/fazenda_controller.dart';
 import 'package:i_farm_net_new/model/fazendeiro_model.dart';
+import 'package:i_farm_net_new/model/missoes_model.dart';
 import 'package:i_farm_net_new/view/mercado_screen.dart';
 import 'package:i_farm_net_new/view/saude_screen.dart';
 import 'package:i_farm_net_new/view/troca_screen.dart';
@@ -17,66 +18,91 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final controller= GetIt.I.get<FazendaController>();
+    return SafeArea(
+        child: Container(
+          color: Color.fromRGBO(8, 64, 4, 1.0),
+          child:  Row(
+            children: <Widget>[
+              Flexible(
+                flex: 1,
+                child: GestureDetector(
+                  onTap:() {
 
-    return AppBar(
-      automaticallyImplyLeading: false,
-      titleSpacing: 100.0,
-      backgroundColor: Color.fromRGBO(33, 82, 30, 0.1),
-      actions: <Widget>[
-        GestureDetector(
-          onTap:() {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SaudeScreen()));
 
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SaudeScreen()));
+                  },
+                  child: Image.asset("lib/view/assets/barraPrincipal/saude.png", width: 50,),
+                ),
+              ),
+              Flexible(
+                flex:1,
+                child:Container(),
 
-          },
-          child: Image.asset("lib/view/assets/barraPrincipal/saude.png", width: 50,),
-        ),
-        Container(width: 30),
-        GestureDetector(
-          onTap: () {
-            showCupertinoModalPopup<void>(
-            context: context,
-            builder: (BuildContext context) {
-            return atividadeFisica(context);
-            },);
+              ),
+              Flexible(
+                flex:1,
+                child: GestureDetector(
+                  onTap: () {
+                    showCupertinoModalPopup<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return atividadeFisica(context);
+                      },);
 
-          },
-          child: Image.asset("lib/view/assets/barraPrincipal/exercicio.png", width: 50,),
-        ),
-        GestureDetector(
-          onTap:  (){
-              Navigator.push(
-                 context,
-                 MaterialPageRoute(builder: (context) => TrocaScreen()));
-            },
-          child: Image.asset("lib/view/assets/barraPrincipal/troca.png", width: 50,),
-        ),
-        GestureDetector(
-          onTap:(){
-            Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => MercadoScreen()));
-          },
-          child: Image.asset("lib/view/assets/barraPrincipal/mercado.png", width: 50,),
-        ),
-        Container(width: 30),
-        GestureDetector(
-          onTap: () {
-            controller.fazendeiro.avisoNovaMissao=false;
-            showCupertinoModalPopup<void>(
-              context: context,
-              builder: (BuildContext context) {
-                return missao(context);
-              },);
+                  },
+                  child: Image.asset("lib/view/assets/barraPrincipal/exercicio.png", width: 50,),
+                ),
+              ),
+              Flexible(
+                flex:1,
+                child: GestureDetector(
+                  onTap:  (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => TrocaScreen()));
+                  },
+                  child: Image.asset("lib/view/assets/barraPrincipal/troca.png", width: 50,),
+                ),
+              ),
+              Flexible(
+                flex:1,
+                child: GestureDetector(
+                  onTap:(){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MercadoScreen()));
+                  },
+                  child: Image.asset("lib/view/assets/barraPrincipal/mercado.png", width: 50,),
+                ),
+              ),
+              Flexible(
+                  flex:1,
+                  child:Container(),
+              ),
+              Flexible(
+                flex:1,
+                child: GestureDetector(
+                  onTap: () {
+                    controller.fazendeiro.avisoNovaMissao=false;
+                    showCupertinoModalPopup<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return missao(context);
+                      },);
 
-          },
-          child: Image.asset("lib/view/assets/barraPrincipal/missao.png", width: 40,),
-        )
-      ],
+                  },
+                  child: Image.asset("lib/view/assets/barraPrincipal/missao.png", width: 40,),
+                ),
+              )
+            ],
 
-    );
+
+
+          ),
+        ));
+
   }
 
 
@@ -85,111 +111,147 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
     Fazendeiro fazendeiro = Fazendeiro();
 
     return AlertDialog(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12)),
-      title:Text("Atividade Física", textAlign: TextAlign.center,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
-      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
-      content: Container(
-        height: 200,
-        child: Column(
-          children: <Widget>[
-            RaisedButton(
-                child: Row(
-                  children: <Widget>[
-                    Image.asset("lib/view/assets/atividadeFisica/bicicleta.png",height: 20,),
-                    Text("Pedalar",)
-                  ],
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12)),
+        title:Text("Atividade Física", textAlign: TextAlign.center,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+        backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+        content: Container(
+          height: 200,
+          child: Column(
+              children: <Widget>[
+                RaisedButton(
+                    child: Row(
+                      children: <Widget>[
+                        Image.asset("lib/view/assets/atividadeFisica/bicicleta.png",height: 20,),
+                        Text("Pedalar",)
+                      ],
+                    ),
+                    onPressed: (){
+                      Navigator.of(context).pop();
+
+                      if(controller.fazendeiro.fome>10) {
+                        controller.adicionarValorItemSaude("vigorFisico", 8);
+                        controller.adicionarValorItemSaude("fome", -10);
+                        showCupertinoModalPopup<void>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return confirmarPedalar(context);
+                          },
+                        );
+                      }
+                      else{
+                        showCupertinoModalPopup<void>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return modalFome(context);
+                          },
+                        );
+                      }
+                    }
+
                 ),
-                onPressed: (){
-                  Navigator.of(context).pop();
-                  controller.adicionarValorItemSaude("vigorFisico", 8);
-                  showCupertinoModalPopup<void>(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return confirmarPedalar(context);
-                    },
-                  );
-                }
+                RaisedButton(
+                    child: Row(
+                      children: <Widget>[
+                        Image.asset("lib/view/assets/atividadeFisica/caminhar.png",height: 20
+                        ),
+                        Text("Caminhar",)
+                      ],
+                    ),
+                    onPressed: (){
+                      Navigator.of(context).pop();
 
-            ),
-            RaisedButton(
-              child: Row(
-                children: <Widget>[
-                  Image.asset("lib/view/assets/atividadeFisica/caminhar.png",height: 20
-                  ),
-                  Text("Caminhar",)
-                ],
-              ),
-              onPressed: (){
-                Navigator.of(context).pop();
-                controller.adicionarValorItemSaude("vigorFisico", 8);
-                showCupertinoModalPopup<void>(
-                context: context,
-                builder: (BuildContext context) {
-                return confirmarCaminhada(context);
-                },
-                );
-                }
+                      if(controller.fazendeiro.fome>10) {
+                        controller.adicionarValorItemSaude("vigorFisico", 8);
+                        controller.adicionarValorItemSaude("fome", -10);
+                        showCupertinoModalPopup<void>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return confirmarCaminhada(context);
+                          },
+                        );
+                      }
+                      else{
+                        showCupertinoModalPopup<void>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return modalFome(context);
+                          },
+                        );
+                      }
+                    }
 
+                ),
+
+                RaisedButton(
+                    child: Row(
+                      children: <Widget>[
+                        Image.asset("lib/view/assets/atividadeFisica/correr.png",height: 20),
+                        Text("Correr",)
+                      ],
+                    ),
+                    onPressed: (){
+                      Navigator.of(context).pop();
+                      if(controller.fazendeiro.fome>10) {
+                        controller.adicionarValorItemSaude("vigorFisico", 8);
+                        controller.adicionarValorItemSaude("fome", -10);
+                        showCupertinoModalPopup<void>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return confirmarCorrida(context);
+                          },
+                        );
+                      }
+                      else{
+                        showCupertinoModalPopup<void>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return modalFome(context);
+                          },
+                        );
+                      }
+                    }
+
+                ),
+                RaisedButton(
+                    child: Row(
+                      children: <Widget>[
+                        Image.asset("lib/view/assets/atividadeFisica/nadar.png",height: 20,),
+                        Text("Nadar",)
+                      ],
+                    ),
+                    onPressed: (){
+                      Navigator.of(context).pop();
+                      if(controller.fazendeiro.fome>10) {
+                        controller.adicionarValorItemSaude("vigorFisico", 8);
+                        controller.adicionarValorItemSaude("fome", -10);
+                        showCupertinoModalPopup<void>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return confirmarNatacao(context);
+                          },
+                        );
+                      }
+                      else{
+                        showCupertinoModalPopup<void>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return modalFome(context);
+                          },
+                        );
+                      }
+
+                    }
+
+                ),
+              ]
           ),
-
-            RaisedButton(
-                child: Row(
-                  children: <Widget>[
-                    Image.asset("lib/view/assets/atividadeFisica/correr.png",height: 20),
-                    Text("Correr",)
-                  ],
-                ),
-                onPressed: (){
-                  Navigator.of(context).pop();
-                  controller.adicionarValorItemSaude("vigorFisico", 8);
-                  showCupertinoModalPopup<void>(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return confirmarCorrida(context);
-                    },
-                  );
-                }
-
-            ),
-            RaisedButton(
-                child: Row(
-                  children: <Widget>[
-                    Image.asset("lib/view/assets/atividadeFisica/nadar.png",height: 20,),
-                    Text("Nadar",)
-                  ],
-                ),
-                onPressed: (){
-                  Navigator.of(context).pop();
-                  controller.adicionarValorItemSaude("vigorFisico", 8);
-                  showCupertinoModalPopup<void>(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return confirmarNatacao(context);
-                    },
-                  );
-                }
-
-            ),
-          ]
-        ),
-      ));
+        ));
 
 
   }
 
 
-
-  Widget confirmarAtividadeFisica(BuildContext context) {
-    return AlertDialog(
-      content: Text("Você praticou atividade Física!",textAlign: TextAlign.center,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
-      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
-
-      actions: <Widget>[
-        BotaoModal(context),
-    ],
-    );
-  }
 
   Widget confirmarNatacao(BuildContext context) {
     Fazendeiro fazendeiro =Fazendeiro();
@@ -205,7 +267,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: <Widget>[
-        BotaoModal(context),
+        botaoModal(context, Missoes.nadar),
       ],
     );
   }
@@ -224,7 +286,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: <Widget>[
-        BotaoModal(context),
+        botaoModal(context,Missoes.correr),
       ],
     );
   }
@@ -244,7 +306,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: <Widget>[
-        BotaoModal(context),
+        botaoModal(context,Missoes.caminhar),
       ],
     );
   }
@@ -263,7 +325,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: <Widget>[
-        BotaoModal(context),
+        botaoModal(context,Missoes.pedalar),
       ],
     );
   }
@@ -272,35 +334,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
 
 
 
-//  Widget missao(BuildContext context){
-//    Fazendeiro fazendeiro =Fazendeiro();
-//    return AlertDialog(
-//        shape: RoundedRectangleBorder(
-//            borderRadius: BorderRadius.circular(12)),
-//      title:Text("Missão Atual", textAlign: TextAlign.center,),
-//      content: Column(
-//        children: <Widget>[
-//          fazendeiro.missaoConcluida?Text("Missao concluída",style: TextStyle(color: Colors.green),):Text("Missão em andamento",style: TextStyle(color: Colors.yellowAccent),),
-//          Text(fazendeiro.missaAtual),
-//          fazendeiro.missaoConcluida? RaisedButton(
-//            child: Text("Requerer nova Missão"),
-//            onPressed: () {
-//              Navigator.of(context).pop();
-//              fazendeiro.numeroMissao++;
-//              fazendeiro.missaAtual = fazendeiro.missoes[fazendeiro.numeroMissao];
-//              fazendeiro.missaoConcluida =false;
-//              missao(context);
-//            }
-//
-//
-//          ):RaisedButton(
-//            child: Text("Fechar"),
-//            onPressed: (){
-//              Navigator.of(context).pop();
-//            },
-//          )]));
-//
-//}
+
 
   Widget missao(BuildContext context) {
     final controller= GetIt.I.get<FazendaController>();
@@ -310,7 +344,6 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
     fazendeiro.missaAtual = fazendeiro.missoes[fazendeiro.numeroMissao];
     fazendeiro.missaoConcluida? controller.adicionarValorItemSaude("experiencia", 10):null;
     fazendeiro.missaoConcluida =false;
-    controller.setMensagemMissao("Realize sua missão e ganhe experiência |" );
 
     return AlertDialog(
       shape: RoundedRectangleBorder(
@@ -319,23 +352,68 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
       content:  Text(fazendeiro.missaAtual,textAlign: TextAlign.center,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
       actions: <Widget>[
-        BotaoModal(context),
+        botaoModal(context,""),
       ],
     );
   }
 
 
-    Widget BotaoModal(BuildContext context) {
+  Widget botaoModal(BuildContext context, String missao) {
+    final controller= GetIt.I.get<FazendaController>();
+
     return Container(
       child: FlatButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            if ( controller.checarMissao(missao)){
+              Navigator.of(context).pop();
+
+              showCupertinoModalPopup<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return missaoConcluida(context);
+                  });
+            }
+
+            else{
+              Navigator.of(context).pop();
+            }
+
           },
           child: Text("OK",style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white))),
     );
   }
 
-  
+
+  Widget modalFome(BuildContext context){
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)),
+      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+      title:Text("Você está com fome! coma um item do celeiro para aumentar sua nutrição", textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+      content: Image.asset("lib/view/assets/celeiro.png",height: 100, excludeFromSemantics: true,),
+      actions: <Widget>[
+        botaoModal(context,""),
+      ],
+    );
+  }
+
+
+
+
+  Widget missaoConcluida(BuildContext context){
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)),
+      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
+      title:Text("Missão Concluída! Pegue sua nova missão!", textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+
+      actions: <Widget>[
+        botaoModal(context,""),
+      ],
+    );
+  }
+
+
 
 
 }

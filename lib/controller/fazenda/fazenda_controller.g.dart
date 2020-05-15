@@ -9,12 +9,6 @@ part of 'fazenda_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$FazendaController on _FazendaControllerBase, Store {
-  Computed<String> _$noticiasComputed;
-
-  @override
-  String get noticias =>
-      (_$noticiasComputed ??= Computed<String>(() => super.noticias)).value;
-
   final _$NomeCultivoAtom = Atom(name: '_FazendaControllerBase.NomeCultivo');
 
   @override
@@ -66,44 +60,6 @@ mixin _$FazendaController on _FazendaControllerBase, Store {
     }, _$estadoAtualAtom, name: '${_$estadoAtualAtom.name}_set');
   }
 
-  final _$mensagensNoticiasMissoesAtom =
-      Atom(name: '_FazendaControllerBase.mensagensNoticiasMissoes');
-
-  @override
-  String get mensagensNoticiasMissoes {
-    _$mensagensNoticiasMissoesAtom.context
-        .enforceReadPolicy(_$mensagensNoticiasMissoesAtom);
-    _$mensagensNoticiasMissoesAtom.reportObserved();
-    return super.mensagensNoticiasMissoes;
-  }
-
-  @override
-  set mensagensNoticiasMissoes(String value) {
-    _$mensagensNoticiasMissoesAtom.context.conditionallyRunInAction(() {
-      super.mensagensNoticiasMissoes = value;
-      _$mensagensNoticiasMissoesAtom.reportChanged();
-    }, _$mensagensNoticiasMissoesAtom,
-        name: '${_$mensagensNoticiasMissoesAtom.name}_set');
-  }
-
-  final _$mensagemExtraAtom =
-      Atom(name: '_FazendaControllerBase.mensagemExtra');
-
-  @override
-  String get mensagemExtra {
-    _$mensagemExtraAtom.context.enforceReadPolicy(_$mensagemExtraAtom);
-    _$mensagemExtraAtom.reportObserved();
-    return super.mensagemExtra;
-  }
-
-  @override
-  set mensagemExtra(String value) {
-    _$mensagemExtraAtom.context.conditionallyRunInAction(() {
-      super.mensagemExtra = value;
-      _$mensagemExtraAtom.reportChanged();
-    }, _$mensagemExtraAtom, name: '${_$mensagemExtraAtom.name}_set');
-  }
-
   final _$fazendeiroAtom = Atom(name: '_FazendaControllerBase.fazendeiro');
 
   @override
@@ -125,16 +81,6 @@ mixin _$FazendaController on _FazendaControllerBase, Store {
       ActionController(name: '_FazendaControllerBase');
 
   @override
-  dynamic setMensagemMissao(String value) {
-    final _$actionInfo = _$_FazendaControllerBaseActionController.startAction();
-    try {
-      return super.setMensagemMissao(value);
-    } finally {
-      _$_FazendaControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   dynamic evoluirTerreno() {
     final _$actionInfo = _$_FazendaControllerBaseActionController.startAction();
     try {
@@ -149,16 +95,6 @@ mixin _$FazendaController on _FazendaControllerBase, Store {
     final _$actionInfo = _$_FazendaControllerBaseActionController.startAction();
     try {
       return super.matarTerreno();
-    } finally {
-      _$_FazendaControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic gerarMensagensMissoes() {
-    final _$actionInfo = _$_FazendaControllerBaseActionController.startAction();
-    try {
-      return super.gerarMensagensMissoes();
     } finally {
       _$_FazendaControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -205,10 +141,10 @@ mixin _$FazendaController on _FazendaControllerBase, Store {
   }
 
   @override
-  void comer(String nome) {
+  void comer(String alimento) {
     final _$actionInfo = _$_FazendaControllerBaseActionController.startAction();
     try {
-      return super.comer(nome);
+      return super.comer(alimento);
     } finally {
       _$_FazendaControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -275,9 +211,19 @@ mixin _$FazendaController on _FazendaControllerBase, Store {
   }
 
   @override
+  void utilizarRacao() {
+    final _$actionInfo = _$_FazendaControllerBaseActionController.startAction();
+    try {
+      return super.utilizarRacao();
+    } finally {
+      _$_FazendaControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
-        'NomeCultivo: ${NomeCultivo.toString()},terreno: ${terreno.toString()},estadoAtual: ${estadoAtual.toString()},mensagensNoticiasMissoes: ${mensagensNoticiasMissoes.toString()},mensagemExtra: ${mensagemExtra.toString()},fazendeiro: ${fazendeiro.toString()},noticias: ${noticias.toString()}';
+        'NomeCultivo: ${NomeCultivo.toString()},terreno: ${terreno.toString()},estadoAtual: ${estadoAtual.toString()},fazendeiro: ${fazendeiro.toString()}';
     return '{$string}';
   }
 }

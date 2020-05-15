@@ -8,11 +8,22 @@ class Missoes {
   static final gerarAdubo = "Produza Adubo";
 
   //missoes a serem implementadas
+
   static final correr= "Corra";
-  static final nadar ="nade";
+  static final nadar ="Nade";
   static final pedalar ="Pedale";
-  static final colherTresPlantas ="";
-  static final colherAlgo = "colha algo";
+  static final caminhar ="caminhe";
+
+  static final comer = "comer um produto \n \n \n Dica:Para comer, clique no alimento do celeiro";
+
+  static final colherTresPlantas = "";
+
+  //colheitas
+  static final colherTomate = "colha tomate";
+  static final colherCenoura = "colha cenoura";
+  static final colherAlface = "colha alface";
+  static final colherMorango = "colha Morango";
+
 
 }
 

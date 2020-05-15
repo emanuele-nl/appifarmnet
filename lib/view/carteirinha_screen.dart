@@ -32,7 +32,7 @@ class CarteirinhaScreen extends StatelessWidget {
                         shape: BoxShape.rectangle,
                       ),
                       width: 250,
-                      child: Text("Olá, "+fazendeiro.nome+"! \nVocê está entrando em um ambiente de econõmica solidária. Essa é a sua carteirinha CADSOL, um cadastro de todos que fazem parte da econômia solidária no país!"
+                      child: Text("Olá, "+fazendeiro.nome+"! \nVocê está entrando em um ambiente de economia solidária. Essa é a sua carteirinha CADSOL, um cadastro de todos que fazem parte da econômia solidária no país!"
                           ,
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white,fontSize: 14),
@@ -106,7 +106,6 @@ class CarteirinhaScreen extends StatelessWidget {
 
 
                 ],
-                //child: new Text("Hello background"),
               )
             ],
           )

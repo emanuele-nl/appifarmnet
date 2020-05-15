@@ -12,8 +12,8 @@
 12         to allow setting breakpoints, to provide hot reload, etc.
 13    -->
 14    <uses-permission android:name="android.permission.INTERNET" />
-14-->/home/jwieland/Projetos/appifarmnet/android/app/src/debug/AndroidManifest.xml:6:5-66
-14-->/home/jwieland/Projetos/appifarmnet/android/app/src/debug/AndroidManifest.xml:6:22-64
+14-->/home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:47:5-66
+14-->/home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:47:22-64
 15    <!--
 16     io.flutter.app.FlutterApplication is an android.app.Application that
 17         calls FlutterMain.startInitialization(this); in its onCreate method.

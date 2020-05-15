@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:i_farm_net_new/model/fazendeiro_model.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -10,6 +11,18 @@ class SaudeScreen extends StatelessWidget{
       backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),
+        actions: [IconButton(
+          icon:  Icon(Icons.assignment_ind, color: Colors.white,),
+          onPressed:(){
+            showCupertinoModalPopup<void>(
+                context: context,
+                builder: (BuildContext context) {
+                  return carteirinha(context);
+                });
+
+
+            } ,
+        )],
       ),
       body: Center(
         child: Column(
@@ -61,6 +74,73 @@ class SaudeScreen extends StatelessWidget{
       ),
     );
   }
+
+  Widget carteirinha (BuildContext context){
+    Fazendeiro fazendeiro = Fazendeiro();
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)),
+      backgroundColor: Colors.grey ,
+      content: Container(
+        height: 200,
+        child: Column(
+          children: [
+            Row(
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Hero(
+                        tag:'fazendeiro',
+                        child: Image.asset("lib/view/assets/cadsol.png",height: 60,)
+                    ),
+                    Container(height: 30,),
+                  ],
+                ),
+                Container(width: 20,),
+                ClipOval(
+                  child: Image.asset(
+                    "lib/view/assets/fazendeiros/"+fazendeiro.nomeImagem+".png",
+                    height: 100,
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              decoration: BoxDecoration(color: Colors.white),
+              height: 55,
+              child: Text("Empreendimentos Econômicos Solidários",
+                style: TextStyle(fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+            )
+
+
+          ],
+
+        ),
+      ),
+      actions: <Widget>[
+        botaoModal(context),
+      ],
+    );
+
+
+
+  }
+
+  Widget botaoModal(BuildContext context) {
+
+    return Container(
+      child: FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+
+          },
+          child: Text("OK")),
+    );
+  }
+
+
 
 }
 

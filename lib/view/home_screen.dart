@@ -50,7 +50,6 @@ class HomeScreen extends StatelessWidget {
                 ),
 
               ],
-              //child: new Text("Hello background"),
             )
           ],
         )

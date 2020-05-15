@@ -20,23 +20,18 @@ abstract class _FazendaControllerBase with Store{
   @observable
   String estadoAtual="vazio";
 
-  @observable
-  String mensagensNoticiasMissoes = "Faça missões e ganhe experiência! | ";
-
-  @observable
-  String mensagemExtra = "Você está em um ambiente de econômia solidária |";
-
 
   @observable
   Fazendeiro fazendeiro = Fazendeiro();
 
-  @action
-  setMensagemMissao(String value) => mensagensNoticiasMissoes = value;
 
   @action
   evoluirTerreno() {
-    if (terreno.valorEstadoAtual<3)
+    adicionarValorItemSaude("fome",-10);
+
+    if (terreno.valorEstadoAtual<3) {
       terreno.valorEstadoAtual++;
+    }
     else
       terreno.valorEstadoAtual=0;
 
@@ -52,33 +47,20 @@ abstract class _FazendaControllerBase with Store{
 
   }
 
-  @computed
-  String get noticias => "$mensagensNoticiasMissoes $mensagemExtra";
 
 
 
-  @action
-  gerarMensagensMissoes(){
-    if (fazendeiro.avisoNovaMissao){
-      setMensagemMissao("Missao concluída! pegue uma nova missão | ");
-    }
-    else
-      setMensagemMissao("Realize sua missão e ganhe experiência | ");
-
-  }
 
   @action
   bool checarMissao (String acaoRealizada){
 
 
     if ((acaoRealizada == fazendeiro.missaAtual) &  (!fazendeiro.missaoConcluida)){
-      setMensagemMissao("Missao concluída! Pegue uma nova missão! |");
       fazendeiro.missaoConcluida = true;
       fazendeiro.avisoNovaMissao = true;
       return true;
     }
     return false;
-    gerarMensagensMissoes();
   }
 
   @action
@@ -101,8 +83,19 @@ abstract class _FazendaControllerBase with Store{
   }
 
   @action
-  void comer(String nome){
-    retirarItem(nome);
+  void comer(String alimento){
+    List<String> alimentosSaudaveis = ["cenoura","tomate","alface","morango"];
+    retirarItem(alimento);
+    
+    if(alimentosSaudaveis.contains(alimento)){
+      adicionarValorItemSaude("fome", 15);
+      adicionarValorItemSaude("vigorFisico", -10);
+    }
+    else {
+      adicionarValorItemSaude("fome", 15);
+      adicionarValorItemSaude("vigorFisico", -30);
+    }
+
   }
 
   @action
@@ -126,7 +119,30 @@ abstract class _FazendaControllerBase with Store{
         posicaoSelecionada=i;
       i++;
     }
-    fazendeiro.quantidadeProdutos[posicaoSelecionada]--;
+    //se for o item original, garantir que sempre tenha 1 mas gerar aviso de ajuda externa
+    if(posicaoSelecionada==0){
+      if(fazendeiro.quantidadeProdutos[posicaoSelecionada]>1) {
+        fazendeiro.quantidadeProdutos[posicaoSelecionada]--;
+      }
+      else{
+        fazendeiro.ajudaExterna = true;
+      }
+    }
+
+    else{
+      if(fazendeiro.quantidadeProdutos[posicaoSelecionada]>1){
+        fazendeiro.quantidadeProdutos[posicaoSelecionada]--;
+      }
+
+      else {
+        fazendeiro.quantidadeProdutos.removeAt(posicaoSelecionada);
+        fazendeiro.nomeProdutos.removeAt(posicaoSelecionada);
+      }
+
+    }
+
+
+
   }
 
   @action
@@ -171,8 +187,14 @@ abstract class _FazendaControllerBase with Store{
   void utilizarLeite(){
     if(fazendeiro.leite>0)
       fazendeiro.leite--;
-
   }
+
+  @action
+  void utilizarRacao(){
+    if(fazendeiro.racao>0)
+      fazendeiro.racao--;
+  }
+
 
 
 

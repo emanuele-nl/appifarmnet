@@ -1,10 +1,11 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-47:12
-INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-47:12
-INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-47:12
-INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-47:12
-MERGED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-47:12
+ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-49:12
+INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-49:12
+INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-49:12
+INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-49:12
+MERGED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-49:12
+MERGED from [:audioplayers] /home/jwieland/Projetos/appifarmnet/build/audioplayers/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:path_provider] /home/jwieland/Projetos/appifarmnet/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:path_provider_macos] /home/jwieland/Projetos/appifarmnet/build/path_provider_macos/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:webview_media] /home/jwieland/Projetos/appifarmnet/build/webview_media/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
@@ -31,11 +32,11 @@ INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/debug/AndroidM
 		INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/debug/AndroidManifest.xml
 	android:versionName
 		INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml
-		ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-47:12
+		ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-49:12
 		INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/debug/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml
-		ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-47:12
+		ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-49:12
 		INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/debug/AndroidManifest.xml
 	xmlns:android
 		ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:11-69
@@ -95,10 +96,18 @@ ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManif
 		ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:45:13-30
 	android:name
 		ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:44:13-44
+uses-permission#android.permission.INTERNET
+ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:47:5-66
+MERGED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:47:5-66
+MERGED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:47:5-66
+	android:name
+		ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:47:22-64
 uses-sdk
 INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml
 INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml
+MERGED from [:audioplayers] /home/jwieland/Projetos/appifarmnet/build/audioplayers/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-44
+MERGED from [:audioplayers] /home/jwieland/Projetos/appifarmnet/build/audioplayers/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-44
 MERGED from [:path_provider] /home/jwieland/Projetos/appifarmnet/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:path_provider] /home/jwieland/Projetos/appifarmnet/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:path_provider_macos] /home/jwieland/Projetos/appifarmnet/build/path_provider_macos/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
@@ -141,7 +150,3 @@ INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/debug/AndroidM
 	android:minSdkVersion
 		INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml
 		INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/debug/AndroidManifest.xml
-uses-permission#android.permission.INTERNET
-ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/debug/AndroidManifest.xml:6:5-66
-	android:name
-		ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/debug/AndroidManifest.xml:6:22-64

@@ -121,14 +121,11 @@ class _VideoTutorialScreenState extends State<VideoTutorialScreen> {
                   ),
                 ],
                 onReady: () {
-                  //_controller.toggleFullScreenMode();
                   _isPlayerReady = true;
                 },
                 onEnded: (data) {
-                  //_controller.toggleFullScreenMode();
                   Navigator.of(context).pop();
 
-                  //_showSnackBar('Next Video Started!');
                 },
               ),
               Padding(
@@ -172,12 +169,22 @@ class _VideoTutorialScreenState extends State<VideoTutorialScreen> {
                           }
                               : null,
                         ),
-
-
-                        FullScreenButton(
-                          controller: _controller,
+                        IconButton(
+                          icon: Icon(
+                            Icons.aspect_ratio
+                          ),
                           color: Colors.white,
+                          onPressed: _controller.value.isPlaying
+
+                            ? () {
+                            _controller.toggleFullScreenMode();
+                          }
+                              : null,
                         ),
+
+
+
+
                       ],
                     ),
                     _space,

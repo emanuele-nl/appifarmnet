@@ -18,7 +18,7 @@ class Fazendeiro{
   int leite = 0;
   int fomeVaca =5;
   int racao = 0;
-
+  bool ajudaExterna = false;
 
   List<String> nomeProdutos = ['cenoura'];
   List<int> quantidadeProdutos= [8];
@@ -29,7 +29,7 @@ class Fazendeiro{
   String missaAtual= Missoes.realizarUmaTroca;
   bool missaoConcluida =false;
   bool avisoNovaMissao = false;
-  List<String> missoes = [Missoes.coletarAgua,Missoes.colherAlimento,Missoes.realizarUmaTroca,Missoes.comprarItemMercado,Missoes.comerAlimento,Missoes.coletarLeite,Missoes.coletarLeite,"Não há novas missões"];
+  List<String> missoes = [Missoes.coletarAgua,Missoes.caminhar,Missoes.colherAlimento,Missoes.pedalar,Missoes.realizarUmaTroca, Missoes.nadar,Missoes.comprarItemMercado,Missoes.comerAlimento,Missoes.correr,Missoes.coletarLeite,"Não há novas missões"];
   int numeroMissao = 0;
 
   List<int>ordemPerguntas =[];

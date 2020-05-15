@@ -1,7 +1,7 @@
 # compiler: R8
 # compiler_version: 1.5.64
 # min_api: 16
-# pg_map_id: 3a58f7b
+# pg_map_id: c7eadc8
 androidx.activity.Cancellable -> androidx.activity.a:
 androidx.activity.ComponentActivity -> androidx.activity.b:
     androidx.lifecycle.ViewModelStore getViewModelStore() -> a
@@ -189,12 +189,12 @@ androidx.lifecycle.CompositeGeneratedAdaptersObserver -> androidx.lifecycle.Comp
     androidx.lifecycle.GeneratedAdapter[] mGeneratedAdapters -> a
     void onStateChanged(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Lifecycle$Event) -> a
 androidx.lifecycle.FullLifecycleObserver -> androidx.lifecycle.b:
-    void onStart(androidx.lifecycle.LifecycleOwner) -> a
-    void onResume(androidx.lifecycle.LifecycleOwner) -> b
-    void onPause(androidx.lifecycle.LifecycleOwner) -> c
-    void onDestroy(androidx.lifecycle.LifecycleOwner) -> d
-    void onStop(androidx.lifecycle.LifecycleOwner) -> e
-    void onCreate(androidx.lifecycle.LifecycleOwner) -> f
+    void onResume(androidx.lifecycle.LifecycleOwner) -> a
+    void onPause(androidx.lifecycle.LifecycleOwner) -> b
+    void onDestroy(androidx.lifecycle.LifecycleOwner) -> c
+    void onStop(androidx.lifecycle.LifecycleOwner) -> d
+    void onCreate(androidx.lifecycle.LifecycleOwner) -> e
+    void onStart(androidx.lifecycle.LifecycleOwner) -> f
 androidx.lifecycle.FullLifecycleObserverAdapter -> androidx.lifecycle.FullLifecycleObserverAdapter:
     androidx.lifecycle.FullLifecycleObserver mFullLifecycleObserver -> a
     androidx.lifecycle.LifecycleEventObserver mLifecycleEventObserver -> b
@@ -290,7 +290,7 @@ androidx.savedstate.SavedStateRegistry$1 -> androidx.savedstate.SavedStateRegist
     androidx.savedstate.SavedStateRegistry this$0 -> a
     void onStateChanged(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Lifecycle$Event) -> a
 androidx.savedstate.SavedStateRegistryOwner -> androidx.savedstate.b:
-    androidx.savedstate.SavedStateRegistry getSavedStateRegistry() -> i
+    androidx.savedstate.SavedStateRegistry getSavedStateRegistry() -> g
 androidx.versionedparcelable.ParcelImpl -> androidx.versionedparcelable.ParcelImpl:
     androidx.versionedparcelable.VersionedParcelable mParcel -> a
 androidx.versionedparcelable.ParcelImpl$1 -> androidx.versionedparcelable.ParcelImpl$a:
@@ -364,6 +364,106 @@ androidx.versionedparcelable.VersionedParcelParcel -> androidx.versionedparcelab
     android.os.Parcelable readParcelable() -> h
     java.lang.String readString() -> i
 androidx.versionedparcelable.VersionedParcelable -> androidx.versionedparcelable.c:
+androidx.webkit.SafeBrowsingResponseCompat -> androidx.webkit.a:
+    void showInterstitial(boolean) -> a
+androidx.webkit.WebResourceErrorCompat -> androidx.webkit.b:
+    java.lang.CharSequence getDescription() -> a
+    int getErrorCode() -> b
+androidx.webkit.WebViewClientCompat -> androidx.webkit.WebViewClientCompat:
+    java.lang.String[] sSupportedFeatures -> a
+    void onReceivedError(android.webkit.WebView,android.webkit.WebResourceRequest,androidx.webkit.WebResourceErrorCompat) -> a
+    void onSafeBrowsingHit(android.webkit.WebView,android.webkit.WebResourceRequest,int,androidx.webkit.SafeBrowsingResponseCompat) -> a
+androidx.webkit.WebViewFeature -> androidx.webkit.c:
+    boolean isFeatureSupported(java.lang.String) -> a
+androidx.webkit.internal.IncompatibleApkWebViewProviderFactory -> androidx.webkit.d.a:
+    java.lang.String[] EMPTY_STRING_ARRAY -> a
+    java.lang.String[] getWebViewFeatures() -> a
+androidx.webkit.internal.SafeBrowsingResponseImpl -> androidx.webkit.d.b:
+    org.chromium.support_lib_boundary.SafeBrowsingResponseBoundaryInterface mBoundaryInterface -> b
+    android.webkit.SafeBrowsingResponse mFrameworksImpl -> a
+    org.chromium.support_lib_boundary.SafeBrowsingResponseBoundaryInterface getBoundaryInterface() -> a
+    void showInterstitial(boolean) -> a
+    android.webkit.SafeBrowsingResponse getFrameworksImpl() -> b
+androidx.webkit.internal.WebResourceErrorImpl -> androidx.webkit.d.c:
+    android.webkit.WebResourceError mFrameworksImpl -> a
+    org.chromium.support_lib_boundary.WebResourceErrorBoundaryInterface mBoundaryInterface -> b
+    java.lang.CharSequence getDescription() -> a
+    int getErrorCode() -> b
+    org.chromium.support_lib_boundary.WebResourceErrorBoundaryInterface getBoundaryInterface() -> c
+    android.webkit.WebResourceError getFrameworksImpl() -> d
+androidx.webkit.internal.WebViewFeatureInternal -> androidx.webkit.d.d:
+    androidx.webkit.internal.WebViewFeatureInternal WEB_RESOURCE_ERROR_GET_CODE -> w
+    androidx.webkit.internal.WebViewFeatureInternal WEB_RESOURCE_REQUEST_IS_REDIRECT -> u
+    androidx.webkit.internal.WebViewFeatureInternal SAFE_BROWSING_RESPONSE_PROCEED -> y
+    androidx.webkit.internal.WebViewFeatureInternal WEB_MESSAGE_PORT_SET_MESSAGE_CALLBACK -> C
+    androidx.webkit.internal.WebViewFeatureInternal VISUAL_STATE_CALLBACK_FEATURE -> d
+    boolean $assertionsDisabled -> R
+    androidx.webkit.internal.WebViewFeatureInternal WEB_MESSAGE_PORT_POST_MESSAGE -> A
+    androidx.webkit.internal.WebViewFeatureInternal DISABLED_ACTION_MODE_MENU_ITEMS -> g
+    androidx.webkit.internal.WebViewFeatureInternal GET_WEB_CHROME_CLIENT -> H
+    androidx.webkit.internal.WebViewFeatureInternal OFF_SCREEN_PRERASTER -> e
+    androidx.webkit.internal.WebViewFeatureInternal WEB_MESSAGE_CALLBACK_ON_MESSAGE -> F
+    androidx.webkit.internal.WebViewFeatureInternal SERVICE_WORKER_BASIC_USAGE -> k
+    androidx.webkit.internal.WebViewFeatureInternal WEB_VIEW_RENDERER_CLIENT_BASIC_USAGE -> L
+    androidx.webkit.internal.WebViewFeatureInternal SAFE_BROWSING_WHITELIST -> i
+    androidx.webkit.internal.WebViewFeatureInternal WEB_VIEW_RENDERER_TERMINATE -> J
+    androidx.webkit.internal.WebViewFeatureInternal SERVICE_WORKER_BLOCK_NETWORK_LOADS -> o
+    androidx.webkit.internal.WebViewFeatureInternal FORCE_DARK -> P
+    androidx.webkit.internal.WebViewFeatureInternal SERVICE_WORKER_CONTENT_ACCESS -> m
+    java.lang.String mPublicFeatureValue -> a
+    androidx.webkit.internal.WebViewFeatureInternal SUPPRESS_ERROR_PAGE -> N
+    androidx.webkit.internal.WebViewFeatureInternal SHOULD_OVERRIDE_WITH_REDIRECTS -> s
+    androidx.webkit.internal.WebViewFeatureInternal RECEIVE_WEB_RESOURCE_ERROR -> q
+    androidx.webkit.internal.WebViewFeatureInternal SAFE_BROWSING_RESPONSE_BACK_TO_SAFETY -> x
+    androidx.webkit.internal.WebViewFeatureInternal WEB_RESOURCE_ERROR_GET_DESCRIPTION -> v
+    androidx.webkit.internal.WebViewFeatureInternal SAFE_BROWSING_RESPONSE_SHOW_INTERSTITIAL -> z
+    androidx.webkit.internal.WebViewFeatureInternal[] $VALUES -> Q
+    androidx.webkit.internal.WebViewFeatureInternal CREATE_WEB_MESSAGE_CHANNEL -> D
+    int mOsVersion -> c
+    androidx.webkit.internal.WebViewFeatureInternal WEB_MESSAGE_PORT_CLOSE -> B
+    androidx.webkit.internal.WebViewFeatureInternal GET_WEB_VIEW_CLIENT -> G
+    androidx.webkit.internal.WebViewFeatureInternal START_SAFE_BROWSING -> h
+    androidx.webkit.internal.WebViewFeatureInternal POST_WEB_MESSAGE -> E
+    androidx.webkit.internal.WebViewFeatureInternal SAFE_BROWSING_ENABLE -> f
+    androidx.webkit.internal.WebViewFeatureInternal TRACING_CONTROLLER_BASIC_USAGE -> K
+    androidx.webkit.internal.WebViewFeatureInternal SERVICE_WORKER_CACHE_MODE -> l
+    androidx.webkit.internal.WebViewFeatureInternal GET_WEB_VIEW_RENDERER -> I
+    androidx.webkit.internal.WebViewFeatureInternal SAFE_BROWSING_PRIVACY_POLICY_URL -> j
+    androidx.webkit.internal.WebViewFeatureInternal MULTI_PROCESS_QUERY -> O
+    androidx.webkit.internal.WebViewFeatureInternal SERVICE_WORKER_SHOULD_INTERCEPT_REQUEST -> p
+    androidx.webkit.internal.WebViewFeatureInternal PROXY_OVERRIDE -> M
+    androidx.webkit.internal.WebViewFeatureInternal SERVICE_WORKER_FILE_ACCESS -> n
+    androidx.webkit.internal.WebViewFeatureInternal SAFE_BROWSING_HIT -> t
+    java.lang.String mInternalFeatureValue -> b
+    androidx.webkit.internal.WebViewFeatureInternal RECEIVE_HTTP_ERROR -> r
+    androidx.webkit.internal.WebViewFeatureInternal getFeature(java.lang.String) -> a
+    boolean isSupportedByFramework() -> a
+    boolean isSupportedByWebView() -> b
+    java.lang.UnsupportedOperationException getUnsupportedOperationException() -> c
+androidx.webkit.internal.WebViewFeatureInternal$LAZY_HOLDER -> androidx.webkit.d.d$a:
+    java.util.Set WEBVIEW_APK_FEATURES -> a
+androidx.webkit.internal.WebViewGlueCommunicator -> androidx.webkit.d.e:
+    androidx.webkit.internal.WebViewProviderFactory createGlueProviderFactory() -> a
+    java.lang.reflect.InvocationHandler fetchGlueProviderFactoryImpl() -> b
+    androidx.webkit.internal.WebkitToCompatConverter getCompatConverter() -> c
+    androidx.webkit.internal.WebViewProviderFactory getFactory() -> d
+    java.lang.ClassLoader getWebViewClassLoader() -> e
+    java.lang.Object getWebViewProviderFactory() -> f
+androidx.webkit.internal.WebViewGlueCommunicator$LAZY_COMPAT_CONVERTER_HOLDER -> androidx.webkit.d.e$a:
+    androidx.webkit.internal.WebkitToCompatConverter INSTANCE -> a
+androidx.webkit.internal.WebViewGlueCommunicator$LAZY_FACTORY_HOLDER -> androidx.webkit.d.e$b:
+    androidx.webkit.internal.WebViewProviderFactory INSTANCE -> a
+androidx.webkit.internal.WebViewProviderFactory -> androidx.webkit.d.f:
+    java.lang.String[] getWebViewFeatures() -> a
+androidx.webkit.internal.WebViewProviderFactoryAdapter -> androidx.webkit.d.g:
+    org.chromium.support_lib_boundary.WebViewProviderFactoryBoundaryInterface mImpl -> a
+    java.lang.String[] getWebViewFeatures() -> a
+androidx.webkit.internal.WebkitToCompatConverter -> androidx.webkit.d.h:
+    org.chromium.support_lib_boundary.WebkitToCompatConverterBoundaryInterface mImpl -> a
+    android.webkit.SafeBrowsingResponse convertSafeBrowsingResponse(java.lang.reflect.InvocationHandler) -> a
+    java.lang.reflect.InvocationHandler convertSafeBrowsingResponse(android.webkit.SafeBrowsingResponse) -> a
+    java.lang.reflect.InvocationHandler convertWebResourceError(android.webkit.WebResourceError) -> a
+    android.webkit.WebResourceError convertWebResourceError(java.lang.reflect.InvocationHandler) -> b
 ifarmnet.ifarmnet.MainActivity -> ifarmnet.ifarmnet.MainActivity:
     void configureFlutterEngine(io.flutter.embedding.engine.FlutterEngine) -> a
 io.flutter.Log -> b.a.a:
@@ -412,14 +512,14 @@ io.flutter.embedding.android.FlutterActivity -> io.flutter.embedding.android.d:
     androidx.lifecycle.Lifecycle getLifecycle() -> c
     android.app.Activity getActivity() -> d
     java.lang.String getInitialRoute() -> e
-    io.flutter.embedding.android.TransparencyMode getTransparencyMode() -> f
-    io.flutter.embedding.engine.FlutterShellArgs getFlutterShellArgs() -> g
-    java.lang.String getCachedEngineId() -> h
-    java.lang.String getAppBundlePath() -> j
-    java.lang.String getDartEntrypointFunctionName() -> k
-    boolean shouldAttachEngineToActivity() -> l
-    io.flutter.embedding.android.RenderMode getRenderMode() -> m
-    boolean shouldDestroyEngineWithHost() -> n
+    io.flutter.embedding.engine.FlutterShellArgs getFlutterShellArgs() -> f
+    java.lang.String getAppBundlePath() -> h
+    boolean shouldAttachEngineToActivity() -> i
+    io.flutter.embedding.android.RenderMode getRenderMode() -> j
+    boolean shouldDestroyEngineWithHost() -> k
+    io.flutter.embedding.android.TransparencyMode getTransparencyMode() -> l
+    java.lang.String getCachedEngineId() -> m
+    java.lang.String getDartEntrypointFunctionName() -> n
     io.flutter.embedding.android.SplashScreen provideSplashScreen() -> o
     android.content.Context getContext() -> p
     io.flutter.embedding.android.FlutterActivityLaunchConfigs$BackgroundMode getBackgroundMode() -> q
@@ -475,14 +575,14 @@ io.flutter.embedding.android.FlutterActivityAndFragmentDelegate$Host -> io.flutt
     androidx.lifecycle.Lifecycle getLifecycle() -> c
     android.app.Activity getActivity() -> d
     java.lang.String getInitialRoute() -> e
-    io.flutter.embedding.android.TransparencyMode getTransparencyMode() -> f
-    io.flutter.embedding.engine.FlutterShellArgs getFlutterShellArgs() -> g
-    java.lang.String getCachedEngineId() -> h
-    java.lang.String getAppBundlePath() -> j
-    java.lang.String getDartEntrypointFunctionName() -> k
-    boolean shouldAttachEngineToActivity() -> l
-    io.flutter.embedding.android.RenderMode getRenderMode() -> m
-    boolean shouldDestroyEngineWithHost() -> n
+    io.flutter.embedding.engine.FlutterShellArgs getFlutterShellArgs() -> f
+    java.lang.String getAppBundlePath() -> h
+    boolean shouldAttachEngineToActivity() -> i
+    io.flutter.embedding.android.RenderMode getRenderMode() -> j
+    boolean shouldDestroyEngineWithHost() -> k
+    io.flutter.embedding.android.TransparencyMode getTransparencyMode() -> l
+    java.lang.String getCachedEngineId() -> m
+    java.lang.String getDartEntrypointFunctionName() -> n
     io.flutter.embedding.android.SplashScreen provideSplashScreen() -> o
     android.content.Context getContext() -> p
 io.flutter.embedding.android.FlutterActivityLaunchConfigs$BackgroundMode -> io.flutter.embedding.android.f:
@@ -700,10 +800,10 @@ io.flutter.embedding.engine.FlutterEnginePluginRegistry -> io.flutter.embedding.
     void onRestoreInstanceState(android.os.Bundle) -> a
     void onUserLeaveHint() -> a
     void remove(java.util.Set) -> a
-    void detachFromActivityForConfigChanges() -> b
+    void detachFromActivity() -> b
     void onSaveInstanceState(android.os.Bundle) -> b
     void remove(java.lang.Class) -> b
-    void detachFromActivity() -> c
+    void detachFromActivityForConfigChanges() -> c
     void destroy() -> d
     void detachFromBroadcastReceiver() -> e
     void detachFromContentProvider() -> f
@@ -717,17 +817,23 @@ io.flutter.embedding.engine.FlutterEnginePluginRegistry -> io.flutter.embedding.
 io.flutter.embedding.engine.FlutterEnginePluginRegistry$1 -> io.flutter.embedding.engine.c$a:
 io.flutter.embedding.engine.FlutterEnginePluginRegistry$DefaultFlutterAssets -> io.flutter.embedding.engine.c$b:
 io.flutter.embedding.engine.FlutterEnginePluginRegistry$FlutterEngineActivityPluginBinding -> io.flutter.embedding.engine.c$c:
-    java.util.Set onNewIntentListeners -> c
-    java.util.Set onUserLeaveHintListeners -> d
-    java.util.Set onSaveInstanceStateListeners -> e
-    java.util.Set onRequestPermissionsResultListeners -> a
-    java.util.Set onActivityResultListeners -> b
+    java.util.Set onActivityResultListeners -> c
+    java.util.Set onNewIntentListeners -> d
+    java.util.Set onUserLeaveHintListeners -> e
+    java.util.Set onSaveInstanceStateListeners -> f
+    java.util.Set onRequestPermissionsResultListeners -> b
+    android.app.Activity activity -> a
+    void addActivityResultListener(io.flutter.plugin.common.PluginRegistry$ActivityResultListener) -> a
+    void addOnNewIntentListener(io.flutter.plugin.common.PluginRegistry$NewIntentListener) -> a
+    void addOnUserLeaveHintListener(io.flutter.plugin.common.PluginRegistry$UserLeaveHintListener) -> a
+    void addRequestPermissionsResultListener(io.flutter.plugin.common.PluginRegistry$RequestPermissionsResultListener) -> a
     boolean onActivityResult(int,int,android.content.Intent) -> a
     void onNewIntent(android.content.Intent) -> a
     boolean onRequestPermissionsResult(int,java.lang.String[],int[]) -> a
     void onRestoreInstanceState(android.os.Bundle) -> a
     void onUserLeaveHint() -> a
     void onSaveInstanceState(android.os.Bundle) -> b
+    android.app.Activity getActivity() -> d
 io.flutter.embedding.engine.FlutterEnginePluginRegistry$FlutterEngineBroadcastReceiverPluginBinding -> io.flutter.embedding.engine.c$d:
 io.flutter.embedding.engine.FlutterEnginePluginRegistry$FlutterEngineContentProviderPluginBinding -> io.flutter.embedding.engine.c$e:
 io.flutter.embedding.engine.FlutterEnginePluginRegistry$FlutterEngineServicePluginBinding -> io.flutter.embedding.engine.c$f:
@@ -831,8 +937,10 @@ io.flutter.embedding.engine.plugins.FlutterPlugin$FlutterAssets -> io.flutter.em
 io.flutter.embedding.engine.plugins.FlutterPlugin$FlutterPluginBinding -> io.flutter.embedding.engine.g.a$b:
     android.content.Context applicationContext -> a
     io.flutter.embedding.engine.FlutterEngine flutterEngine -> b
+    io.flutter.plugin.common.BinaryMessenger binaryMessenger -> c
     android.content.Context getApplicationContext() -> a
-    io.flutter.embedding.engine.FlutterEngine getFlutterEngine() -> b
+    io.flutter.plugin.common.BinaryMessenger getBinaryMessenger() -> b
+    io.flutter.embedding.engine.FlutterEngine getFlutterEngine() -> c
 io.flutter.embedding.engine.plugins.PluginRegistry -> io.flutter.embedding.engine.g.b:
     void add(io.flutter.embedding.engine.plugins.FlutterPlugin) -> a
 io.flutter.embedding.engine.plugins.activity.ActivityAware -> io.flutter.embedding.engine.g.c.a:
@@ -847,10 +955,15 @@ io.flutter.embedding.engine.plugins.activity.ActivityControlSurface -> io.flutte
     boolean onRequestPermissionsResult(int,java.lang.String[],int[]) -> a
     void onRestoreInstanceState(android.os.Bundle) -> a
     void onUserLeaveHint() -> a
-    void detachFromActivityForConfigChanges() -> b
+    void detachFromActivity() -> b
     void onSaveInstanceState(android.os.Bundle) -> b
-    void detachFromActivity() -> c
+    void detachFromActivityForConfigChanges() -> c
 io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding -> io.flutter.embedding.engine.g.c.c:
+    void addActivityResultListener(io.flutter.plugin.common.PluginRegistry$ActivityResultListener) -> a
+    void addOnNewIntentListener(io.flutter.plugin.common.PluginRegistry$NewIntentListener) -> a
+    void addOnUserLeaveHintListener(io.flutter.plugin.common.PluginRegistry$UserLeaveHintListener) -> a
+    void addRequestPermissionsResultListener(io.flutter.plugin.common.PluginRegistry$RequestPermissionsResultListener) -> a
+    android.app.Activity getActivity() -> d
 io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding$OnSaveInstanceStateListener -> io.flutter.embedding.engine.g.c.c$a:
     void onRestoreInstanceState(android.os.Bundle) -> a
     void onSaveInstanceState(android.os.Bundle) -> b
@@ -869,6 +982,42 @@ io.flutter.embedding.engine.plugins.service.ServiceAware -> io.flutter.embedding
     void onDetachedFromService() -> a
 io.flutter.embedding.engine.plugins.service.ServiceControlSurface -> io.flutter.embedding.engine.g.f.b:
 io.flutter.embedding.engine.plugins.service.ServicePluginBinding -> io.flutter.embedding.engine.g.f.c:
+io.flutter.embedding.engine.plugins.shim.ShimPluginRegistry -> io.flutter.embedding.engine.g.g.a:
+    java.util.Map pluginMap -> b
+    io.flutter.embedding.engine.plugins.shim.ShimPluginRegistry$ShimRegistrarAggregate shimRegistrarAggregate -> c
+    io.flutter.embedding.engine.FlutterEngine flutterEngine -> a
+    io.flutter.plugin.common.PluginRegistry$Registrar registrarFor(java.lang.String) -> a
+io.flutter.embedding.engine.plugins.shim.ShimPluginRegistry$1 -> io.flutter.embedding.engine.g.g.a$a:
+io.flutter.embedding.engine.plugins.shim.ShimPluginRegistry$ShimRegistrarAggregate -> io.flutter.embedding.engine.g.g.a$b:
+    io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding activityPluginBinding -> c
+    io.flutter.embedding.engine.plugins.FlutterPlugin$FlutterPluginBinding flutterPluginBinding -> b
+    java.util.Set shimRegistrars -> a
+    void addPlugin(io.flutter.embedding.engine.plugins.shim.ShimRegistrar) -> a
+    void onAttachedToActivity(io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding) -> a
+    void onDetachedFromActivity() -> a
+    void onDetachedFromEngine(io.flutter.embedding.engine.plugins.FlutterPlugin$FlutterPluginBinding) -> a
+    void onAttachedToEngine(io.flutter.embedding.engine.plugins.FlutterPlugin$FlutterPluginBinding) -> b
+    void onDetachedFromActivityForConfigChanges() -> b
+    void onReattachedToActivityForConfigChanges(io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding) -> b
+io.flutter.embedding.engine.plugins.shim.ShimRegistrar -> io.flutter.embedding.engine.g.g.b:
+    java.util.Set activityResultListeners -> c
+    java.util.Set newIntentListeners -> d
+    java.util.Set userLeaveHintListeners -> e
+    java.util.Set viewDestroyListeners -> a
+    io.flutter.embedding.engine.plugins.FlutterPlugin$FlutterPluginBinding pluginBinding -> f
+    java.util.Set requestPermissionsResultListeners -> b
+    io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding activityPluginBinding -> g
+    void onAttachedToActivity(io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding) -> a
+    void onDetachedFromActivity() -> a
+    void onDetachedFromEngine(io.flutter.embedding.engine.plugins.FlutterPlugin$FlutterPluginBinding) -> a
+    void onAttachedToEngine(io.flutter.embedding.engine.plugins.FlutterPlugin$FlutterPluginBinding) -> b
+    void onDetachedFromActivityForConfigChanges() -> b
+    void onReattachedToActivityForConfigChanges(io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding) -> b
+    io.flutter.plugin.common.BinaryMessenger messenger() -> c
+    android.content.Context activeContext() -> d
+    android.app.Activity activity() -> e
+    android.content.Context context() -> f
+    void addExistingListenersToActivityPluginBinding() -> g
 io.flutter.embedding.engine.renderer.FlutterRenderer -> io.flutter.embedding.engine.h.a:
     io.flutter.embedding.engine.FlutterJNI flutterJNI -> a
     java.util.concurrent.atomic.AtomicLong nextTextureId -> b
@@ -947,10 +1096,10 @@ io.flutter.embedding.engine.systemchannels.AccessibilityChannel$1 -> io.flutter.
     io.flutter.embedding.engine.systemchannels.AccessibilityChannel this$0 -> a
     void onMessage(java.lang.Object,io.flutter.plugin.common.BasicMessageChannel$Reply) -> a
 io.flutter.embedding.engine.systemchannels.AccessibilityChannel$AccessibilityMessageHandler -> io.flutter.embedding.engine.i.a$b:
-    void onTap(int) -> a
+    void onLongPress(int) -> a
     void onTooltip(java.lang.String) -> a
     void announce(java.lang.String) -> b
-    void onLongPress(int) -> b
+    void onTap(int) -> b
 io.flutter.embedding.engine.systemchannels.KeyEventChannel -> io.flutter.embedding.engine.i.b:
     io.flutter.plugin.common.BasicMessageChannel channel -> a
     void encodeKeyEvent(io.flutter.embedding.engine.systemchannels.KeyEventChannel$FlutterKeyEvent,java.util.Map) -> a
@@ -1039,8 +1188,8 @@ io.flutter.embedding.engine.systemchannels.PlatformChannel$HapticFeedbackType ->
     io.flutter.embedding.engine.systemchannels.PlatformChannel$HapticFeedbackType fromValue(java.lang.String) -> a
 io.flutter.embedding.engine.systemchannels.PlatformChannel$PlatformMessageHandler -> io.flutter.embedding.engine.i.f$h:
     java.lang.CharSequence getClipboardData(io.flutter.embedding.engine.systemchannels.PlatformChannel$ClipboardContentFormat) -> a
-    java.util.List getSystemGestureExclusionRects() -> a
     void playSystemSound(io.flutter.embedding.engine.systemchannels.PlatformChannel$SoundType) -> a
+    void restoreSystemUiOverlays() -> a
     void setApplicationSwitcherDescription(io.flutter.embedding.engine.systemchannels.PlatformChannel$AppSwitcherDescription) -> a
     void setClipboardData(java.lang.String) -> a
     void setPreferredOrientations(int) -> a
@@ -1048,8 +1197,8 @@ io.flutter.embedding.engine.systemchannels.PlatformChannel$PlatformMessageHandle
     void setSystemUiOverlayStyle(io.flutter.embedding.engine.systemchannels.PlatformChannel$SystemChromeStyle) -> a
     void showSystemOverlays(java.util.List) -> a
     void vibrateHapticFeedback(io.flutter.embedding.engine.systemchannels.PlatformChannel$HapticFeedbackType) -> a
-    void restoreSystemUiOverlays() -> b
-    void popSystemNavigator() -> c
+    void popSystemNavigator() -> b
+    java.util.List getSystemGestureExclusionRects() -> c
 io.flutter.embedding.engine.systemchannels.PlatformChannel$SoundType -> io.flutter.embedding.engine.i.f$i:
     io.flutter.embedding.engine.systemchannels.PlatformChannel$SoundType CLICK -> b
     java.lang.String encodedName -> a
@@ -1187,12 +1336,12 @@ io.flutter.embedding.engine.systemchannels.TextInputChannel$TextEditState -> io.
     int selectionEnd -> c
     io.flutter.embedding.engine.systemchannels.TextInputChannel$TextEditState fromJson(org.json.JSONObject) -> a
 io.flutter.embedding.engine.systemchannels.TextInputChannel$TextInputMethodHandler -> io.flutter.embedding.engine.i.j$f:
-    void hide() -> a
+    void clearClient() -> a
     void setClient(int,io.flutter.embedding.engine.systemchannels.TextInputChannel$Configuration) -> a
     void setEditingState(io.flutter.embedding.engine.systemchannels.TextInputChannel$TextEditState) -> a
     void setPlatformViewClient(int) -> a
-    void clearClient() -> b
-    void show() -> c
+    void show() -> b
+    void hide() -> c
 io.flutter.embedding.engine.systemchannels.TextInputChannel$TextInputType -> io.flutter.embedding.engine.i.j$g:
     io.flutter.embedding.engine.systemchannels.TextInputChannel$TextInputType DATETIME -> c
     io.flutter.embedding.engine.systemchannels.TextInputChannel$TextInputType TEXT -> b
@@ -1298,15 +1447,21 @@ io.flutter.plugin.common.MethodCodec -> b.a.b.a.j:
     java.nio.ByteBuffer encodeMethodCall(io.flutter.plugin.common.MethodCall) -> a
     java.nio.ByteBuffer encodeSuccessEnvelope(java.lang.Object) -> a
     java.lang.Object decodeEnvelope(java.nio.ByteBuffer) -> b
-io.flutter.plugin.common.PluginRegistry$ActivityResultListener -> b.a.b.a.k:
+io.flutter.plugin.common.PluginRegistry -> b.a.b.a.k:
+io.flutter.plugin.common.PluginRegistry$ActivityResultListener -> b.a.b.a.k$a:
     boolean onActivityResult(int,int,android.content.Intent) -> a
-io.flutter.plugin.common.PluginRegistry$NewIntentListener -> b.a.b.a.l:
+io.flutter.plugin.common.PluginRegistry$NewIntentListener -> b.a.b.a.k$b:
     boolean onNewIntent(android.content.Intent) -> a
-io.flutter.plugin.common.PluginRegistry$RequestPermissionsResultListener -> b.a.b.a.m:
+io.flutter.plugin.common.PluginRegistry$Registrar -> b.a.b.a.k$c:
+    io.flutter.plugin.common.BinaryMessenger messenger() -> c
+    android.content.Context activeContext() -> d
+io.flutter.plugin.common.PluginRegistry$RequestPermissionsResultListener -> b.a.b.a.k$d:
     boolean onRequestPermissionsResult(int,java.lang.String[],int[]) -> a
-io.flutter.plugin.common.PluginRegistry$UserLeaveHintListener -> b.a.b.a.n:
+io.flutter.plugin.common.PluginRegistry$UserLeaveHintListener -> b.a.b.a.k$e:
     void onUserLeaveHint() -> a
-io.flutter.plugin.common.StandardMessageCodec -> b.a.b.a.o:
+io.flutter.plugin.common.PluginRegistry$ViewDestroyListener -> b.a.b.a.k$f:
+    boolean onViewDestroy(io.flutter.view.FlutterNativeView) -> a
+io.flutter.plugin.common.StandardMessageCodec -> b.a.b.a.l:
     java.nio.charset.Charset UTF8 -> c
     io.flutter.plugin.common.StandardMessageCodec INSTANCE -> a
     boolean LITTLE_ENDIAN -> b
@@ -1325,9 +1480,9 @@ io.flutter.plugin.common.StandardMessageCodec -> b.a.b.a.o:
     void writeInt(java.io.ByteArrayOutputStream,int) -> c
     int readSize(java.nio.ByteBuffer) -> d
     void writeSize(java.io.ByteArrayOutputStream,int) -> d
-io.flutter.plugin.common.StandardMessageCodec$ExposedByteArrayOutputStream -> b.a.b.a.o$a:
+io.flutter.plugin.common.StandardMessageCodec$ExposedByteArrayOutputStream -> b.a.b.a.l$a:
     byte[] buffer() -> a
-io.flutter.plugin.common.StandardMethodCodec -> b.a.b.a.p:
+io.flutter.plugin.common.StandardMethodCodec -> b.a.b.a.m:
     io.flutter.plugin.common.StandardMessageCodec messageCodec -> a
     io.flutter.plugin.common.StandardMethodCodec INSTANCE -> b
     io.flutter.plugin.common.MethodCall decodeMethodCall(java.nio.ByteBuffer) -> a
@@ -1335,7 +1490,7 @@ io.flutter.plugin.common.StandardMethodCodec -> b.a.b.a.p:
     java.nio.ByteBuffer encodeMethodCall(io.flutter.plugin.common.MethodCall) -> a
     java.nio.ByteBuffer encodeSuccessEnvelope(java.lang.Object) -> a
     java.lang.Object decodeEnvelope(java.nio.ByteBuffer) -> b
-io.flutter.plugin.common.StringCodec -> b.a.b.a.q:
+io.flutter.plugin.common.StringCodec -> b.a.b.a.n:
     java.nio.charset.Charset UTF8 -> a
     io.flutter.plugin.common.StringCodec INSTANCE -> b
     java.lang.Object decodeMessage(java.nio.ByteBuffer) -> a
@@ -1390,12 +1545,12 @@ io.flutter.plugin.editing.TextInputPlugin -> b.a.b.b.b:
     boolean isRestartAlwaysRequired() -> g
 io.flutter.plugin.editing.TextInputPlugin$1 -> b.a.b.b.b$a:
     io.flutter.plugin.editing.TextInputPlugin this$0 -> a
-    void hide() -> a
+    void clearClient() -> a
     void setClient(int,io.flutter.embedding.engine.systemchannels.TextInputChannel$Configuration) -> a
     void setEditingState(io.flutter.embedding.engine.systemchannels.TextInputChannel$TextEditState) -> a
     void setPlatformViewClient(int) -> a
-    void clearClient() -> b
-    void show() -> c
+    void show() -> b
+    void hide() -> c
 io.flutter.plugin.editing.TextInputPlugin$InputTarget -> b.a.b.b.b$b:
     io.flutter.plugin.editing.TextInputPlugin$InputTarget$Type type -> a
     int id -> b
@@ -1445,8 +1600,8 @@ io.flutter.plugin.platform.PlatformPlugin -> io.flutter.plugin.platform.c:
 io.flutter.plugin.platform.PlatformPlugin$1 -> io.flutter.plugin.platform.c$a:
     io.flutter.plugin.platform.PlatformPlugin this$0 -> a
     java.lang.CharSequence getClipboardData(io.flutter.embedding.engine.systemchannels.PlatformChannel$ClipboardContentFormat) -> a
-    java.util.List getSystemGestureExclusionRects() -> a
     void playSystemSound(io.flutter.embedding.engine.systemchannels.PlatformChannel$SoundType) -> a
+    void restoreSystemUiOverlays() -> a
     void setApplicationSwitcherDescription(io.flutter.embedding.engine.systemchannels.PlatformChannel$AppSwitcherDescription) -> a
     void setClipboardData(java.lang.String) -> a
     void setPreferredOrientations(int) -> a
@@ -1454,27 +1609,29 @@ io.flutter.plugin.platform.PlatformPlugin$1 -> io.flutter.plugin.platform.c$a:
     void setSystemUiOverlayStyle(io.flutter.embedding.engine.systemchannels.PlatformChannel$SystemChromeStyle) -> a
     void showSystemOverlays(java.util.List) -> a
     void vibrateHapticFeedback(io.flutter.embedding.engine.systemchannels.PlatformChannel$HapticFeedbackType) -> a
-    void restoreSystemUiOverlays() -> b
-    void popSystemNavigator() -> c
+    void popSystemNavigator() -> b
+    java.util.List getSystemGestureExclusionRects() -> c
 io.flutter.plugin.platform.PlatformPlugin$2 -> io.flutter.plugin.platform.c$b:
     int[] $SwitchMap$io$flutter$embedding$engine$systemchannels$PlatformChannel$SystemUiOverlay -> b
     int[] $SwitchMap$io$flutter$embedding$engine$systemchannels$PlatformChannel$Brightness -> c
     int[] $SwitchMap$io$flutter$embedding$engine$systemchannels$PlatformChannel$HapticFeedbackType -> a
 io.flutter.plugin.platform.PlatformView -> io.flutter.plugin.platform.d:
-    void dispose() -> a
     void onFlutterViewAttached(android.view.View) -> a
-    void onInputConnectionUnlocked() -> b
-    void onFlutterViewDetached() -> c
-    android.view.View getView() -> d
-    void onInputConnectionLocked() -> e
+    void onInputConnectionUnlocked() -> a
+    void onInputConnectionLocked() -> b
+    void dispose() -> c
+    void onFlutterViewDetached() -> d
+    android.view.View getView() -> e
 io.flutter.plugin.platform.PlatformViewFactory -> io.flutter.plugin.platform.e:
     io.flutter.plugin.common.MessageCodec createArgsCodec -> a
     io.flutter.plugin.platform.PlatformView create(android.content.Context,int,java.lang.Object) -> a
     io.flutter.plugin.common.MessageCodec getCreateArgsCodec() -> a
 io.flutter.plugin.platform.PlatformViewRegistry -> io.flutter.plugin.platform.f:
+    boolean registerViewFactory(java.lang.String,io.flutter.plugin.platform.PlatformViewFactory) -> a
 io.flutter.plugin.platform.PlatformViewRegistryImpl -> io.flutter.plugin.platform.g:
     java.util.Map viewFactories -> a
     io.flutter.plugin.platform.PlatformViewFactory getFactory(java.lang.String) -> a
+    boolean registerViewFactory(java.lang.String,io.flutter.plugin.platform.PlatformViewFactory) -> a
 io.flutter.plugin.platform.PlatformViewsAccessibilityDelegate -> io.flutter.plugin.platform.h:
     void attachAccessibilityBridge(io.flutter.view.AccessibilityBridge) -> a
     void detachAccessibiltyBridge() -> a
@@ -1614,6 +1771,127 @@ io.flutter.plugins.pathprovider.PathProviderPlugin -> io.flutter.plugins.a.a:
     java.lang.String getPathProviderTemporaryDirectory() -> e
 io.flutter.plugins.pathprovider.StorageDirectoryMapper -> io.flutter.plugins.a.b:
     java.lang.String androidType(java.lang.Integer) -> a
+io.flutter.plugins.webviewflutter.DisplayListenerProxy -> io.flutter.plugins.b.a:
+    java.util.ArrayList listenersBeforeWebView -> a
+    void onPostWebViewInitialization(android.hardware.display.DisplayManager) -> a
+    void onPreWebViewInitialization(android.hardware.display.DisplayManager) -> b
+    java.util.ArrayList yoinkDisplayListeners(android.hardware.display.DisplayManager) -> c
+io.flutter.plugins.webviewflutter.DisplayListenerProxy$1 -> io.flutter.plugins.b.a$a:
+    android.hardware.display.DisplayManager val$displayManager -> b
+    java.util.ArrayList val$webViewListeners -> a
+io.flutter.plugins.webviewflutter.FlutterCookieManager -> io.flutter.plugins.b.b:
+    io.flutter.plugin.common.MethodChannel methodChannel -> a
+    void clearCookies(io.flutter.plugin.common.MethodChannel$Result) -> a
+    void dispose() -> a
+    void onMethodCall(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> a
+io.flutter.plugins.webviewflutter.FlutterCookieManager$1 -> io.flutter.plugins.b.b$a:
+    io.flutter.plugin.common.MethodChannel$Result val$result -> a
+    boolean val$hasCookies -> b
+    void onReceiveValue(java.lang.Boolean) -> a
+io.flutter.plugins.webviewflutter.FlutterWebView -> io.flutter.plugins.b.c:
+    android.os.Handler platformThreadHandler -> d
+    io.flutter.plugins.webviewflutter.InputAwareWebView webView -> a
+    io.flutter.plugins.webviewflutter.FlutterWebViewClient flutterWebViewClient -> c
+    io.flutter.plugin.common.MethodChannel methodChannel -> b
+    void applySettings(java.util.Map) -> a
+    void canGoBack(io.flutter.plugin.common.MethodChannel$Result) -> a
+    void onFlutterViewAttached(android.view.View) -> a
+    void onInputConnectionUnlocked() -> a
+    void onMethodCall(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> a
+    void registerJavaScriptChannelNames(java.util.List) -> a
+    void updateAutoMediaPlaybackPolicy(int) -> a
+    void updateUserAgent(java.lang.String) -> a
+    void addJavaScriptChannels(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> b
+    void canGoForward(io.flutter.plugin.common.MethodChannel$Result) -> b
+    void onInputConnectionLocked() -> b
+    void updateJsMode(int) -> b
+    void clearCache(io.flutter.plugin.common.MethodChannel$Result) -> c
+    void dispose() -> c
+    void evaluateJavaScript(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> c
+    void currentUrl(io.flutter.plugin.common.MethodChannel$Result) -> d
+    void loadData(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> d
+    void onFlutterViewDetached() -> d
+    void getTitle(io.flutter.plugin.common.MethodChannel$Result) -> e
+    android.view.View getView() -> e
+    void loadUrl(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> e
+    void goBack(io.flutter.plugin.common.MethodChannel$Result) -> f
+    void removeJavaScriptChannels(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> f
+    void goForward(io.flutter.plugin.common.MethodChannel$Result) -> g
+    void updateSettings(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> g
+    void reload(io.flutter.plugin.common.MethodChannel$Result) -> h
+io.flutter.plugins.webviewflutter.FlutterWebView$1 -> io.flutter.plugins.b.c$a:
+    io.flutter.plugin.common.MethodChannel$Result val$result -> a
+    void onReceiveValue(java.lang.String) -> a
+io.flutter.plugins.webviewflutter.FlutterWebViewClient -> io.flutter.plugins.b.d:
+    boolean hasNavigationDelegate -> b
+    io.flutter.plugin.common.MethodChannel methodChannel -> a
+    boolean access$100(io.flutter.plugins.webviewflutter.FlutterWebViewClient,android.webkit.WebView,android.webkit.WebResourceRequest) -> a
+    void access$200(io.flutter.plugins.webviewflutter.FlutterWebViewClient,android.webkit.WebView,java.lang.String) -> a
+    void access$400(io.flutter.plugins.webviewflutter.FlutterWebViewClient,int,java.lang.String) -> a
+    android.webkit.WebViewClient createWebViewClient(boolean) -> a
+    java.lang.String errorCodeToString(int) -> a
+    android.webkit.WebViewClient internalCreateWebViewClient() -> a
+    void notifyOnNavigationRequest(java.lang.String,java.util.Map,android.webkit.WebView,boolean) -> a
+    void onPageFinished(android.webkit.WebView,java.lang.String) -> a
+    void onWebResourceError(int,java.lang.String) -> a
+    boolean shouldOverrideUrlLoading(android.webkit.WebView,android.webkit.WebResourceRequest) -> a
+    void access$300(io.flutter.plugins.webviewflutter.FlutterWebViewClient,android.webkit.WebView,java.lang.String) -> b
+    androidx.webkit.WebViewClientCompat internalCreateWebViewClientCompat() -> b
+    void onPageStarted(android.webkit.WebView,java.lang.String) -> b
+    boolean access$500(io.flutter.plugins.webviewflutter.FlutterWebViewClient,android.webkit.WebView,java.lang.String) -> c
+    boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> c
+io.flutter.plugins.webviewflutter.FlutterWebViewClient$1 -> io.flutter.plugins.b.d$a:
+    io.flutter.plugins.webviewflutter.FlutterWebViewClient this$0 -> a
+io.flutter.plugins.webviewflutter.FlutterWebViewClient$2 -> io.flutter.plugins.b.d$b:
+    io.flutter.plugins.webviewflutter.FlutterWebViewClient this$0 -> b
+    void onReceivedError(android.webkit.WebView,android.webkit.WebResourceRequest,androidx.webkit.WebResourceErrorCompat) -> a
+io.flutter.plugins.webviewflutter.FlutterWebViewClient$OnNavigationRequestResult -> io.flutter.plugins.b.d$c:
+    java.util.Map headers -> b
+    android.webkit.WebView webView -> c
+    java.lang.String url -> a
+    void error(java.lang.String,java.lang.String,java.lang.Object) -> a
+    void notImplemented() -> a
+    void success(java.lang.Object) -> a
+    void loadUrl() -> b
+io.flutter.plugins.webviewflutter.InputAwareWebView -> io.flutter.plugins.b.e:
+    android.view.View threadedInputConnectionProxyView -> a
+    android.view.View containerView -> c
+    io.flutter.plugins.webviewflutter.ThreadedInputConnectionProxyAdapterView proxyAdapterView -> b
+    android.view.View access$000(io.flutter.plugins.webviewflutter.InputAwareWebView) -> a
+    void dispose() -> a
+    void setContainerView(android.view.View) -> a
+    void lockInputConnection() -> b
+    void setInputConnectionTarget(android.view.View) -> b
+    void unlockInputConnection() -> c
+    void resetInputConnection() -> d
+io.flutter.plugins.webviewflutter.InputAwareWebView$1 -> io.flutter.plugins.b.e$a:
+    android.view.View val$targetView -> a
+    io.flutter.plugins.webviewflutter.InputAwareWebView this$0 -> b
+io.flutter.plugins.webviewflutter.JavaScriptChannel -> io.flutter.plugins.b.f:
+    android.os.Handler platformThreadHandler -> c
+    java.lang.String javaScriptChannelName -> b
+    io.flutter.plugin.common.MethodChannel methodChannel -> a
+    java.lang.String access$000(io.flutter.plugins.webviewflutter.JavaScriptChannel) -> a
+    io.flutter.plugin.common.MethodChannel access$100(io.flutter.plugins.webviewflutter.JavaScriptChannel) -> b
+io.flutter.plugins.webviewflutter.JavaScriptChannel$1 -> io.flutter.plugins.b.f$a:
+    java.lang.String val$message -> a
+    io.flutter.plugins.webviewflutter.JavaScriptChannel this$0 -> b
+io.flutter.plugins.webviewflutter.ThreadedInputConnectionProxyAdapterView -> io.flutter.plugins.b.g:
+    android.os.IBinder windowToken -> b
+    android.os.Handler imeHandler -> a
+    boolean isLocked -> e
+    android.view.inputmethod.InputConnection cachedConnection -> f
+    android.view.View rootView -> c
+    android.view.View targetView -> d
+    void setLocked(boolean) -> a
+io.flutter.plugins.webviewflutter.WebViewFactory -> io.flutter.plugins.b.h:
+    io.flutter.plugin.common.BinaryMessenger messenger -> b
+    android.view.View containerView -> c
+    io.flutter.plugin.platform.PlatformView create(android.content.Context,int,java.lang.Object) -> a
+io.flutter.plugins.webviewflutter.WebViewFlutterPlugin -> io.flutter.plugins.b.i:
+    io.flutter.plugins.webviewflutter.FlutterCookieManager flutterCookieManager -> a
+    void onDetachedFromEngine(io.flutter.embedding.engine.plugins.FlutterPlugin$FlutterPluginBinding) -> a
+    void onAttachedToEngine(io.flutter.embedding.engine.plugins.FlutterPlugin$FlutterPluginBinding) -> b
 io.flutter.util.PathUtils -> b.a.c.a:
     java.lang.String getCacheDirectory(android.content.Context) -> a
     java.lang.String getDataDirectory(android.content.Context) -> b
@@ -1693,11 +1971,11 @@ io.flutter.view.AccessibilityBridge -> io.flutter.view.c:
     int access$900(io.flutter.view.AccessibilityBridge) -> i
 io.flutter.view.AccessibilityBridge$1 -> io.flutter.view.c$a:
     io.flutter.view.AccessibilityBridge this$0 -> a
-    void onTap(int) -> a
+    void onLongPress(int) -> a
     void onTooltip(java.lang.String) -> a
     void updateCustomAccessibilityActions(java.nio.ByteBuffer,java.lang.String[]) -> a
     void announce(java.lang.String) -> b
-    void onLongPress(int) -> b
+    void onTap(int) -> b
     void updateSemantics(java.nio.ByteBuffer,java.lang.String[]) -> b
 io.flutter.view.AccessibilityBridge$2 -> io.flutter.view.c$b:
     io.flutter.view.AccessibilityBridge this$0 -> a
@@ -1921,23 +2199,24 @@ io.flutter.view.FlutterMain -> io.flutter.view.d:
     boolean isRunningInRobolectricTest -> a
     java.lang.String findAppBundlePath() -> a
     void startInitialization(android.content.Context) -> a
-io.flutter.view.TextureRegistry -> io.flutter.view.e:
+io.flutter.view.FlutterNativeView -> io.flutter.view.e:
+io.flutter.view.TextureRegistry -> io.flutter.view.f:
     io.flutter.view.TextureRegistry$SurfaceTextureEntry createSurfaceTexture() -> a
-io.flutter.view.TextureRegistry$SurfaceTextureEntry -> io.flutter.view.e$a:
+io.flutter.view.TextureRegistry$SurfaceTextureEntry -> io.flutter.view.f$a:
     void release() -> a
     long id() -> b
     android.graphics.SurfaceTexture surfaceTexture() -> c
-io.flutter.view.VsyncWaiter -> io.flutter.view.f:
+io.flutter.view.VsyncWaiter -> io.flutter.view.g:
     android.view.WindowManager windowManager -> a
     io.flutter.view.VsyncWaiter instance -> c
     io.flutter.embedding.engine.FlutterJNI$AsyncWaitForVsyncDelegate asyncWaitForVsyncDelegate -> b
     android.view.WindowManager access$000(io.flutter.view.VsyncWaiter) -> a
     io.flutter.view.VsyncWaiter getInstance(android.view.WindowManager) -> a
     void init() -> a
-io.flutter.view.VsyncWaiter$1 -> io.flutter.view.f$a:
+io.flutter.view.VsyncWaiter$1 -> io.flutter.view.g$a:
     io.flutter.view.VsyncWaiter this$0 -> a
     void asyncWaitForVsync(long) -> a
-io.flutter.view.VsyncWaiter$1$1 -> io.flutter.view.f$a$a:
+io.flutter.view.VsyncWaiter$1$1 -> io.flutter.view.g$a$a:
     long val$cookie -> a
     io.flutter.view.VsyncWaiter$1 this$1 -> b
 kotlin.jvm.internal.Intrinsics -> c.a.a.a:
@@ -1945,3 +2224,131 @@ kotlin.jvm.internal.Intrinsics -> c.a.a.a:
     java.lang.Throwable sanitizeStackTrace(java.lang.Throwable) -> a
     java.lang.Throwable sanitizeStackTrace(java.lang.Throwable,java.lang.String) -> a
     void throwParameterIsNullException(java.lang.String) -> a
+org.chromium.support_lib_boundary.util.BoundaryInterfaceReflectionUtil -> org.chromium.support_lib_boundary.a.a:
+    java.lang.Object castToSuppLibClass(java.lang.Class,java.lang.reflect.InvocationHandler) -> a
+    boolean containsFeature(java.util.Collection,java.lang.String) -> a
+    boolean isDebuggable() -> a
+xyz.luan.audioplayers.AudioplayersPlugin -> d.a.a.a:
+    java.util.Map mediaPlayers -> b
+    java.lang.Runnable positionUpdates -> d
+    android.os.Handler handler -> c
+    boolean seekFinish -> f
+    java.util.logging.Logger LOGGER -> g
+    android.content.Context context -> e
+    io.flutter.plugin.common.MethodChannel channel -> a
+    void access$100(xyz.luan.audioplayers.AudioplayersPlugin) -> a
+    java.util.Map access$200(java.lang.String,java.lang.Object) -> a
+    boolean access$302(xyz.luan.audioplayers.AudioplayersPlugin,boolean) -> a
+    xyz.luan.audioplayers.Player getPlayer(java.lang.String,java.lang.String) -> a
+    void handleCompletion(xyz.luan.audioplayers.Player) -> a
+    void onMethodCall(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> a
+    void registerWith(io.flutter.plugin.common.PluginRegistry$Registrar) -> a
+    void startPositionUpdates() -> a
+    boolean access$300(xyz.luan.audioplayers.AudioplayersPlugin) -> b
+    java.util.Map buildArguments(java.lang.String,java.lang.Object) -> b
+    void handleDuration(xyz.luan.audioplayers.Player) -> b
+    void handleMethodCall(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> b
+    void stopPositionUpdates() -> b
+    void handleIsPlaying(xyz.luan.audioplayers.Player) -> c
+    void handleSeekComplete(xyz.luan.audioplayers.Player) -> d
+xyz.luan.audioplayers.AudioplayersPlugin$1 -> d.a.a.a$a:
+xyz.luan.audioplayers.AudioplayersPlugin$UpdateCallback -> d.a.a.a$b:
+    java.lang.ref.WeakReference audioplayersPlugin -> d
+    java.lang.ref.WeakReference handler -> c
+    java.lang.ref.WeakReference channel -> b
+    java.lang.ref.WeakReference mediaPlayers -> a
+xyz.luan.audioplayers.Player -> d.a.a.b:
+    void configAttributes(boolean,boolean,android.content.Context) -> a
+    int getCurrentPosition() -> a
+    boolean objectEquals(java.lang.Object,java.lang.Object) -> a
+    void seek(int) -> a
+    int setRate(double) -> a
+    void setReleaseMode(xyz.luan.audioplayers.ReleaseMode) -> a
+    void setUrl(java.lang.String,boolean) -> a
+    int getDuration() -> b
+    void setVolume(double) -> b
+    java.lang.String getPlayerId() -> c
+    boolean isActuallyPlaying() -> d
+    void pause() -> e
+    void play() -> f
+    void release() -> g
+    void stop() -> h
+xyz.luan.audioplayers.ReleaseMode -> d.a.a.c:
+    xyz.luan.audioplayers.ReleaseMode RELEASE -> a
+    xyz.luan.audioplayers.ReleaseMode LOOP -> b
+    xyz.luan.audioplayers.ReleaseMode STOP -> c
+    xyz.luan.audioplayers.ReleaseMode[] $VALUES -> d
+xyz.luan.audioplayers.WrappedMediaPlayer -> d.a.a.d:
+    boolean prepared -> i
+    boolean playing -> j
+    int shouldSeekTo -> k
+    android.media.MediaPlayer player -> l
+    float rate -> d
+    xyz.luan.audioplayers.AudioplayersPlugin ref -> m
+    boolean respectSilence -> e
+    double volume -> c
+    boolean stayAwake -> f
+    java.lang.String playerId -> a
+    xyz.luan.audioplayers.ReleaseMode releaseMode -> g
+    boolean released -> h
+    java.lang.String url -> b
+    void configAttributes(boolean,boolean,android.content.Context) -> a
+    int getCurrentPosition() -> a
+    void seek(int) -> a
+    void setAttributes(android.media.MediaPlayer) -> a
+    int setRate(double) -> a
+    void setReleaseMode(xyz.luan.audioplayers.ReleaseMode) -> a
+    void setSource(java.lang.String) -> a
+    void setUrl(java.lang.String,boolean) -> a
+    int getDuration() -> b
+    void setVolume(double) -> b
+    java.lang.String getPlayerId() -> c
+    boolean isActuallyPlaying() -> d
+    void pause() -> e
+    void play() -> f
+    void release() -> g
+    void stop() -> h
+    android.media.MediaPlayer createPlayer() -> i
+xyz.luan.audioplayers.WrappedSoundPool -> d.a.a.e:
+    java.lang.Integer soundId -> e
+    java.lang.Integer streamId -> f
+    android.media.SoundPool soundPool -> k
+    java.util.Map urlToPlayers -> m
+    boolean looping -> i
+    boolean loading -> j
+    float rate -> d
+    float volume -> c
+    java.lang.String playerId -> a
+    boolean playing -> g
+    java.util.Map soundIdToPlayer -> l
+    boolean paused -> h
+    java.lang.String url -> b
+    java.lang.Integer access$100(xyz.luan.audioplayers.WrappedSoundPool) -> a
+    boolean access$402(xyz.luan.audioplayers.WrappedSoundPool,boolean) -> a
+    void configAttributes(boolean,boolean,android.content.Context) -> a
+    byte[] downloadUrl(java.net.URL) -> a
+    int getCurrentPosition() -> a
+    java.io.File loadTempFileFromNetwork(java.lang.String) -> a
+    void seek(int) -> a
+    int setRate(double) -> a
+    void setReleaseMode(xyz.luan.audioplayers.ReleaseMode) -> a
+    void setUrl(java.lang.String,boolean) -> a
+    java.lang.String access$300(xyz.luan.audioplayers.WrappedSoundPool) -> b
+    java.lang.String getAudioPath(java.lang.String,boolean) -> b
+    int getDuration() -> b
+    void setVolume(double) -> b
+    java.lang.UnsupportedOperationException unsupportedOperation(java.lang.String) -> b
+    boolean access$500(xyz.luan.audioplayers.WrappedSoundPool) -> c
+    java.lang.String getPlayerId() -> c
+    void access$600(xyz.luan.audioplayers.WrappedSoundPool) -> d
+    boolean isActuallyPlaying() -> d
+    void pause() -> e
+    void play() -> f
+    void release() -> g
+    void stop() -> h
+    java.util.Map access$000() -> i
+    java.util.Map access$200() -> j
+    android.media.SoundPool createSoundPool() -> k
+    void start() -> l
+    android.media.SoundPool unsafeBuildLegacySoundPool() -> m
+xyz.luan.audioplayers.WrappedSoundPool$1 -> d.a.a.e$a:

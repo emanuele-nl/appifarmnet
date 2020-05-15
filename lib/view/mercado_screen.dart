@@ -250,7 +250,6 @@ class MercadoScreen extends StatelessWidget {
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12)),
-      backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
       title:Text("Missão Concluída! Pegue sua nova missão!", textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
       content: Image.asset("lib/view/assets/barraPrincipal/missao.png",height: 100,),
       actions: <Widget>[

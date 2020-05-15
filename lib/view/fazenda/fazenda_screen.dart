@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -9,7 +12,6 @@ import 'package:i_farm_net_new/model/fazendeiro_model.dart';
 import 'package:i_farm_net_new/model/missoes_model.dart';
 import 'package:i_farm_net_new/model/pergunta_model.dart';
 import 'package:i_farm_net_new/view/barra_navegacao_widget.dart';
-import 'dart:math';
 
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
@@ -29,77 +31,79 @@ class _FazendaScreenState extends State<FazendaScreen> {
   @override
   Widget build(BuildContext context) {
     final controller= GetIt.I.get<FazendaController>();
-
-
+    
     return WillPopScope(
-      child: new Scaffold(
-          backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),
-          appBar: BarraNavegacao(),
-          body:
-          Stack(
-            children: [
-             Align(
-                  alignment: FractionalOffset.bottomCenter,
-                  child:  Image.asset("lib/view/assets/lago.png", excludeFromSemantics: true,),
-                ),
+      onWillPop: () async => false,
+      child: SafeArea(
+        child: new Scaffold(
+            backgroundColor: Color.fromRGBO(49, 122, 45, 0.7),
+            appBar: BarraNavegacao(),
+            body:
+            Stack(
+              children: [
+               Align(
+                    alignment: FractionalOffset.bottomCenter,
+                    child:  Image.asset("lib/view/assets/lago.png", excludeFromSemantics: true,),
+                  ),
 
-              Center(
-                  child:
+                Center(
+                    child:
 
-                  Column(
-                    children: <Widget>[
-                      Container(height: 40,),
-
-
+                    Column(
+                      children: <Widget>[
+                        Container(height: 40,),
 
 
-                      Row(
-                          children: <Widget>[
-                            Container(width: 20),
-                            Column(
-                              children: <Widget>[
-                                terreno(),
-                                Container(height: 70,),
-                                vaca(),
-                              ],
-                            ),
-                            Container(width: 60,),
-                            Column(
-                              children:[
-                                GestureDetector(
-                                    child: Image.asset("lib/view/assets/celeiro.png",height: 100,),
-                                    onTap:() {
-                                      showCupertinoModalPopup<void>(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return celeiro(context);
-                                        },
 
-                                      );
-                                    }
-                                ),
-                                Container(height: 70,),
-                                GestureDetector(
-                                    child: Image.asset("lib/view/assets/poco.png",height:60),
-                                    onTap: (){
-                                      controller.adicionarAgua();
-                                      showCupertinoModalPopup<void>(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return aguaAdicionada(context);
-                                        },
-                                      );
-                                    }
-                                )
-                              ],
-                            ),
-                          ]
-                      ),
-                    ],
-                  )),
-            ],
-          ),
 
+                        Row(
+                            children: <Widget>[
+                              Container(width: 20),
+                              Column(
+                                children: <Widget>[
+                                  terreno(),
+                                  Container(height: 70,),
+                                  vaca(),
+                                ],
+                              ),
+                              Container(width: 60,),
+                              Column(
+                                children:[
+                                  GestureDetector(
+                                      child: Image.asset("lib/view/assets/celeiro.png",height: 100,),
+                                      onTap:() {
+                                        showCupertinoModalPopup<void>(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return celeiro(context);
+                                          },
+
+                                        );
+                                      }
+                                  ),
+                                  Container(height: 70,),
+                                  GestureDetector(
+                                      child: Image.asset("lib/view/assets/poco.png",height:60),
+                                      onTap: (){
+                                        controller.adicionarAgua();
+                                        showCupertinoModalPopup<void>(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return aguaAdicionada(context);
+                                          },
+                                        );
+                                      }
+                                  )
+                                ],
+                              ),
+                            ]
+                        ),
+                      ],
+                    )),
+              ],
+            ),
+
+        ),
       ),
     );
   }
@@ -128,7 +132,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
         return AlertDialog(
           title: Text(pergunta.questao, style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
           backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
-          content: Column(children:alternativasPergunta(pergunta)),
+          content: SingleChildScrollView(child: Column(children:alternativasPergunta(pergunta))),
         );
 
       },
@@ -464,7 +468,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
 
           onPressed: () {
             controller.fazendeiro.fomeVaca=5;
-            controller.fazendeiro.racao--;
+            controller.utilizarRacao();
             Navigator.of(context).pop();
             showCupertinoModalPopup<void>(
               context: context,
@@ -643,7 +647,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
             child: ListTile(
               leading: Image.asset("lib/view/assets/produtos/"+itens+".png", width: 50,),
               trailing: Text(quantidades[i].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
-              title: Text(itens,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+              title: Text(StringUtils.capitalize(itens),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
             ),
           ));
       i++;
@@ -744,7 +748,6 @@ class _FazendaScreenState extends State<FazendaScreen> {
     return Container(
       child: FlatButton(
           onPressed: () {
-            controller.adicionarValorItemSaude("fome", 15);
             controller.comer(alimento);
             if(controller.checarMissao(Missoes.comerAlimento)){
               showCupertinoModalPopup<void>(
@@ -814,10 +817,9 @@ class _FazendaScreenState extends State<FazendaScreen> {
 
 
 
-
   final jsonPerguntas ={
     "perguntas": [{
-      "questao": "Quanto tempo o tomate leva para poder ser cultivado ?",
+      "questao": "Quanto tempo o tomate leva para ser cultivado ?",
       "alternativas": [
         "entre 90 e 110 dias",
         "entre 95 e 115 dias",
@@ -827,7 +829,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
       "respostaCorreta": "entre 90 e 110 dias",
       "assuntoPergunta": "cultivo"
     }, {
-      "questao": "Quanto tempo a batata leva para poder ser cultivada ?",
+      "questao": "Quanto tempo a batata leva para ser cultivada ?",
       "alternativas": [
         "entre 90 dias a 280 dias",
         "entre 15 dias a 20 dias",
@@ -837,7 +839,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
       "respostaCorreta": "75 dias a 180 dias",
       "assuntoPergunta": "cultivo"
     }, {
-      "questao": "Quanto tempo a mandioca leva para poder ser cultivada ?",
+      "questao": "Quanto tempo a mandioca leva para ser cultivada ?",
       "alternativas": [
         "entre 16 dias a 20 dias",
         "entre 7 meses a 5 anos",
@@ -1211,7 +1213,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
         "assuntoPergunta": "Biologia"
       },
       {
-        "questao": "Qual desses não é um strato dos organismos aquáticos?",
+        "questao": "Qual desses não é um extrato dos organismos aquáticos?",
         "alternativas": [
           "Nécton",
           "Venon",
@@ -1255,7 +1257,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
         "assuntoPergunta": "Biologia"
       },
       {
-        "questao": "Em qual desses itens é onde se  gasta mais água em uma casa no Brasil?",
+        "questao": "Em qual desses itens é onde se gasta mais água em uma casa no Brasil?",
         "alternativas": [
           "Descarga",
           "Higiene corporal",
