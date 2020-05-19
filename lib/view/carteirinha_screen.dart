@@ -42,48 +42,51 @@ class CarteirinhaScreen extends StatelessWidget {
                   Flexible(flex: 2,child: Container(),),
                   Flexible(
                     flex:   10,
-                    child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.grey,
-                          shape: BoxShape.rectangle,
-                        ),
-                        width: 250,
-                        child: Column(
-                          children: [
-                            Row(
-                              children: <Widget>[
-                                Column(
-                                  children: <Widget>[
-                                    Hero(
-                                      tag:'fazendeiro',
-                                        child: Image.asset("lib/view/assets/cadsol.png",height: 60,)
-                                    ),
-                                    Container(height: 30,),
-                                  ],
-                                ),
-                                Container(width: 20,),
-                                ClipOval(
-                                  child: Image.asset(
-                                      "lib/view/assets/fazendeiros/"+fazendeiro.nomeImagem+".png",
-                                    height: 100,
+                    child: Semantics(
+                      label: "carteirinha",
+                      child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey,
+                            shape: BoxShape.rectangle,
+                          ),
+                          width: 250,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: <Widget>[
+                                  Column(
+                                    children: <Widget>[
+                                      Hero(
+                                        tag:'fazendeiro',
+                                          child: Image.asset("lib/view/assets/cadsol.png",height: 60,)
+                                      ),
+                                      Container(height: 30,),
+                                    ],
                                   ),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              decoration: BoxDecoration(color: Colors.white),
-                              height: 55,
-                              child: Text("Empreendimentos Econômicos Solidários",
-                                style: TextStyle(fontSize: 20),
-                                textAlign: TextAlign.center,
+                                  Container(width: 20,),
+                                  ClipOval(
+                                    child: Image.asset(
+                                        "lib/view/assets/fazendeiros/"+fazendeiro.nomeImagem+".png",
+                                      height: 100,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            )
+                              Container(
+                                decoration: BoxDecoration(color: Colors.white),
+                                height: 55,
+                                child: Text("Empreendimentos Econômicos Solidários",
+                                  style: TextStyle(fontSize: 20),
+                                  textAlign: TextAlign.center,
+                                ),
+                              )
 
 
-                          ],
+                            ],
 
-                        )
+                          )
+                      ),
                     ),
                   ),
 

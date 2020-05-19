@@ -16,57 +16,65 @@ class MercadoScreen extends StatelessWidget {
 
     return new Scaffold(
         appBar: AppBar(backgroundColor: Color.fromRGBO(67, 44, 26, 1.0)),
-        body: new Stack(
-          children: <Widget>[
-            new Container(
-              decoration: new BoxDecoration(
-                image: new DecorationImage(
-                  image: new AssetImage("lib/view/assets/mercado/fundo_mercado.jpeg"),
-                  fit: BoxFit.cover,),
+        body: SafeArea(
+          child: new Stack(
+            children: <Widget>[
+              new Container(
+                decoration: new BoxDecoration(
+                  image: new DecorationImage(
+                    image: new AssetImage("lib/view/assets/mercado/fundo_mercado.jpeg"),
+                    fit: BoxFit.cover,),
+                ),
               ),
-            ),
-            new Container(
-              decoration: new BoxDecoration(
-                image: new DecorationImage(
-                  image: new AssetImage("lib/view/assets/mercado/balcaomercado.png"),
-                  fit: BoxFit.cover,),
+              Semantics(
+                excludeSemantics: true,
+                child: new Container(
+                  decoration: new BoxDecoration(
+                    image: new DecorationImage(
+                      image: new AssetImage("lib/view/assets/mercado/balcaomercado.png"),
+                      fit: BoxFit.cover,),
+                  ),
+                ),
               ),
-            ),
-            new Container(
-              decoration: new BoxDecoration(
-                image: new DecorationImage(
-                  image: new AssetImage("lib/view/assets/mercado/prateleiramercado.png"),
-                  fit: BoxFit.fitHeight),
+              Semantics(
+                excludeSemantics: true,
+                child: new Container(
+                  decoration: new BoxDecoration(
+                    image: new DecorationImage(
+                      image: new AssetImage("lib/view/assets/mercado/prateleiramercado.png"),
+                      fit: BoxFit.fitHeight),
+                  ),
+                ),
               ),
-            ),
-            new Container(
-              decoration: new BoxDecoration(
-                image: new DecorationImage(
-                    image: new AssetImage("lib/view/assets/mercado/comerciante.png"),
-                    fit: BoxFit.fitWidth),
+              new Container(
+                decoration: new BoxDecoration(
+                  image: new DecorationImage(
+                      image: new AssetImage("lib/view/assets/mercado/comerciante.png", ),
+                      fit: BoxFit.fitWidth),
+                ),
               ),
-            ),
 
-            new Column(
-              children: <Widget>[
+              new Column(
+                children: <Widget>[
 //                Flexible(
 //                  flex: 5,
 //                  child: Container(),
 //                ),
-                Flexible(
-                  flex:6,
-                  child: Row(
-                    children: widgetsItensMercado,
+                  Flexible(
+                    flex:6,
+                    child: Row(
+                      children: widgetsItensMercado,
+                    ),
                   ),
-                ),
-                Flexible(
-                  flex:30,
-                  child: Container(),
-                )
+                  Flexible(
+                    flex:30,
+                    child: Container(),
+                  )
 
-              ],
-            )
-          ],
+                ],
+              )
+            ],
+          ),
         )
     );
   }
@@ -78,22 +86,25 @@ class MercadoScreen extends StatelessWidget {
 
     for (String itens in itensMercado){
       listaFinal.add(
-        GestureDetector(
-          child: Image.asset("lib/view/assets/produtos/"+itens+".png"),
-          onTap:(){
-            final controller= GetIt.I.get<FazendaController>();
-            showCupertinoModalPopup<void>(
-                context: context,
-                builder: (BuildContext context) {
-                  if (controller.fazendeiro.leite <=0)
-                    return modalSemLeite(context);
-                  else
-                    return Questionamento("leite", itens, context);
+        Flexible(
+          flex: 1,
+          child: GestureDetector(
+            child: Image.asset("lib/view/assets/produtos/"+itens+".png", semanticLabel: itens,),
+            onTap:(){
+              final controller= GetIt.I.get<FazendaController>();
+              showCupertinoModalPopup<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    if (controller.fazendeiro.leite <=0)
+                      return modalSemLeite(context);
+                    else
+                      return Questionamento("leite", itens, context);
 
-                });
+                  });
 
 
-          },
+            },
+          ),
         )
 
       );
@@ -127,7 +138,7 @@ class MercadoScreen extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Text("Você não possui leite no seu celeiro. Produza leite para que você possa trocar itens do mercado"),
-            Image.asset("lib/view/assets/animal/vaca.png",height: 60,),
+            Image.asset("lib/view/assets/animal/vaca.png",height: 60,excludeFromSemantics: true,),
           ],
         ),
       ),
@@ -141,7 +152,6 @@ class MercadoScreen extends StatelessWidget {
   Widget trocaConcluida(String produtoDado, String produtoRecebido,BuildContext context) {
     final controller= GetIt.I.get<FazendaController>();
     controller.utilizarLeite();
-    //controller.retirarItem(produtoDado);
     if (fazendeiro.nomeProdutos.contains(produtoRecebido))
       controller.adicionarItem(produtoRecebido);
     else {

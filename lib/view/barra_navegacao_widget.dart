@@ -33,7 +33,14 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                         MaterialPageRoute(builder: (context) => SaudeScreen()));
 
                   },
-                  child: Image.asset("lib/view/assets/barraPrincipal/saude.png", width: 50,),
+                  child: Semantics(
+                      child: Image.asset("lib/view/assets/barraPrincipal/saude.png",
+                        width: 50,
+                      ),
+                    hint: "saúde",
+                    onTapHint: "para ir para a tela de saúde",
+
+                  ),
                 ),
               ),
               Flexible(
@@ -52,7 +59,13 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                       },);
 
                   },
-                  child: Image.asset("lib/view/assets/barraPrincipal/exercicio.png", width: 50,),
+                  child: Semantics(
+                      child: Image.asset("lib/view/assets/barraPrincipal/exercicio.png", width: 50,),
+                      label:"Atividade física",
+                      onTapHint: "praticar exercício físico",
+
+                  ),
+
                 ),
               ),
               Flexible(
@@ -63,7 +76,11 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                         context,
                         MaterialPageRoute(builder: (context) => TrocaScreen()));
                   },
-                  child: Image.asset("lib/view/assets/barraPrincipal/troca.png", width: 50,),
+                  child: Semantics(
+                      child: Image.asset("lib/view/assets/barraPrincipal/troca.png", width: 50,),
+                      label: "Troca",
+                      onTapHint: "ir para a tela de troca",
+                  ),
                 ),
               ),
               Flexible(
@@ -74,7 +91,11 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                         context,
                         MaterialPageRoute(builder: (context) => MercadoScreen()));
                   },
-                  child: Image.asset("lib/view/assets/barraPrincipal/mercado.png", width: 50,),
+                  child: Semantics(
+                      child: Image.asset("lib/view/assets/barraPrincipal/mercado.png", width: 50,),
+                      label:"Mercado",
+                      onTapHint: "ir ao mercado",
+                  ),
                 ),
               ),
               Flexible(
@@ -93,7 +114,12 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                       },);
 
                   },
-                  child: Image.asset("lib/view/assets/barraPrincipal/missao.png", width: 40,),
+                  child: Semantics(
+                      child: Image.asset("lib/view/assets/barraPrincipal/missao.png", width: 40,),
+                      label:"Missão",
+                      onTapHint: "ver sua missão ",
+
+                  ),
                 ),
               )
             ],

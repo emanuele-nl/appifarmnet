@@ -43,36 +43,44 @@ class TrocaScreen extends StatelessWidget {
               Row(
                 children: [
                   GestureDetector(
-                    child: Stack(
-                      children: <Widget>[
-                        Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
-                        Row(
-                          children: <Widget>[
-                            Container(width:20),
-                            Image.asset("lib/view/assets/fazendeiros/"+personagensTroca[0]+".png",height: 50,
+                    child: Semantics(
+                      label: "Fazenda para troca 1",
+                      onTapHint: "realizar troca",
+                      child: Stack(
+                        children: <Widget>[
+                          Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
+                          Row(
+                            children: <Widget>[
+                              Container(width:20),
+                              Image.asset("lib/view/assets/fazendeiros/"+personagensTroca[0]+".png",height: 50,
 
-                            ),
-                          ],
-                        )
-                      ],
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                     onTap: (){
                       oferecerProdutoParaTroca(itensTroca[0],personagensTroca[0],context);
                       },),
                   Container(width: 60,),
                   GestureDetector(
-                    child: Stack(
-                      children: <Widget>[
-                        Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
-                        Row(
-                          children: <Widget>[
-                            Container(width:20),
-                            Image.asset("lib/view/assets/fazendeiros/"+personagensTroca[1]+".png",height: 50,
+                    child: Semantics(
+                      label: "Fazenda para troca 2",
+                      onTapHint: "realizar troca",
+                      child: Stack(
+                        children: <Widget>[
+                          Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
+                          Row(
+                            children: <Widget>[
+                              Container(width:20),
+                              Image.asset("lib/view/assets/fazendeiros/"+personagensTroca[1]+".png",height: 50,
 
-                            ),
-                          ],
-                        )
-                      ],
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
 
                     onTap: (){
@@ -84,18 +92,22 @@ class TrocaScreen extends StatelessWidget {
               Row(
                 children: [
                   GestureDetector(
-                    child: Stack(
-                      children: <Widget>[
-                        Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
-                        Row(
-                          children: <Widget>[
-                            Container(width:20),
-                            Image.asset("lib/view/assets/fazendeiros/"+personagensTroca[2]+".png",height: 50,
+                    child: Semantics(
+                      label: "Fazenda para troca 3",
+                      onTapHint: "realizar troca",
+                      child: Stack(
+                        children: <Widget>[
+                          Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
+                          Row(
+                            children: <Widget>[
+                              Container(width:20),
+                              Image.asset("lib/view/assets/fazendeiros/"+personagensTroca[2]+".png",height: 50,
 
-                            ),
-                          ],
-                        )
-                      ],
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
 
                     onTap: (){
@@ -103,19 +115,22 @@ class TrocaScreen extends StatelessWidget {
                     },),
                   Container(width: 60,),
                   GestureDetector(
-                    //child: Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
-                    child: Stack(
-                      children: <Widget>[
-                        Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
-                        Row(
-                          children: <Widget>[
-                            Container(width:20),
-                            Image.asset("lib/view/assets/fazendeiros/"+personagensTroca[3]+".png",height: 50,
+                    child: Semantics(
+                      label: "Fazenda para troca 4",
+                      onTapHint: "realizar troca",
+                      child: Stack(
+                        children: <Widget>[
+                          Image.asset("lib/view/assets/troca/casa_troca.png",height: 75,),
+                          Row(
+                            children: <Widget>[
+                              Container(width:20),
+                              Image.asset("lib/view/assets/fazendeiros/"+personagensTroca[3]+".png",height: 50,
 
-                            ),
-                          ],
-                        )
-                      ],
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
 
                     onTap: (){
@@ -307,9 +322,9 @@ class TrocaScreen extends StatelessWidget {
       content: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
           children:[
-            Image.asset("lib/view/assets/produtos/"+produtoDado+".png", width: 50,) ,
-            Image.asset("lib/view/assets/seta.png",width: 50,),
-            Image.asset("lib/view/assets/produtos/"+produtoRecebido+".png", width: 50,) ,
+            Image.asset("lib/view/assets/produtos/"+produtoDado+".png", width: 50, semanticLabel: produtoDado,) ,
+            Image.asset("lib/view/assets/seta.png",width: 50, semanticLabel: "trocado por",),
+            Image.asset("lib/view/assets/produtos/"+produtoRecebido+".png", width: 50, semanticLabel: produtoRecebido,) ,
 
           ]
 
@@ -363,7 +378,7 @@ class TrocaScreen extends StatelessWidget {
             Navigator.of(context).pop();
             Navigator.of(context).pop();
           },
-          child: Text("ok", style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white))),
+          child: Text("Ok", style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white))),
     );
   }
 

@@ -53,24 +53,29 @@ class _FazendaScreenState extends State<FazendaScreen> {
                       children: <Widget>[
                         Container(height: 40,),
 
-
-
-
                         Row(
                             children: <Widget>[
                               Container(width: 20),
                               Column(
                                 children: <Widget>[
-                                  terreno(),
+                                  Semantics(
+                                      child: terreno(),
+                                      label: "terreno",
+                                      onTapHint: "evoluir o terreno",
+                                  ),
                                   Container(height: 70,),
-                                  vaca(),
+                                  Semantics(child: vaca(),label: "vaca", onTapHint: "ver opções da vaca",),
                                 ],
                               ),
                               Container(width: 60,),
                               Column(
                                 children:[
                                   GestureDetector(
-                                      child: Image.asset("lib/view/assets/celeiro.png",height: 100,),
+                                      child: Semantics(
+                                          child: Image.asset("lib/view/assets/celeiro.png",height: 100,),
+                                          label: "Celeiro",
+                                          onTapHint: "produtos disponíveis",
+                                      ),
                                       onTap:() {
                                         showCupertinoModalPopup<void>(
                                           context: context,
@@ -83,7 +88,11 @@ class _FazendaScreenState extends State<FazendaScreen> {
                                   ),
                                   Container(height: 70,),
                                   GestureDetector(
-                                      child: Image.asset("lib/view/assets/poco.png",height:60),
+                                      child: Semantics(
+                                          child: Image.asset("lib/view/assets/poco.png",height:60),
+                                          label:"poço",
+                                          onTapHint: "coletar água",
+                                      ),
                                       onTap: (){
                                         controller.adicionarAgua();
                                         showCupertinoModalPopup<void>(
