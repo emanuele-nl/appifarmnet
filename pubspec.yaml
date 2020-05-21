@@ -21,6 +21,17 @@ dependencies:
     sdk: flutter
   mobx:
   flutter_mobx:
+  percent_indicator: "^2.1.1"
+  bubble: ^1.1.9+1
+  auto_size_text: ^2.1.0
+  get_it:
+  youtube_player_flutter: ^6.1.1
+  basic_utils: ^1.2.0
+  audioplayers: ^0.13.2
+
+
+
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -48,9 +59,30 @@ flutter:
 
   assets:
     - lib/view/assets/botao-continuar.png
+    - lib/view/assets/botao-tutorial.png
+    - lib/view/assets/botao-iniciar.png
+    - lib/view/assets/telainicial.png
     - lib/view/assets/fundo.png
     - lib/view/assets/fazendeiros/
     - lib/view/assets/plantacao/
+    - lib/view/assets/produtos/
+    - lib/view/assets/mercado/
+    - lib/view/assets/animal/
+    - lib/view/assets/atividadeFisica/
+    - lib/view/assets/atividadeFisica/natacao/
+    - lib/view/assets/atividadeFisica/bicicleta/
+    - lib/view/assets/atividadeFisica/corrida/
+    - lib/view/assets/atividadeFisica/caminhada/
+    - lib/view/assets/barraPrincipal/
+    - lib/view/assets/pergunta/
+    - lib/view/assets/celeiro.png
+    - lib/view/assets/poco.png
+    - lib/view/assets/lago.png
+    - lib/view/assets/troca/
+    - lib/view/assets/seta.png
+    - lib/view/assets/cadsol.png
+    - lib/view/assets/pergunta/
+
 
 
 

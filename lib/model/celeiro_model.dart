@@ -1,20 +1,20 @@
-
-
-
-
-
 class Produto{
   String nome;
-  int quantidade;
-  bool plantavel;
+  int quantidade = 1;
+  bool plantavel = true;
 
+  Produto(String nomeProduto){
+    this.nome = nomeProduto;
+  }
+
+  //Produto.nome(this.nome);
 }
 
 
 class Celeiro{
 
-  List<Produto> produto;
-
+  List<String> nomeProdutos = ['cenoura'];
+  List<int> quantidadeProdutos= [8];
 
 
   static  final Celeiro _instance= Celeiro._internalConstructor();
@@ -24,6 +24,8 @@ class Celeiro{
   }
 
   Celeiro._internalConstructor();
+
+
 
 
 
