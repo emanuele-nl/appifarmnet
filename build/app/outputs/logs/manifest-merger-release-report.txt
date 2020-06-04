@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-49:12
-INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-49:12
-INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-49:12
-INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-49:12
+ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-50:12
+INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-50:12
+INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-50:12
+INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-50:12
 MERGED from [:audioplayers] /home/jwieland/Projetos/appifarmnet/build/audioplayers/intermediates/library_manifest/release/AndroidManifest.xml:2:1-9:12
 MERGED from [:path_provider] /home/jwieland/Projetos/appifarmnet/build/path_provider/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
 MERGED from [:path_provider_macos] /home/jwieland/Projetos/appifarmnet/build/path_provider_macos/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
@@ -22,20 +22,20 @@ MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/jwieland/.g
 MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/jwieland/.gradle/caches/transforms-2/files-2.1/077300052aa327ee6fc9bbb0ce309b24/core-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/jwieland/.gradle/caches/transforms-2/files-2.1/3a7eb299570065a3866b140e1a95969b/versionedparcelable-1.1.0/AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /home/jwieland/.gradle/caches/transforms-2/files-2.1/b80fad55c42c418cc210e235056767fb/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:17:1-22:12
-INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-49:12
-INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-49:12
-INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-49:12
+INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-50:12
+INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-50:12
+INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-50:12
 	package
 		ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:2:5-32
 		INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml
 		INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml
-		ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-49:12
+		ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-50:12
 		INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml
-		ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-49:12
+		ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:1-50:12
 		INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:1:11-69
@@ -99,6 +99,10 @@ uses-permission#android.permission.INTERNET
 ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:47:5-66
 	android:name
 		ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:47:22-64
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:48:5-81
+	android:name
+		ADDED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml:48:22-78
 uses-sdk
 INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/jwieland/Projetos/appifarmnet/android/app/src/main/AndroidManifest.xml

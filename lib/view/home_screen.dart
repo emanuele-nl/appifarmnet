@@ -72,23 +72,12 @@ class HomeScreen extends StatelessWidget {
 
 
   void _encaminharPagina(BuildContext context){
-    Fazendeiro fazendeiro = Fazendeiro();
-    if(fazendeiro.nome == null){
-      Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) =>
-              FazendaScreen()));
-
-    }
-    else {
       Navigator.push(
           context,
           MaterialPageRoute(builder: (context) =>
               SelecionarFazendeiroScreen()));
     }
 
-
-  }
 
 
   Widget avisoConsumoDados(BuildContext context) {

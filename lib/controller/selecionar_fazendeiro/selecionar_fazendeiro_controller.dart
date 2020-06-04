@@ -23,7 +23,7 @@ abstract class _SelecionarFazendeiroControllerBase with Store{
   String descricaoPersonagem="";
 
   @observable
-  String nomeFazendeiro;
+  String nomeFazendeiro="";
 
   @observable
   int numeroFazendeiro=1;

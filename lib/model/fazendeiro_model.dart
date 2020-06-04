@@ -10,7 +10,7 @@ import 'package:path_provider/path_provider.dart';
 
 class Fazendeiro{
   static  final Fazendeiro _instance= Fazendeiro._internalConstructor();
-  String nome;
+  String nome="";
   String nomeImagem = "1";
   String descricaoPersongem ="menina loira de camisa rosa";
 
