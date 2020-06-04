@@ -48,6 +48,26 @@ mixin _$SelecionarFazendeiroController
     }, _$nomePreenchidoAtom, name: '${_$nomePreenchidoAtom.name}_set');
   }
 
+  final _$descricaoPersonagemAtom =
+      Atom(name: '_SelecionarFazendeiroControllerBase.descricaoPersonagem');
+
+  @override
+  String get descricaoPersonagem {
+    _$descricaoPersonagemAtom.context
+        .enforceReadPolicy(_$descricaoPersonagemAtom);
+    _$descricaoPersonagemAtom.reportObserved();
+    return super.descricaoPersonagem;
+  }
+
+  @override
+  set descricaoPersonagem(String value) {
+    _$descricaoPersonagemAtom.context.conditionallyRunInAction(() {
+      super.descricaoPersonagem = value;
+      _$descricaoPersonagemAtom.reportChanged();
+    }, _$descricaoPersonagemAtom,
+        name: '${_$descricaoPersonagemAtom.name}_set');
+  }
+
   final _$nomeFazendeiroAtom =
       Atom(name: '_SelecionarFazendeiroControllerBase.nomeFazendeiro');
 
@@ -86,6 +106,18 @@ mixin _$SelecionarFazendeiroController
 
   final _$_SelecionarFazendeiroControllerBaseActionController =
       ActionController(name: '_SelecionarFazendeiroControllerBase');
+
+  @override
+  dynamic carregarDados() {
+    final _$actionInfo =
+        _$_SelecionarFazendeiroControllerBaseActionController.startAction();
+    try {
+      return super.carregarDados();
+    } finally {
+      _$_SelecionarFazendeiroControllerBaseActionController
+          .endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic mudaImagemFazendeiroSelecionado(String value) {
@@ -150,7 +182,7 @@ mixin _$SelecionarFazendeiroController
   @override
   String toString() {
     final string =
-        'imagemFazendeiroSelecionado: ${imagemFazendeiroSelecionado.toString()},nomePreenchido: ${nomePreenchido.toString()},nomeFazendeiro: ${nomeFazendeiro.toString()},numeroFazendeiro: ${numeroFazendeiro.toString()}';
+        'imagemFazendeiroSelecionado: ${imagemFazendeiroSelecionado.toString()},nomePreenchido: ${nomePreenchido.toString()},descricaoPersonagem: ${descricaoPersonagem.toString()},nomeFazendeiro: ${nomeFazendeiro.toString()},numeroFazendeiro: ${numeroFazendeiro.toString()}';
     return '{$string}';
   }
 }

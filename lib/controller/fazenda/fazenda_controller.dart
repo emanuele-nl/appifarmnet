@@ -54,10 +54,10 @@ abstract class _FazendaControllerBase with Store{
   @action
   bool checarMissao (String acaoRealizada){
 
-
-    if ((acaoRealizada == fazendeiro.missaAtual) &  (!fazendeiro.missaoConcluida)){
+    if ((acaoRealizada == fazendeiro.missaoAtual) &  (!fazendeiro.missaoConcluida)){
       fazendeiro.missaoConcluida = true;
       fazendeiro.avisoNovaMissao = true;
+      fazendeiro.escreverArquivo();
       return true;
     }
     return false;
@@ -66,6 +66,8 @@ abstract class _FazendaControllerBase with Store{
   @action
   void produzirAdubo(){
     fazendeiro.adubo++;
+    fazendeiro.escreverArquivo();
+
     //checarMissao(Missoes.gerarAdubo);
   }
 
@@ -73,11 +75,15 @@ abstract class _FazendaControllerBase with Store{
   void utilizarAdubo (){
     if (fazendeiro.adubo>0)
       fazendeiro.adubo--;
+    fazendeiro.escreverArquivo();
+
   }
 
   @action
   void coletarLeite(){
     fazendeiro.leite++;
+    fazendeiro.escreverArquivo();
+
     //checarMissao(Missoes.coletarLeite);
 
   }
@@ -95,6 +101,7 @@ abstract class _FazendaControllerBase with Store{
       adicionarValorItemSaude("fome", 15);
       adicionarValorItemSaude("vigorFisico", -30);
     }
+    fazendeiro.escreverArquivo();
 
   }
 
@@ -108,6 +115,8 @@ abstract class _FazendaControllerBase with Store{
       i++;
     }
     fazendeiro.quantidadeProdutos[posicaoSelecionada]++;
+    fazendeiro.escreverArquivo();
+
   }
 
   @action
@@ -141,6 +150,7 @@ abstract class _FazendaControllerBase with Store{
 
     }
 
+    fazendeiro.escreverArquivo();
 
 
   }
@@ -168,11 +178,15 @@ abstract class _FazendaControllerBase with Store{
       if (fazendeiro.experiencia<=0)
         fazendeiro.experiencia = 0;
     }
+    fazendeiro.escreverArquivo();
+
   }
   @action
   void adicionarAgua(){
     //checarMissao(Missoes.coletarAgua);
     fazendeiro.agua++;
+    fazendeiro.escreverArquivo();
+
   }
 
 
@@ -181,18 +195,26 @@ abstract class _FazendaControllerBase with Store{
     //checarMissao(Missoes.);
     if(fazendeiro.agua>0)
       fazendeiro.agua--;
+    fazendeiro.escreverArquivo();
+
   }
 
   @action
   void utilizarLeite(){
     if(fazendeiro.leite>0)
       fazendeiro.leite--;
+
+    fazendeiro.escreverArquivo();
+
   }
 
   @action
   void utilizarRacao(){
     if(fazendeiro.racao>0)
       fazendeiro.racao--;
+
+    fazendeiro.escreverArquivo();
+
   }
 
 

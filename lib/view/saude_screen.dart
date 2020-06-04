@@ -30,10 +30,11 @@ class SaudeScreen extends StatelessWidget{
       body: Center(
         child: Column(
           children: <Widget>[
-            Image.asset("lib/view/assets/fazendeiros/"+fazendeiro.nomeImagem+".png", width: 100,excludeFromSemantics: true,),
+            Container(height: 30,),
+            Image.asset("lib/view/assets/fazendeiros/"+fazendeiro.nomeImagem+".png", width: 150,excludeFromSemantics: true,),
             Semantics(
                 excludeSemantics: true,
-                child: Text(fazendeiro.nome == null? "nulo": fazendeiro.nome,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white))),
+                child: Text(fazendeiro.nome == null? "nulo": fazendeiro.nome,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white, fontSize: 40))),
             Semantics(
               label:"Nutrição"+fazendeiro.fome.toString()+"de cem",
               child: Padding(
@@ -42,7 +43,7 @@ class SaudeScreen extends StatelessWidget{
                   width: MediaQuery.of(context).size.width - 50,
                   animation: true,
                   lineHeight: 20.0,
-                  animationDuration: 20,
+                  animationDuration: 2,
                   percent: fazendeiro.fome/100,
                   center: Text("Nutrição"),
                   linearStrokeCap: LinearStrokeCap.roundAll,
@@ -59,7 +60,7 @@ class SaudeScreen extends StatelessWidget{
                   width: MediaQuery.of(context).size.width - 50,
                   animation: true,
                   lineHeight: 20.0,
-                  animationDuration: 2000,
+                  animationDuration: 20,
                   percent: fazendeiro.vigorFisico/100,
                   center: Text("Vigor Fisico"),
                   linearStrokeCap: LinearStrokeCap.roundAll,
@@ -75,7 +76,7 @@ class SaudeScreen extends StatelessWidget{
                   width: MediaQuery.of(context).size.width - 50,
                   animation: true,
                   lineHeight: 20.0,
-                  animationDuration: 2000,
+                  animationDuration: 20,
                   percent: fazendeiro.experiencia/100,
                   center: Text("Experiência"),
                   linearStrokeCap: LinearStrokeCap.roundAll,

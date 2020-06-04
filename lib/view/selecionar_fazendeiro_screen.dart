@@ -19,6 +19,9 @@ class _SelecionarFazendeiroScreenState extends State<SelecionarFazendeiroScreen>
 
   @override
   Widget build(BuildContext context) {
+
+    controller.carregarDados();
+
     return  SafeArea(
       child: Scaffold(
           body: new Stack(
@@ -33,45 +36,56 @@ class _SelecionarFazendeiroScreenState extends State<SelecionarFazendeiroScreen>
                     child: Column(
                         children: <Widget>[
 
-                          Center(
-                            child: Row(
-                              children: <Widget>[
-                                Container(width:20),
-                                GestureDetector(
-                                  onTap: controller.anteriorNumeroFazendeiro,
-                                  child: Icon(Icons.arrow_back, size: 50),
-                                ),
-                                Observer(
+                          Row(
+                            children: <Widget>[
+                              Flexible(child: Container(),flex: 2,),
+                              GestureDetector(
+                                onTap: controller.anteriorNumeroFazendeiro,
+                                child: Icon(Icons.arrow_back,size: 60,),
+                              ),
+                              Flexible(child: Container(),flex: 1,),
+                              Flexible(
+                                flex:16,
+                                child: Observer(
                                     builder: (_) {
                                       return Hero(
                                         tag: 'fazendeiro',
                                         child: Image.asset(
                                           "lib/view/assets/fazendeiros/" +
                                               controller.numeroFazendeiro.toString() +
-                                              ".png", width: 180,),
+                                              ".png",
+                                              semanticLabel: controller.descricaoPersonagem,
+                                        ),
                                       );
                                     }
                                 ),
-                                GestureDetector(
+                              ),
+                              Flexible(child: Container(),flex: 1,),
+                              Flexible(
+                                flex: 10,
+                                child: GestureDetector(
                                   onTap: controller.proximoNumeroFazendeiro,
-                                  child: Icon(Icons.arrow_forward, size: 50,),
+                                  child: Icon(Icons.arrow_forward,size: 60,),
                                 ),
-                              ],
-                            ),
+                              ),
+
+
+                            ],
                           ),
-                          Container(height:20),
+                          Container(height: 50,),
 
                           Container(
                             color:Color.fromRGBO(125, 125, 125, 0.5),
                             child: Observer(
                                 builder: (_) {
                                   return TextFormField(
+                                    initialValue: controller.fazendeiro.nome,
                                     style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white) ,
                                     onChanged: controller.mudaNomeFazendeiro,
                                     decoration  : InputDecoration(
                                       labelText: "Nome",
                                       prefixStyle: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
-                                      labelStyle: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),//aaaaaaaa
+                                      labelStyle: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             const Radius.circular(12.0)),
@@ -80,7 +94,6 @@ class _SelecionarFazendeiroScreenState extends State<SelecionarFazendeiroScreen>
                                           .of(context)
                                           .size
                                           .width * 0.035),
-                                      //errorText: controller.nomePreenchido? null : "Favor inserir um nome ",
                                     ),
                                   );
                                 }

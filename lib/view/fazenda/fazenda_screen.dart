@@ -28,9 +28,13 @@ class FazendaScreen extends StatefulWidget {
 class _FazendaScreenState extends State<FazendaScreen> {
 
 
+
+
   @override
   Widget build(BuildContext context) {
     final controller= GetIt.I.get<FazendaController>();
+    controller.fazendeiro.escreverArquivo();
+
     
     return WillPopScope(
       onWillPop: () async => false,
@@ -595,7 +599,7 @@ class _FazendaScreenState extends State<FazendaScreen> {
       showCupertinoModalPopup<void>(
         context: context,
         builder: (BuildContext context) {
-          return respostaErrada(context);
+          return respostaErrada(context,repostaEsperada);
 
         },
       );
@@ -617,13 +621,22 @@ class _FazendaScreenState extends State<FazendaScreen> {
     );
   }
 
-  Widget respostaErrada(BuildContext context) {
+  Widget respostaErrada(BuildContext context, String respostaEsperada) {
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12)),
       title:Text("Resposta Incorreta! Sua planta morreu!", textAlign: TextAlign.center,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
       backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
-      content: Image.asset("lib/view/assets/pergunta/errado.png",height: 100,),
+      content: Container(
+        height: 150,
+        child: Column(
+          children: <Widget>[
+            Image.asset("lib/view/assets/pergunta/errado.png",height: 100,),
+            Container(height: 10,),
+            Text("A resposta esperada para a pergunta era $respostaEsperada", textAlign: TextAlign.center,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white,))
+          ],
+        ),
+      ),
       actions: <Widget>[
         botaoModal(context),
       ],

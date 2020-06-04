@@ -14,10 +14,29 @@ abstract class _SelecionarFazendeiroControllerBase with Store{
   var fazendeiro = Fazendeiro();
 
   @observable
-  String imagemFazendeiroSelecionado ="1";
+  String imagemFazendeiroSelecionado = "1";
 
   @observable
   bool nomePreenchido= false;
+
+  @observable
+  String descricaoPersonagem="";
+
+  @observable
+  String nomeFazendeiro;
+
+  @observable
+  int numeroFazendeiro=1;
+
+
+
+  @action
+  carregarDados(){
+    imagemFazendeiroSelecionado = fazendeiro.nomeImagem;
+    descricaoPersonagem = fazendeiro.descricaoPersongem;
+    mudaNomeFazendeiro(fazendeiro.nome);
+    numeroFazendeiro = int.parse(fazendeiro.nomeImagem);
+  }
 
   @action
   mudaImagemFazendeiroSelecionado(String value) {
@@ -26,8 +45,7 @@ abstract class _SelecionarFazendeiroControllerBase with Store{
     //fazendeiro.gerarListaAlimentoCultivavelInicial();
   }
 
-  @observable
-  String nomeFazendeiro;
+
 
   @action
   mudaNomeFazendeiro(String value){
@@ -39,8 +57,7 @@ abstract class _SelecionarFazendeiroControllerBase with Store{
       nomePreenchido=false;
   }
 
-  @observable
-  int numeroFazendeiro=1;
+
   @action
   proximoNumeroFazendeiro(){
     if (numeroFazendeiro < 5){
@@ -51,6 +68,8 @@ abstract class _SelecionarFazendeiroControllerBase with Store{
     }
     fazendeiro.nomeImagem = numeroFazendeiro.toString();
     fazendeiro.gerarListaAlimentoCultivavelInicial();
+    descricaoPersonagem = fazendeiro.descricaoPersongem;
+
 
   }
   @action
@@ -63,6 +82,7 @@ abstract class _SelecionarFazendeiroControllerBase with Store{
     }
     fazendeiro.nomeImagem = numeroFazendeiro.toString();
     fazendeiro.gerarListaAlimentoCultivavelInicial();
+    descricaoPersonagem = fazendeiro.descricaoPersongem;
 
   }
 

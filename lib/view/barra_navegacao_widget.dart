@@ -13,7 +13,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
 
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight * 0.9);
+  Size get preferredSize => Size.fromHeight(kToolbarHeight* 1.2);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
           child:  Row(
             children: <Widget>[
               Flexible(
-                flex: 1,
+                flex: 3,
                 child: GestureDetector(
                   onTap:() {
 
@@ -35,7 +35,6 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                   },
                   child: Semantics(
                       child: Image.asset("lib/view/assets/barraPrincipal/saude.png",
-                        width: 50,
                       ),
                     hint: "saúde",
                     onTapHint: "para ir para a tela de saúde",
@@ -44,12 +43,12 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               Flexible(
-                flex:1,
+                flex:2,
                 child:Container(),
 
               ),
               Flexible(
-                flex:1,
+                flex:3,
                 child: GestureDetector(
                   onTap: () {
                     showCupertinoModalPopup<void>(
@@ -60,7 +59,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
 
                   },
                   child: Semantics(
-                      child: Image.asset("lib/view/assets/barraPrincipal/exercicio.png", width: 50,),
+                      child: Image.asset("lib/view/assets/barraPrincipal/exercicio.png", ),
                       label:"Atividade física",
                       onTapHint: "praticar exercício físico",
 
@@ -69,7 +68,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               Flexible(
-                flex:1,
+                flex:3,
                 child: GestureDetector(
                   onTap:  (){
                     Navigator.push(
@@ -77,14 +76,14 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                         MaterialPageRoute(builder: (context) => TrocaScreen()));
                   },
                   child: Semantics(
-                      child: Image.asset("lib/view/assets/barraPrincipal/troca.png", width: 50,),
+                      child: Image.asset("lib/view/assets/barraPrincipal/troca.png", ),
                       label: "Troca",
                       onTapHint: "ir para a tela de troca",
                   ),
                 ),
               ),
               Flexible(
-                flex:1,
+                flex:3,
                 child: GestureDetector(
                   onTap:(){
                     Navigator.push(
@@ -92,18 +91,18 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                         MaterialPageRoute(builder: (context) => MercadoScreen()));
                   },
                   child: Semantics(
-                      child: Image.asset("lib/view/assets/barraPrincipal/mercado.png", width: 50,),
+                      child: Image.asset("lib/view/assets/barraPrincipal/mercado.png", ),
                       label:"Mercado",
                       onTapHint: "ir ao mercado",
                   ),
                 ),
               ),
               Flexible(
-                  flex:1,
+                  flex:2,
                   child:Container(),
               ),
               Flexible(
-                flex:1,
+                flex:3,
                 child: GestureDetector(
                   onTap: () {
                     controller.fazendeiro.avisoNovaMissao=false;
@@ -115,7 +114,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
 
                   },
                   child: Semantics(
-                      child: Image.asset("lib/view/assets/barraPrincipal/missao.png", width: 40,),
+                      child: Image.asset("lib/view/assets/barraPrincipal/missao.png",),
                       label:"Missão",
                       onTapHint: "ver sua missão ",
 
@@ -149,7 +148,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                     child: Row(
                       children: <Widget>[
                         Image.asset("lib/view/assets/atividadeFisica/bicicleta.png",height: 20,),
-                        Text("Pedalar",)
+                        Text("  Pedalar", style: TextStyle(fontSize: 16),)
                       ],
                     ),
                     onPressed: (){
@@ -181,7 +180,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                       children: <Widget>[
                         Image.asset("lib/view/assets/atividadeFisica/caminhar.png",height: 20
                         ),
-                        Text("Caminhar",)
+                        Text("     Caminhar",style: TextStyle(fontSize: 16),)
                       ],
                     ),
                     onPressed: (){
@@ -213,7 +212,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                     child: Row(
                       children: <Widget>[
                         Image.asset("lib/view/assets/atividadeFisica/correr.png",height: 20),
-                        Text("Correr",)
+                        Text("   Correr",style: TextStyle(fontSize: 16),)
                       ],
                     ),
                     onPressed: (){
@@ -243,7 +242,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
                     child: Row(
                       children: <Widget>[
                         Image.asset("lib/view/assets/atividadeFisica/nadar.png",height: 20,),
-                        Text("Nadar",)
+                        Text("    Nadar",style: TextStyle(fontSize: 16),)
                       ],
                     ),
                     onPressed: (){
@@ -367,7 +366,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
 
     Fazendeiro fazendeiro = Fazendeiro();
     fazendeiro.missaoConcluida?fazendeiro.numeroMissao++:null;
-    fazendeiro.missaAtual = fazendeiro.missoes[fazendeiro.numeroMissao];
+    fazendeiro.missaoAtual = fazendeiro.missoes[fazendeiro.numeroMissao];
     fazendeiro.missaoConcluida? controller.adicionarValorItemSaude("experiencia", 10):null;
     fazendeiro.missaoConcluida =false;
 
@@ -376,7 +375,7 @@ class BarraNavegacao extends StatelessWidget implements PreferredSizeWidget {
           borderRadius: BorderRadius.circular(12)),
       title:Text("Missão", textAlign: TextAlign.center,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
       backgroundColor: Color.fromRGBO(125, 125, 125, 0.5),
-      content:  Text(fazendeiro.missaAtual,textAlign: TextAlign.center,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
+      content:  Text(fazendeiro.missaoAtual,textAlign: TextAlign.center,style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
       actions: <Widget>[
         botaoModal(context,""),
       ],
